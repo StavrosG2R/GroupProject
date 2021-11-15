@@ -17,7 +17,7 @@ namespace DataAccess.Core.Entities
         public int DdrType { get; set; }
         public string Size { get; set; }
         public string Thumbnail { get; set; }
-        public string Watt { get; set; }
+        public int Watt { get; set; }
         public HttpPostedFileBase ImageFile { get; set; } // NotMapped
     }
 }
