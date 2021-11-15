@@ -18,5 +18,6 @@ namespace DataAccess.Core.Entities
         public int WriteSpeed { get; set; }
         public string Thumbnail { get; set; }
         public HttpPostedFileBase ImageFile { get; set; } // NotMapped
+        public decimal Price { get; set; }
     }
 }

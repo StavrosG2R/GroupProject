@@ -15,5 +15,6 @@ namespace DataAccess.Core.Entities
         public bool Modularity { get; set; }
         public string Thumbnail { get; set; }
         public HttpPostedFileBase ImageFile { get; set; } // NotMapped
+        public decimal Price { get; set; }
     }
 }
