@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Core.Entities
 {
-    public class Games
+    public class Game
     {
         public int ID { get; set; }
+        public Company Company { get; set; }
+        public int CompanyID { get; set; }
         public string Name { get; set; }
-        public string Company { get; set; }
     }
 }

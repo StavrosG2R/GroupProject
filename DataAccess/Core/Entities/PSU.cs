@@ -10,6 +10,8 @@ namespace DataAccess.Core.Entities
     public class PSU
     {
         public int ID { get; set; }
+        public Company Company { get; set; }
+        public int CompanyID { get; set; }
         public int Watt { get; set; }
         public string Efficiency { get; set; }
         public bool Modularity { get; set; }

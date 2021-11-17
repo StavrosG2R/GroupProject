@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Core.Entities
 {
-    public class Product
+    public class Company
     {
-
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -10,7 +10,8 @@ namespace DataAccess.Core.Entities
     public class RAM
     {
         public int ID { get; set; }
-        public string Brand { get; set; }
+        public Company Company { get; set; }
+        public int CompanyID { get; set; }
         public string Model { get; set; }
         public int Frequency { get; set; }
         public int DdrType { get; set; }
