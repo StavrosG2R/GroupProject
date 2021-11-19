@@ -298,27 +298,27 @@
                 "dbo.CPUMotherboards",
                 c => new
                     {
-                        CPU_ID = c.Int(nullable: false),
-                        Motherboard_ID = c.Int(nullable: false),
+                        CPU_Socket = c.Int(nullable: false),
+                        Motherboard_Socket = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.CPU_ID, t.Motherboard_ID })
-                .ForeignKey("dbo.CPUs", t => t.CPU_ID, cascadeDelete: true)
-                .ForeignKey("dbo.Motherboards", t => t.Motherboard_ID, cascadeDelete: true)
-                .Index(t => t.CPU_ID)
-                .Index(t => t.Motherboard_ID);
+                .PrimaryKey(t => new { t.CPU_Socket, t.Motherboard_Socket })
+                .ForeignKey("dbo.CPUs", t => t.CPU_Socket, cascadeDelete: false)
+                .ForeignKey("dbo.Motherboards", t => t.Motherboard_Socket, cascadeDelete: false)
+                .Index(t => t.CPU_Socket)
+                .Index(t => t.Motherboard_Socket);
             
             CreateTable(
                 "dbo.RAMMotherboards",
                 c => new
                     {
-                        RAM_ID = c.Int(nullable: false),
-                        Motherboard_ID = c.Int(nullable: false),
+                        RAM_DdrType = c.Int(nullable: false),
+                        Motherboard_DdrType = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.RAM_ID, t.Motherboard_ID })
-                .ForeignKey("dbo.RAMs", t => t.RAM_ID, cascadeDelete: true)
-                .ForeignKey("dbo.Motherboards", t => t.Motherboard_ID, cascadeDelete: true)
-                .Index(t => t.RAM_ID)
-                .Index(t => t.Motherboard_ID);
+                .PrimaryKey(t => new { t.RAM_DdrType, t.Motherboard_DdrType })
+                .ForeignKey("dbo.RAMs", t => t.RAM_DdrType, cascadeDelete: false)
+                .ForeignKey("dbo.Motherboards", t => t.Motherboard_DdrType, cascadeDelete: false)
+                .Index(t => t.RAM_DdrType)
+                .Index(t => t.Motherboard_DdrType);
             
         }
         
