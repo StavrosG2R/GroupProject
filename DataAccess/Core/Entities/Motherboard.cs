@@ -24,7 +24,6 @@ namespace DataAccess.Core.Entities
         public string Size { get; set; }
         public int Watt { get; set; }
         public string Thumbnail { get; set; }
-        public int Watt { get; set; }
         public HttpPostedFileBase ImageFile { get; set; } // NotMapped
         public decimal Price { get; set; }
     }
