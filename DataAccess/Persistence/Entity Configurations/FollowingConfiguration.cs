@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
-    class FollowingConfiguration : EntityTypeConfiguration<Following>
+    public class FollowingConfiguration : EntityTypeConfiguration<Following>
     {
+        public FollowingConfiguration()
+        {
+            HasKey(f => new { f.FollowerId, f.FolloweeId });
+        }
     }
 }

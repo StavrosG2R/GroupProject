@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using GroupProject.Models;
+using DataAccess.Persistence;
+using DataAccess.Core.Entities;
 
 namespace GroupProject
 {

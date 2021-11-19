@@ -1,4 +1,5 @@
 ﻿using DataAccess.Core.Entities;
+using DataAccess.Persistence.Entity_Configurations;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace DataAccess.Persistence
         public DbSet<PSU> PSUs { get; set; }
         public DbSet<RAM> RAMs { get; set; }
         public DbSet<Storage> Storages { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public ApplicationDbContext()
            : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -33,7 +35,12 @@ namespace DataAccess.Persistence
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new FollowingConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
+            modelBuilder.Configurations.Add(new BuildConfiguration());
+
             base.OnModelCreating(modelBuilder);
+
         }
     }
 }
