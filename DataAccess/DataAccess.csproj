@@ -89,7 +89,17 @@
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Entity Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\BuildConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\CaseConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\CategoryConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\CommentConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\CompanyConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\CpuConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\FollowingConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\GameConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\MotherboardConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\PsuConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\RamConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\StorageConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
