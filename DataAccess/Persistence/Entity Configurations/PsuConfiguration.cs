@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
-    class RAMConfiguration : EntityTypeConfiguration<RAM>
+    public class PsuConfiguration : EntityTypeConfiguration<PSU>
     {
     }
 }

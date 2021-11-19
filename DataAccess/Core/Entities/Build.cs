@@ -22,5 +22,8 @@ namespace DataAccess.Core.Entities
         public decimal Price { get; set; }
         public Category Category { get; set; }
         public int CategoryID { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+        
+
     }
 }

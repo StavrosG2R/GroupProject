@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
-    class GameConfiguration : EntityTypeConfiguration<Game>
+    public class GameConfiguration : EntityTypeConfiguration<Game>
     {
+        public GameConfiguration()
+        {
+            Property(c => c.Name)
+                .IsRequired();
+        }
+
     }
 }

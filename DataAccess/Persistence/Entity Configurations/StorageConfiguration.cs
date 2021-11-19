@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
-    class StorageConfiguration : EntityTypeConfiguration<Storage>
+    public class StorageConfiguration : EntityTypeConfiguration<Storage>
     {
+
     }
 }

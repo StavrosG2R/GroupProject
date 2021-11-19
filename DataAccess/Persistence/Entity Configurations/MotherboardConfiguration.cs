@@ -8,7 +8,21 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
-    class MotherboardConfiguration : EntityTypeConfiguration<Motherboard>
+    public class MotherboardConfiguration : EntityTypeConfiguration<Motherboard>
     {
+        public MotherboardConfiguration()
+        {
+            Property(c => c.Socket)
+                .IsRequired();
+
+            Property(c => c.Chipset)
+                .IsRequired();
+
+            Property(c => c.Model)
+                .IsRequired();
+
+            Property(c => c.Chipset)
+                .IsRequired();
+        }
     }
 }

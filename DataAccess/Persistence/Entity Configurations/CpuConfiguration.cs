@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
-    public class FollowingConfiguration : EntityTypeConfiguration<Following>
+    public class CpuConfiguration : EntityTypeConfiguration<CPU>
     {
-        public FollowingConfiguration()
+        public CpuConfiguration()
         {
-            HasKey(f => new { f.FollowerId, f.FolloweeId });
+            Property(c => c.Socket)
+                .IsRequired();
+                
+
+            Property(c => c.Model)
+                .IsRequired();
+
         }
     }
 }

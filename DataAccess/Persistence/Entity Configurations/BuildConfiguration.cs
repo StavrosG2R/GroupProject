@@ -15,6 +15,21 @@ namespace DataAccess.Persistence.Entity_Configurations
             Property(b => b.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+
+            HasRequired(b => b.Motherboard);
+
+            HasRequired(b => b.PSU);
+
+            HasRequired(b => b.RAM);
+
+            HasRequired(b => b.Storage);
+
+            HasRequired(b => b.Case);
+
+            HasRequired(b => b.CPU);
+
+
+
         }
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Core\Entities\Build.cs" />
     <Compile Include="Core\Entities\Case.cs" />
     <Compile Include="Core\Entities\Category.cs" />
+    <Compile Include="Core\Entities\Comment.cs" />
     <Compile Include="Core\Entities\Company.cs" />
     <Compile Include="Core\Entities\CPU.cs" />
     <Compile Include="Core\Entities\Following.cs" />
@@ -80,19 +81,24 @@
     <Compile Include="Core\Entities\PSU.cs" />
     <Compile Include="Core\Entities\RAM.cs" />
     <Compile Include="Core\Entities\Storage.cs" />
+    <Compile Include="Migrations\202111190247117_Initial.cs" />
+    <Compile Include="Migrations\202111190247117_Initial.designer.cs">
+      <DependentUpon>202111190247117_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Entity Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\BuildConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\CaseConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\CategoryConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\CommentConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\CompanyConfiguration.cs" />
-    <Compile Include="Persistence\Entity Configurations\CPUConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\CpuConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\FollowingConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\GameConfiguration.cs" />
-    <Compile Include="Persistence\Entity Configurations\GPUConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\MotherboardConfiguration.cs" />
-    <Compile Include="Persistence\Entity Configurations\PSUConfiguration.cs" />
-    <Compile Include="Persistence\Entity Configurations\RAMConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\PsuConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\RamConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\StorageConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,6 +109,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202111190247117_Initial.resx">
+      <DependentUpon>202111190247117_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

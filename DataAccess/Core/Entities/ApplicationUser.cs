@@ -16,9 +16,10 @@ namespace DataAccess.Core.Entities
         public ICollection<Following> Followers { get; set; }
         public ICollection<Following> Followees { get; set; }
         public ICollection<Build> Builds { get; set; }
-
+        public ICollection<Comment> Comments { get; set; }
         public ApplicationUser()
         {
+            Comments = new Collection<Comment>();
             Followers = new Collection<Following>();
             Followees = new Collection<Following>();
             Builds = new Collection<Build>();

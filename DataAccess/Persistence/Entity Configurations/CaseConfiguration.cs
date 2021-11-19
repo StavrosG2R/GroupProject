@@ -10,5 +10,15 @@ namespace DataAccess.Persistence.Entity_Configurations
 {
     public class CaseConfiguration : EntityTypeConfiguration<Case>
     {
+        public CaseConfiguration()
+        {
+            Property(c => c.Model)
+                .IsRequired();
+
+            Property(c => c.Size)
+                .IsRequired();
+
+
+        }
     }
 }

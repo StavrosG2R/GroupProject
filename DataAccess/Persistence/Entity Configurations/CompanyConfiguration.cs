@@ -8,7 +8,14 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
-    class CompanyConfiguration : EntityTypeConfiguration<Company>
+    public class CompanyConfiguration : EntityTypeConfiguration<Company>
     {
+        public CompanyConfiguration()
+        {
+            Property(c => c.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+
+        }
     }
 }

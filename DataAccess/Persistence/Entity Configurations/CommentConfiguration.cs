@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
-    class CPUConfiguration : EntityTypeConfiguration<CPU>
+    public class CommentConfiguration : EntityTypeConfiguration<Comment>
     {
+
     }
 }
