@@ -14,6 +14,7 @@ namespace DataAccess.Core.Entities
         public Company Company { get; set; }
         public int CompanyID { get; set; }
         public ICollection<Build> Builds { get; set; }
+        public ICollection<Case> Cases { get; set; }
         public ICollection<CPU> CPUs { get; set; }
         public ICollection<RAM> RAMs { get; set; }
         public string Socket { get; set; }

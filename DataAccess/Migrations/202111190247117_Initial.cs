@@ -167,13 +167,10 @@
                         Thumbnail = c.String(),
                         Watt = c.Int(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Case_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Companies", t => t.CompanyID, cascadeDelete: true)
-                .ForeignKey("dbo.Cases", t => t.Case_ID)
-                .Index(t => t.CompanyID)
-                .Index(t => t.Case_ID);
+                .Index(t => t.CompanyID);
             
             CreateTable(
                 "dbo.CPUs",
@@ -295,30 +292,43 @@
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
+                "dbo.MotherboardCases",
+                c => new
+                    {
+                        Motherboard_ID = c.Int(nullable: false),
+                        Case_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Motherboard_ID, t.Case_ID })
+                .ForeignKey("dbo.Motherboards", t => t.Motherboard_ID, cascadeDelete: false)
+                .ForeignKey("dbo.Cases", t => t.Case_ID, cascadeDelete: false)
+                .Index(t => t.Motherboard_ID)
+                .Index(t => t.Case_ID);
+            
+            CreateTable(
                 "dbo.CPUMotherboards",
                 c => new
                     {
-                        CPU_Socket = c.Int(nullable: false),
-                        Motherboard_Socket = c.Int(nullable: false),
+                        CPU_ID = c.Int(nullable: false),
+                        Motherboard_ID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.CPU_Socket, t.Motherboard_Socket })
-                .ForeignKey("dbo.CPUs", t => t.CPU_Socket, cascadeDelete: false)
-                .ForeignKey("dbo.Motherboards", t => t.Motherboard_Socket, cascadeDelete: false)
-                .Index(t => t.CPU_Socket)
-                .Index(t => t.Motherboard_Socket);
+                .PrimaryKey(t => new { t.CPU_ID, t.Motherboard_ID })
+                .ForeignKey("dbo.CPUs", t => t.CPU_ID, cascadeDelete: false)
+                .ForeignKey("dbo.Motherboards", t => t.Motherboard_ID, cascadeDelete: false)
+                .Index(t => t.CPU_ID)
+                .Index(t => t.Motherboard_ID);
             
             CreateTable(
                 "dbo.RAMMotherboards",
                 c => new
                     {
-                        RAM_DdrType = c.Int(nullable: false),
-                        Motherboard_DdrType = c.Int(nullable: false),
+                        RAM_ID = c.Int(nullable: false),
+                        Motherboard_ID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.RAM_DdrType, t.Motherboard_DdrType })
-                .ForeignKey("dbo.RAMs", t => t.RAM_DdrType, cascadeDelete: false)
-                .ForeignKey("dbo.Motherboards", t => t.Motherboard_DdrType, cascadeDelete: false)
-                .Index(t => t.RAM_DdrType)
-                .Index(t => t.Motherboard_DdrType);
+                .PrimaryKey(t => new { t.RAM_ID, t.Motherboard_ID })
+                .ForeignKey("dbo.RAMs", t => t.RAM_ID, cascadeDelete: false)
+                .ForeignKey("dbo.Motherboards", t => t.Motherboard_ID, cascadeDelete: false)
+                .Index(t => t.RAM_ID)
+                .Index(t => t.Motherboard_ID);
             
         }
         
@@ -333,7 +343,6 @@
             DropForeignKey("dbo.GPUs", "CompanyID", "dbo.Companies");
             DropForeignKey("dbo.Builds", "GPU_ID", "dbo.GPUs");
             DropForeignKey("dbo.Builds", "CategoryID", "dbo.Categories");
-            DropForeignKey("dbo.Motherboards", "Case_ID", "dbo.Cases");
             DropForeignKey("dbo.RAMMotherboards", "Motherboard_ID", "dbo.Motherboards");
             DropForeignKey("dbo.RAMMotherboards", "RAM_ID", "dbo.RAMs");
             DropForeignKey("dbo.RAMs", "CompanyID", "dbo.Companies");
@@ -343,6 +352,8 @@
             DropForeignKey("dbo.CPUs", "CompanyID", "dbo.Companies");
             DropForeignKey("dbo.Builds", "CPU_ID", "dbo.CPUs");
             DropForeignKey("dbo.Motherboards", "CompanyID", "dbo.Companies");
+            DropForeignKey("dbo.MotherboardCases", "Case_ID", "dbo.Cases");
+            DropForeignKey("dbo.MotherboardCases", "Motherboard_ID", "dbo.Motherboards");
             DropForeignKey("dbo.Builds", "Motherboard_ID", "dbo.Motherboards");
             DropForeignKey("dbo.Cases", "CompanyID", "dbo.Companies");
             DropForeignKey("dbo.Builds", "Case_ID", "dbo.Cases");
@@ -357,6 +368,8 @@
             DropIndex("dbo.RAMMotherboards", new[] { "RAM_ID" });
             DropIndex("dbo.CPUMotherboards", new[] { "Motherboard_ID" });
             DropIndex("dbo.CPUMotherboards", new[] { "CPU_ID" });
+            DropIndex("dbo.MotherboardCases", new[] { "Case_ID" });
+            DropIndex("dbo.MotherboardCases", new[] { "Motherboard_ID" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Games", new[] { "CompanyID" });
             DropIndex("dbo.Storages", new[] { "CompanyID" });
@@ -364,7 +377,6 @@
             DropIndex("dbo.GPUs", new[] { "CompanyID" });
             DropIndex("dbo.RAMs", new[] { "CompanyID" });
             DropIndex("dbo.CPUs", new[] { "CompanyID" });
-            DropIndex("dbo.Motherboards", new[] { "Case_ID" });
             DropIndex("dbo.Motherboards", new[] { "CompanyID" });
             DropIndex("dbo.Cases", new[] { "CompanyID" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
@@ -386,6 +398,7 @@
             DropIndex("dbo.Builds", new[] { "BuilderID" });
             DropTable("dbo.RAMMotherboards");
             DropTable("dbo.CPUMotherboards");
+            DropTable("dbo.MotherboardCases");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Games");
             DropTable("dbo.Storages");
