@@ -10,6 +10,23 @@ namespace DataAccess.Persistence.Entity_Configurations
 {
     public class CommentConfiguration : EntityTypeConfiguration<Comment>
     {
+        public CommentConfiguration()
+        {
+            Property(c => c.Text)
+                .IsRequired()
+                .HasMaxLength(256);
 
+            Property(c => c.CommentOwnerId)
+                .IsRequired();
+
+            HasRequired(u => u.CommentOwner)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(u => u.CommentOwnerId)
+                .WillCascadeOnDelete(false);
+
+            HasRequired(b => b.Build)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(b => b.BuildId);
+        }
     }
 }

@@ -81,9 +81,9 @@
     <Compile Include="Core\Entities\PSU.cs" />
     <Compile Include="Core\Entities\RAM.cs" />
     <Compile Include="Core\Entities\Storage.cs" />
-    <Compile Include="Migrations\202111190247117_Initial.cs" />
-    <Compile Include="Migrations\202111190247117_Initial.designer.cs">
-      <DependentUpon>202111190247117_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202111211854109_Initial.cs" />
+    <Compile Include="Migrations\202111211854109_Initial.designer.cs">
+      <DependentUpon>202111211854109_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
@@ -111,8 +111,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111190247117_Initial.resx">
-      <DependentUpon>202111190247117_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111211854109_Initial.resx">
+      <DependentUpon>202111211854109_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

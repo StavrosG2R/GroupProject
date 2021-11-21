@@ -15,7 +15,8 @@ namespace DataAccess.Core.Entities
         public int CompanyID { get; set; }
         public ICollection<Build> Builds { get; set; }
         public string Socket { get; set; }
-        public ICollection<Motherboard> Motherboards { get; set; }
+        public Motherboard Motherboard { get; set; }
+        public int MotherboardId { get; set; }
         public string Model { get; set; }
         public int Cores { get; set; }
         public int Threads { get; set; }

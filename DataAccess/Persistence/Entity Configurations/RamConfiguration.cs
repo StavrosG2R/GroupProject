@@ -10,5 +10,15 @@ namespace DataAccess.Persistence.Entity_Configurations
 {
     public class RamConfiguration : EntityTypeConfiguration<RAM>
     {
+        public RamConfiguration()
+        {
+            Property(r => r.Model)
+              .IsRequired();
+
+            HasRequired(r => r.Motherboard)
+                .WithMany(m => m.RAMs)
+                .HasForeignKey(r => r.MotherboardId)
+                .WillCascadeOnDelete(false);
+        }
     }
 }

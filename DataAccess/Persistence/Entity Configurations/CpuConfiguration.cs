@@ -19,6 +19,12 @@ namespace DataAccess.Persistence.Entity_Configurations
             Property(c => c.Model)
                 .IsRequired();
 
+
+            HasMany(c => c.Builds)
+                .WithRequired(b => b.CPU)
+                .HasForeignKey(c => c.CPUId)
+                .WillCascadeOnDelete(false);
+
         }
     }
 }

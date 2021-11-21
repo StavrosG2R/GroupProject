@@ -12,17 +12,27 @@ namespace DataAccess.Persistence.Entity_Configurations
     {
         public MotherboardConfiguration()
         {
-            Property(c => c.Socket)
+
+            Property(m => m.Socket)
                 .IsRequired();
 
-            Property(c => c.Chipset)
+            Property(m => m.Chipset)
                 .IsRequired();
 
-            Property(c => c.Model)
+            Property(m => m.Model)
                 .IsRequired();
+                
+            HasMany(c => c.CPUs)
+                .WithRequired(m => m.Motherboard)
+                .WillCascadeOnDelete(false);
 
-            Property(c => c.Chipset)
-                .IsRequired();
+            HasMany(r => r.RAMs)
+                .WithRequired(m => m.Motherboard)
+                .WillCascadeOnDelete(false);
+
+            HasMany(b => b.Builds)
+                .WithRequired(m => m.Motherboard)
+                .WillCascadeOnDelete(false);
         }
     }
 }

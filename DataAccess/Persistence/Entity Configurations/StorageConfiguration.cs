@@ -10,6 +10,17 @@ namespace DataAccess.Persistence.Entity_Configurations
 {
     public class StorageConfiguration : EntityTypeConfiguration<Storage>
     {
+        public StorageConfiguration()
+        {
+            Property(s => s.Model)
+                .IsRequired();
 
+            Property(s => s.StorageType)
+                .IsRequired();
+
+            HasMany(s => s.Builds)
+                .WithRequired()
+                .WillCascadeOnDelete(false);
+        }
     }
 }
