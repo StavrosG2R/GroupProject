@@ -10,11 +10,13 @@ namespace DataAccess.Core.Entities
 {
     public class RAM
     {
+
         public int ID { get; set; }
         public Company Company { get; set; }
         public int CompanyID { get; set; }
         public ICollection<Build> Builds { get; set; }
-        public ICollection<Motherboard> Motherboards { get; set; }
+        public Motherboard Motherboard { get; set; }
+        public int MotherboardId { get; set; }
         public string Model { get; set; }
         public int Frequency { get; set; }
         public int DdrType { get; set; }

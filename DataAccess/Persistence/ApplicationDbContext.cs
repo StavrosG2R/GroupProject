@@ -38,6 +38,16 @@ namespace DataAccess.Persistence
             modelBuilder.Configurations.Add(new FollowingConfiguration());
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
             modelBuilder.Configurations.Add(new BuildConfiguration());
+            modelBuilder.Configurations.Add(new CommentConfiguration());
+            modelBuilder.Configurations.Add(new CategoryConfiguration());
+            modelBuilder.Configurations.Add(new CaseConfiguration());
+            modelBuilder.Configurations.Add(new CpuConfiguration());
+            modelBuilder.Configurations.Add(new GameConfiguration());
+            modelBuilder.Configurations.Add(new MotherboardConfiguration());
+            modelBuilder.Configurations.Add(new PsuConfiguration());
+            modelBuilder.Configurations.Add(new RamConfiguration());
+            modelBuilder.Configurations.Add(new StorageConfiguration());
+            modelBuilder.Configurations.Add(new CompanyConfiguration());
 
             base.OnModelCreating(modelBuilder);
 

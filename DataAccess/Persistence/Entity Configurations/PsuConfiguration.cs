@@ -10,5 +10,17 @@ namespace DataAccess.Persistence.Entity_Configurations
 {
     public class PsuConfiguration : EntityTypeConfiguration<PSU>
     {
+        public PsuConfiguration()
+        {
+            Property(p => p.Modularity)
+                .IsRequired();
+
+            Property(p => p.Efficiency)
+                .IsRequired();
+
+            HasMany(p => p.Builds)
+                .WithRequired()
+                .WillCascadeOnDelete(false);
+        }
     }
 }

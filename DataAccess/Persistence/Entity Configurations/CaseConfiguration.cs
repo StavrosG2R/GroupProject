@@ -18,7 +18,15 @@ namespace DataAccess.Persistence.Entity_Configurations
             Property(c => c.Size)
                 .IsRequired();
 
+            HasRequired(c => c.Motherboard)
+                .WithMany(m => m.Cases)
+                .HasForeignKey(c => c.MotherboardId)
+                .WillCascadeOnDelete(false);
 
+            HasMany(c => c.Builds)
+                .WithRequired(b => b.Case)
+                .HasForeignKey(c => c.CaseId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -16,6 +16,10 @@ namespace DataAccess.Persistence.Entity_Configurations
                    .IsRequired()
                    .HasMaxLength(50);
 
+            HasMany(c => c.Builds)
+                .WithRequired(b => b.Category)
+                .WillCascadeOnDelete(false);
+                
         }
     }
 }

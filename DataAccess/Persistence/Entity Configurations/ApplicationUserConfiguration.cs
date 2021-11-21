@@ -30,6 +30,11 @@ namespace DataAccess.Persistence.Entity_Configurations
             HasMany(u => u.Builds)
                 .WithRequired(b => b.Builder)
                 .WillCascadeOnDelete(false);
+
+            HasMany(u => u.Comments)
+                .WithRequired(c => c.CommentOwner)
+                .HasForeignKey(u => u.CommentOwnerId)
+                .WillCascadeOnDelete(false);
         }
 
     }
