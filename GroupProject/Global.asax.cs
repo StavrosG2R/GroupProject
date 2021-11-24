@@ -1,3 +1,4 @@
+using GroupProject.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace GroupProject
     {
         protected void Application_Start()
         {
+            ContainerConfig.RegisterContainer();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
