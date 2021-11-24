@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace DataAccess.Core.Entities
 {
     public class GPU
     {
+        public GPU()
+        {
+            Builds = new Collection<Build>();
+        }
         public int ID { get; set; }
         public Company Company { get; set; }
         public int CompanyID { get; set; }

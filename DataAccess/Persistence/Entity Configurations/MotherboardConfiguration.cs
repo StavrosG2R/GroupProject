@@ -1,10 +1,5 @@
 ﻿using DataAccess.Core.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
@@ -21,18 +16,9 @@ namespace DataAccess.Persistence.Entity_Configurations
 
             Property(m => m.Model)
                 .IsRequired();
-                
-            HasMany(c => c.CPUs)
-                .WithRequired(m => m.Motherboard)
-                .WillCascadeOnDelete(false);
 
-            HasMany(r => r.RAMs)
-                .WithRequired(m => m.Motherboard)
-                .WillCascadeOnDelete(false);
-
-            HasMany(b => b.Builds)
-                .WithRequired(m => m.Motherboard)
-                .WillCascadeOnDelete(false);
+            Property(c => c.CompanyID)
+                .IsRequired();
         }
     }
 }

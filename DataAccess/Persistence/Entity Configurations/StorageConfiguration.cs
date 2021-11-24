@@ -1,10 +1,5 @@
 ﻿using DataAccess.Core.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
@@ -18,9 +13,8 @@ namespace DataAccess.Persistence.Entity_Configurations
             Property(s => s.StorageType)
                 .IsRequired();
 
-            HasMany(s => s.Builds)
-                .WithRequired()
-                .WillCascadeOnDelete(false);
+            Property(c => c.CompanyID)
+                .IsRequired();
         }
     }
 }
