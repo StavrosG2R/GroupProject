@@ -10,53 +10,38 @@ namespace DataAccess.Persistence.Entity_Configurations
 {
     public class BuildConfiguration : EntityTypeConfiguration<Build>
     {
+
+        //? Ta nav props na mhn einai required,
+        //? na einai ta foreign keys tous
         public BuildConfiguration()
         {
             Property(b => b.Name)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            HasRequired(b => b.Motherboard)
-                .WithMany(m => m.Builds)
-                .HasForeignKey(b => b.MotherboardId)
-                .WillCascadeOnDelete(false);
+            Property(b => b.BuilderID)
+                .IsRequired();
 
-            HasRequired(b => b.PSU)
-                .WithMany(p => p.Builds)
-                .HasForeignKey(b => b.PSUId)
-                .WillCascadeOnDelete(false);
+            Property(b => b.MotherboardID)
+                .IsRequired();
 
-            HasRequired(b => b.RAM)
-                .WithMany(r => r.Builds)
-                .HasForeignKey(b => b.RAMId)
-                .WillCascadeOnDelete(false);
+            Property(b => b.PSUID)
+                .IsRequired();
 
-            HasRequired(b => b.Storage)
-                .WithMany(s => s.Builds)
-                .HasForeignKey(b => b.StorageId)
-                .WillCascadeOnDelete(false);
+            Property(b => b.RAMID)
+                .IsRequired();
 
-            HasRequired(b => b.Case)
-                .WithMany(c => c.Builds)
-                .HasForeignKey(b => b.CaseId)
-                .WillCascadeOnDelete(false);
+            Property(b => b.StorageID)
+                .IsRequired();
 
-            HasRequired(b => b.CPU)
-                .WithMany(c => c.Builds)
-                .HasForeignKey(b => b.CPUId)
-                .WillCascadeOnDelete(false);
+            Property(b => b.CaseID)
+                .IsRequired();
 
-            HasMany(b => b.Comments)
-                .WithRequired(c => c.Build)
-                .HasForeignKey(b => b.BuildId)
-                .WillCascadeOnDelete(false);
+            Property(b => b.CPUID)
+                .IsRequired();
 
-            HasRequired(b => b.Category)
-                .WithMany(c => c.Builds)
-                .HasForeignKey(b => b.CategoryID)
-                .WillCascadeOnDelete(false);
-
-                
+            Property(b => b.CategoryID)
+                .IsRequired();
         }
     }
 }

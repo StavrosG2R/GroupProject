@@ -16,17 +16,12 @@ namespace DataAccess.Persistence.Entity_Configurations
                 .IsRequired()
                 .HasMaxLength(256);
 
-            Property(c => c.CommentOwnerId)
+            Property(c => c.CommentOwnerID)
                 .IsRequired();
-
-            HasRequired(u => u.CommentOwner)
-                .WithMany(c => c.Comments)
-                .HasForeignKey(u => u.CommentOwnerId)
-                .WillCascadeOnDelete(false);
 
             HasRequired(b => b.Build)
                 .WithMany(c => c.Comments)
-                .HasForeignKey(b => b.BuildId);
+                .HasForeignKey(b => b.BuildID);
         }
     }
 }

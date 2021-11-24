@@ -27,13 +27,14 @@ namespace DataAccess.Persistence.Entity_Configurations
                 .WithRequired(f => f.Follower)
                 .WillCascadeOnDelete(false);
 
-            HasMany(u => u.Builds)
-                .WithRequired(b => b.Builder)
-                .WillCascadeOnDelete(false);
-
             HasMany(u => u.Comments)
                 .WithRequired(c => c.CommentOwner)
-                .HasForeignKey(u => u.CommentOwnerId)
+                .HasForeignKey(u => u.CommentOwnerID)
+                .WillCascadeOnDelete(false);
+
+            HasMany(u => u.Builds)
+                .WithRequired(b => b.Builder)
+                .HasForeignKey(b => b.BuilderID)
                 .WillCascadeOnDelete(false);
         }
 

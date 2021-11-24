@@ -1,10 +1,5 @@
 ﻿using DataAccess.Core.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Persistence.Entity_Configurations
 {
@@ -16,6 +11,38 @@ namespace DataAccess.Persistence.Entity_Configurations
                 .IsRequired()
                 .HasMaxLength(50);
 
+            //! new added
+            HasMany(c => c.Cases)
+                .WithRequired(c => c.Company)
+                .WillCascadeOnDelete(false);
+
+            HasMany(c => c.Games)
+                .WithRequired(c => c.Company)
+                .WillCascadeOnDelete(false);
+
+            HasMany(c => c.CPUs)
+                .WithRequired(c => c.Company)
+                .WillCascadeOnDelete(false);
+
+            HasMany(c => c.GPUs)
+                .WithRequired(c => c.Company)
+                .WillCascadeOnDelete(false);
+
+            HasMany(c => c.Motherboards)
+                .WithRequired(c => c.Company)
+                .WillCascadeOnDelete(false);
+
+            HasMany(c => c.PSUs)
+                .WithRequired(c => c.Company)
+                .WillCascadeOnDelete(false);
+
+            HasMany(c => c.RAMs)
+                .WithRequired(c => c.Company)
+                .WillCascadeOnDelete(false);
+
+            HasMany(c => c.Storages)
+                .WithRequired(c => c.Company)
+                .WillCascadeOnDelete(false);
         }
     }
 }
