@@ -118,6 +118,21 @@
     <Compile Include="Core\Entities\PSU.cs" />
     <Compile Include="Core\Entities\RAM.cs" />
     <Compile Include="Core\Entities\Storage.cs" />
+    <Compile Include="Core\Interfaces\IApplicationUserRepository.cs" />
+    <Compile Include="Core\Interfaces\IBuildRepository.cs" />
+    <Compile Include="Core\Interfaces\ICaseRepository.cs" />
+    <Compile Include="Core\Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Core\Interfaces\ICommentRepository.cs" />
+    <Compile Include="Core\Interfaces\ICompanyRepository.cs" />
+    <Compile Include="Core\Interfaces\ICpuRepository.cs" />
+    <Compile Include="Core\Interfaces\IFollowingRepository.cs" />
+    <Compile Include="Core\Interfaces\IGameRepository.cs" />
+    <Compile Include="Core\Interfaces\IGpuRepository.cs" />
+    <Compile Include="Core\Interfaces\IMotherboardRepository.cs" />
+    <Compile Include="Core\Interfaces\IPsuRepository.cs" />
+    <Compile Include="Core\Interfaces\IRamRepository.cs" />
+    <Compile Include="Core\Interfaces\IStorageRepository.cs" />
+    <Compile Include="Core\Interfaces\IUnitOfWork.cs" />
     <Compile Include="Persistence\Migrations\202111241031502_Initial.cs" />
     <Compile Include="Persistence\Migrations\202111241031502_Initial.designer.cs">
       <DependentUpon>202111241031502_Initial.cs</DependentUpon>
@@ -137,12 +152,24 @@
     <Compile Include="Persistence\Entity Configurations\PsuConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\RamConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\StorageConfiguration.cs" />
+    <Compile Include="Persistence\Repositories\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\Repositories\BuildRepository.cs" />
+    <Compile Include="Persistence\Repositories\CaseRepository.cs" />
+    <Compile Include="Persistence\Repositories\CategoryRepository.cs" />
+    <Compile Include="Persistence\Repositories\CommentRepository.cs" />
+    <Compile Include="Persistence\Repositories\CompanyRepository.cs" />
+    <Compile Include="Persistence\Repositories\CpuRepository.cs" />
+    <Compile Include="Persistence\Repositories\FollowingRepository.cs" />
+    <Compile Include="Persistence\Repositories\GameRepository.cs" />
+    <Compile Include="Persistence\Repositories\GpuRepository.cs" />
+    <Compile Include="Persistence\Repositories\MotherboardRepository.cs" />
+    <Compile Include="Persistence\Repositories\PsuRepository.cs" />
+    <Compile Include="Persistence\Repositories\RamRepository.cs" />
+    <Compile Include="Persistence\Repositories\StorageRepository.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Interfaces\" />
-    <Folder Include="Persistence\Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

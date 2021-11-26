@@ -2,6 +2,7 @@
 using DataAccess.Persistence.Entity_Configurations;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace DataAccess.Persistence
         public DbSet<RAM> RAMs { get; set; }
         public DbSet<Storage> Storages { get; set; }
         public DbSet<Comment> Comments { get; set; }
+       
         public ApplicationDbContext()
            : base("DefaultConnection", throwIfV1Schema: false)
         {

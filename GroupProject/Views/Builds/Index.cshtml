@@ -1,0 +1,99 @@
+﻿@model IEnumerable<DataAccess.Core.Entities.Build>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Builder.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Case.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPU.Socket)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GPU.Chipset)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Motherboard.Socket)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PSU.Efficiency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RAM.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Storage.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAdminBuild)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Builder.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Case.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CPU.Socket)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GPU.Chipset)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Motherboard.Socket)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PSU.Efficiency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RAM.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Storage.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAdminBuild)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,114 @@
+﻿@model DataAccess.Core.Entities.Build
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Build</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Builder.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Builder.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Case.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Case.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPU.Socket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPU.Socket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GPU.Chipset)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GPU.Chipset)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Motherboard.Socket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Motherboard.Socket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PSU.Efficiency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PSU.Efficiency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RAM.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RAM.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Storage.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Storage.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAdminBuild)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAdminBuild)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
