@@ -17,12 +17,13 @@ namespace GroupProject.App_Start
 
             // Register ApplicationDbContext
             builder.RegisterType<ApplicationDbContext>()
-                .InstancePerRequest();
+                .InstancePerLifetimeScope();
+                
 
             // Register UnitOfWork
             builder.RegisterType<UnitOfWork>()
                 .As<IUnitOfWork>()
-                .InstancePerRequest();
+                .InstancePerLifetimeScope();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
