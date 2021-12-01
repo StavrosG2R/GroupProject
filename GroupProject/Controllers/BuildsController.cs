@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
+using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
 namespace GroupProject.Controllers
@@ -14,6 +15,12 @@ namespace GroupProject.Controllers
     public class BuildsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IUnitOfWork _unitOfWork;
+
+        public BuildsController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: Builds
         public ActionResult Index()
@@ -62,7 +69,7 @@ namespace GroupProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Builds.Add(build);
-                db.SaveChanges();
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
