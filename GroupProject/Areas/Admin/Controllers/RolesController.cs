@@ -1,6 +1,8 @@
 ﻿using DataAccess.Persistence;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -64,7 +66,7 @@ namespace GroupProject.Areas.Admin.Controllers
             var users = _context.Users.ToList();
             return View(users);
         }
-                
+
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
