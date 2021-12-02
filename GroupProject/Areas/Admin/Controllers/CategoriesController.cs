@@ -7,112 +7,120 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
+using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
-namespace GroupProject.Controllers
+namespace GroupProject.Areas.Admin.Controllers
 {
-    public class CompaniesController : Controller
+    public class CategoriesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IUnitOfWork _unitOfWork;
 
-        // GET: Companies
-        public ActionResult Index()
+        public CategoriesController(IUnitOfWork unitOfWork)
         {
-            return View(db.Companies.ToList());
+            _unitOfWork = unitOfWork;
         }
 
-        // GET: Companies/Details/5
+        // GET: Admin/Categories
+        public ActionResult Index()
+        {
+            var categories = _unitOfWork.Categories.GetAll();
+            return View(categories.ToList());
+        }
+
+        // GET: Admin/Categories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = db.Companies.Find(id);
-            if (company == null)
+            Category category = _unitOfWork.Categories.GetById(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(company);
+            return View(category);
         }
 
-        // GET: Companies/Create
+        // GET: Admin/Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Companies/Create
+        // POST: Admin/Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] Company company)
+        public ActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Companies.Add(company);
-                db.SaveChanges();
+                _unitOfWork.Categories.Add(category);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            return View(company);
+            return View(category);
         }
 
-        // GET: Companies/Edit/5
+        // GET: Admin/Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = db.Companies.Find(id);
-            if (company == null)
+            Category category = _unitOfWork.Categories.GetById(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(company);
+            return View(category);
         }
 
-        // POST: Companies/Edit/5
+        // POST: Admin/Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] Company company)
+        public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(company).State = EntityState.Modified;
-                db.SaveChanges();
+                _unitOfWork.Categories.Update(category);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            return View(company);
+            return View(category);
         }
 
-        // GET: Companies/Delete/5
+        // GET: Admin/Categories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = db.Companies.Find(id);
-            if (company == null)
+            Category category = _unitOfWork.Categories.GetById(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(company);
+            return View(category);
         }
 
-        // POST: Companies/Delete/5
+        // POST: Admin/Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Company company = db.Companies.Find(id);
-            db.Companies.Remove(company);
-            db.SaveChanges();
+            Category category = _unitOfWork.Categories.GetById(id);
+            _unitOfWork.Categories.Delete(id);
+
+            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +128,7 @@ namespace GroupProject.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

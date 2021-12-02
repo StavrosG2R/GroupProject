@@ -24,14 +24,17 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Roles
         public ActionResult Index()
         {
-            return View(_context.Roles.ToList());
+            var roles = _context.Roles.ToList();
+            return View(roles);
         }
 
+        // Create: Admin/Roles
         public ActionResult Create()
         {
             return View();
         }
 
+        // POST_CREATE: Admin/Roles
         [HttpPost]
         public ActionResult Create(IdentityRole role)
         {
@@ -40,12 +43,13 @@ namespace GroupProject.Areas.Admin.Controllers
             return RedirectToAction("Index", "Roles");
         }
 
-        //delete
+        // DELETE: Admin/Roles
         public ActionResult Delete()
         {
             return View();
         }
 
+        // POST_DELETE: Admin/Roles
         [HttpPost]
         public ActionResult Delete(IdentityRole role)
         {
@@ -56,6 +60,7 @@ namespace GroupProject.Areas.Admin.Controllers
             return RedirectToAction("Index", "Roles");
         }
 
+        // USERS list
         public ActionResult IdentityUsers()
         {
             var users = _context.Users.ToList();
