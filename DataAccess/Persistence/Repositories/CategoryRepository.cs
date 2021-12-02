@@ -25,7 +25,7 @@ namespace DataAccess.Persistence.Repositories
             if (ID == null)
                 throw new ArgumentNullException(nameof(ID));
 
-            return _context.Categories.Find();
+            return _context.Categories.Find(ID);
         }
         
         public void Add(Category category)
