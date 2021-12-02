@@ -7,121 +7,118 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
-using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CategoriesController : Controller
+    public class GamesController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        public CategoriesController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
-        // GET: Admin/Categories
+        // GET: Admin/Games
         public ActionResult Index()
         {
-            var categories = _unitOfWork.Categories.GetAll();
-            return View(categories.ToList());
+            var games = db.Games.Include(g => g.Company);
+            return View(games.ToList());
         }
 
-        // GET: Admin/Categories/Details/5
+        // GET: Admin/Games/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            Game game = db.Games.Find(id);
+            if (game == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(game);
         }
 
-        // GET: Admin/Categories/Create
+        // GET: Admin/Games/Create
         public ActionResult Create()
         {
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
             return View();
         }
 
-        // POST: Admin/Categories/Create
+        // POST: Admin/Games/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create([Bind(Include = "ID,CompanyID,Name,Thumbnail")] Game game)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Categories.Add(category);
-                _unitOfWork.Complete();
+                db.Games.Add(game);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", game.CompanyID);
+            return View(game);
         }
 
-        // GET: Admin/Categories/Edit/5
+        // GET: Admin/Games/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            Game game = db.Games.Find(id);
+            if (game == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", game.CompanyID);
+            return View(game);
         }
 
-        // POST: Admin/Categories/Edit/5
+        // POST: Admin/Games/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit([Bind(Include = "ID,CompanyID,Name,Thumbnail")] Game game)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Categories.Update(category);
-                _unitOfWork.Complete();
+                db.Entry(game).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", game.CompanyID);
+            return View(game);
         }
 
-        // GET: Admin/Categories/Delete/5
+        // GET: Admin/Games/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            Game game = db.Games.Find(id);
+            if (game == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(game);
         }
 
-        // POST: Admin/Categories/Delete/5
+        // POST: Admin/Games/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = _unitOfWork.Categories.GetById(id);
-            _unitOfWork.Categories.Delete(id);
-
-            _unitOfWork.Complete();
+            Game game = db.Games.Find(id);
+            db.Games.Remove(game);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -129,7 +126,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                _unitOfWork.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

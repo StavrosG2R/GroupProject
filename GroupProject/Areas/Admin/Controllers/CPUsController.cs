@@ -1,127 +1,120 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using DataAccess.Core.Entities;
+using DataAccess.Persistence;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using DataAccess.Core.Entities;
-using DataAccess.Core.Interfaces;
-using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CategoriesController : Controller
+    public class CPUsController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        public CategoriesController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
-        // GET: Admin/Categories
+        // GET: Admin/CPUs
         public ActionResult Index()
         {
-            var categories = _unitOfWork.Categories.GetAll();
-            return View(categories.ToList());
+            var cPUs = db.CPUs.Include(c => c.Company);
+            return View(cPUs.ToList());
         }
 
-        // GET: Admin/Categories/Details/5
+        // GET: Admin/CPUs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            CPU cPU = db.CPUs.Find(id);
+            if (cPU == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(cPU);
         }
 
-        // GET: Admin/Categories/Create
+        // GET: Admin/CPUs/Create
         public ActionResult Create()
         {
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
             return View();
         }
 
-        // POST: Admin/Categories/Create
+        // POST: Admin/CPUs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create([Bind(Include = "ID,CompanyID,Socket,Model,Cores,Threads,Frequency,Watt,Thumbnail,Price")] CPU cPU)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Categories.Add(category);
-                _unitOfWork.Complete();
+                db.CPUs.Add(cPU);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", cPU.CompanyID);
+            return View(cPU);
         }
 
-        // GET: Admin/Categories/Edit/5
+        // GET: Admin/CPUs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            CPU cPU = db.CPUs.Find(id);
+            if (cPU == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", cPU.CompanyID);
+            return View(cPU);
         }
 
-        // POST: Admin/Categories/Edit/5
+        // POST: Admin/CPUs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit([Bind(Include = "ID,CompanyID,Socket,Model,Cores,Threads,Frequency,Watt,Thumbnail,Price")] CPU cPU)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Categories.Update(category);
-                _unitOfWork.Complete();
+                db.Entry(cPU).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", cPU.CompanyID);
+            return View(cPU);
         }
 
-        // GET: Admin/Categories/Delete/5
+        // GET: Admin/CPUs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            CPU cPU = db.CPUs.Find(id);
+            if (cPU == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(cPU);
         }
 
-        // POST: Admin/Categories/Delete/5
+        // POST: Admin/CPUs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = _unitOfWork.Categories.GetById(id);
-            _unitOfWork.Categories.Delete(id);
-
-            _unitOfWork.Complete();
+            CPU cPU = db.CPUs.Find(id);
+            db.CPUs.Remove(cPU);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -129,7 +122,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                _unitOfWork.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

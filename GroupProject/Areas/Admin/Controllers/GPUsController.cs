@@ -7,121 +7,118 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
-using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CategoriesController : Controller
+    public class GPUsController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        public CategoriesController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
-        // GET: Admin/Categories
+        // GET: Admin/GPUs
         public ActionResult Index()
         {
-            var categories = _unitOfWork.Categories.GetAll();
-            return View(categories.ToList());
+            var gPUs = db.GPUs.Include(g => g.Company);
+            return View(gPUs.ToList());
         }
 
-        // GET: Admin/Categories/Details/5
+        // GET: Admin/GPUs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            GPU gPU = db.GPUs.Find(id);
+            if (gPU == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(gPU);
         }
 
-        // GET: Admin/Categories/Create
+        // GET: Admin/GPUs/Create
         public ActionResult Create()
         {
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
             return View();
         }
 
-        // POST: Admin/Categories/Create
+        // POST: Admin/GPUs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create([Bind(Include = "ID,CompanyID,Chipset,Model,Watt,Vram,Thumbnail,Price")] GPU gPU)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Categories.Add(category);
-                _unitOfWork.Complete();
+                db.GPUs.Add(gPU);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", gPU.CompanyID);
+            return View(gPU);
         }
 
-        // GET: Admin/Categories/Edit/5
+        // GET: Admin/GPUs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            GPU gPU = db.GPUs.Find(id);
+            if (gPU == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", gPU.CompanyID);
+            return View(gPU);
         }
 
-        // POST: Admin/Categories/Edit/5
+        // POST: Admin/GPUs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit([Bind(Include = "ID,CompanyID,Chipset,Model,Watt,Vram,Thumbnail,Price")] GPU gPU)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Categories.Update(category);
-                _unitOfWork.Complete();
+                db.Entry(gPU).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", gPU.CompanyID);
+            return View(gPU);
         }
 
-        // GET: Admin/Categories/Delete/5
+        // GET: Admin/GPUs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            GPU gPU = db.GPUs.Find(id);
+            if (gPU == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(gPU);
         }
 
-        // POST: Admin/Categories/Delete/5
+        // POST: Admin/GPUs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = _unitOfWork.Categories.GetById(id);
-            _unitOfWork.Categories.Delete(id);
-
-            _unitOfWork.Complete();
+            GPU gPU = db.GPUs.Find(id);
+            db.GPUs.Remove(gPU);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -129,7 +126,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                _unitOfWork.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

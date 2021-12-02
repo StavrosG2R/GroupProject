@@ -7,121 +7,118 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
-using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CategoriesController : Controller
+    public class RAMsController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        public CategoriesController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
-        // GET: Admin/Categories
+        // GET: Admin/RAMs
         public ActionResult Index()
         {
-            var categories = _unitOfWork.Categories.GetAll();
-            return View(categories.ToList());
+            var rAMs = db.RAMs.Include(r => r.Company);
+            return View(rAMs.ToList());
         }
 
-        // GET: Admin/Categories/Details/5
+        // GET: Admin/RAMs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            RAM rAM = db.RAMs.Find(id);
+            if (rAM == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(rAM);
         }
 
-        // GET: Admin/Categories/Create
+        // GET: Admin/RAMs/Create
         public ActionResult Create()
         {
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
             return View();
         }
 
-        // POST: Admin/Categories/Create
+        // POST: Admin/RAMs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create([Bind(Include = "ID,CompanyID,Model,Frequency,DdrType,Storage,Thumbnail,Price")] RAM rAM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Categories.Add(category);
-                _unitOfWork.Complete();
+                db.RAMs.Add(rAM);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", rAM.CompanyID);
+            return View(rAM);
         }
 
-        // GET: Admin/Categories/Edit/5
+        // GET: Admin/RAMs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            RAM rAM = db.RAMs.Find(id);
+            if (rAM == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", rAM.CompanyID);
+            return View(rAM);
         }
 
-        // POST: Admin/Categories/Edit/5
+        // POST: Admin/RAMs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit([Bind(Include = "ID,CompanyID,Model,Frequency,DdrType,Storage,Thumbnail,Price")] RAM rAM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Categories.Update(category);
-                _unitOfWork.Complete();
+                db.Entry(rAM).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", rAM.CompanyID);
+            return View(rAM);
         }
 
-        // GET: Admin/Categories/Delete/5
+        // GET: Admin/RAMs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _unitOfWork.Categories.GetById(id);
-            if (category == null)
+            RAM rAM = db.RAMs.Find(id);
+            if (rAM == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(rAM);
         }
 
-        // POST: Admin/Categories/Delete/5
+        // POST: Admin/RAMs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = _unitOfWork.Categories.GetById(id);
-            _unitOfWork.Categories.Delete(id);
-
-            _unitOfWork.Complete();
+            RAM rAM = db.RAMs.Find(id);
+            db.RAMs.Remove(rAM);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -129,7 +126,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                _unitOfWork.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }
