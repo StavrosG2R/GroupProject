@@ -15,7 +15,7 @@ namespace DataAccess.Persistence.Repositories
         }
         public IQueryable<Case> GetAll()
         {
-            return _context.Cases;
+            return _context.Cases.Include(c => c.Company);
         }
         public Case GetById(int? ID)
         {

@@ -33,7 +33,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Case @case = db.Cases.Find(id);
+            Case @case = _unitOfWork.Cases.GetById(id);
             if (@case == null)
             {
                 return HttpNotFound();
@@ -74,7 +74,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Case @case = db.Cases.Find(id);
+            Case @case = _unitOfWork.Cases.GetById(id);
             if (@case == null)
             {
                 return HttpNotFound();
@@ -88,12 +88,12 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CompanyID,Model,Size,NumberOfFans,Thumbnail,Price")] Case @case)
+        public ActionResult Edit(Case @case)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@case).State = EntityState.Modified;
-                db.SaveChanges();
+                _unitOfWork.Cases.Update(@case);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
             ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", @case.CompanyID);
@@ -107,7 +107,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Case @case = db.Cases.Find(id);
+            Case @case = _unitOfWork.Cases.GetById(id);
             if (@case == null)
             {
                 return HttpNotFound();
@@ -120,9 +120,9 @@ namespace GroupProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Case @case = db.Cases.Find(id);
-            db.Cases.Remove(@case);
-            db.SaveChanges();
+            Case @case = _unitOfWork.Cases.GetById(id);
+            _unitOfWork.Cases.Delete(id);
+            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
@@ -130,7 +130,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
