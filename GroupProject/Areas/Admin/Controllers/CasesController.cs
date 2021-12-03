@@ -60,7 +60,7 @@ namespace GroupProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll());
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", @case.CompanyID);
             return View(@case);
         }
 
