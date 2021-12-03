@@ -1,7 +1,5 @@
 ﻿using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
-using DataAccess.Persistence;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -11,7 +9,6 @@ namespace GroupProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class CasesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
         private readonly IUnitOfWork _unitOfWork;
         public CasesController(IUnitOfWork unitOfWork)
