@@ -45,7 +45,7 @@ namespace GroupProject.Areas.Admin.Controllers
         public ActionResult Create()
         {
 
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace GroupProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", @case.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll());
             return View(@case);
         }
 
@@ -79,7 +79,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", @case.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", @case.CompanyID);
             return View(@case);
         }
 
@@ -96,7 +96,7 @@ namespace GroupProject.Areas.Admin.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", @case.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", @case.CompanyID);
             return View(@case);
         }
 
