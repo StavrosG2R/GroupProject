@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
+using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
@@ -15,7 +16,7 @@ namespace GroupProject.Areas.Admin.Controllers
     public class MotherboardsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CasesController(IUnitOfWork unitOfWork)
+        public MotherboardsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -24,7 +25,7 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Motherboards
         public ActionResult Index()
         {
-            var motherboards = db.Motherboards.Include(m => m.Company);
+            var motherboards = _unitOfWork.Motherboards.GetAll();
             return View(motherboards.ToList());
         }
 
@@ -35,7 +36,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Motherboard motherboard = db.Motherboards.Find(id);
+            Motherboard motherboard = _unitOfWork.Motherboards.GetById(id);
             if (motherboard == null)
             {
                 return HttpNotFound();
@@ -46,7 +47,7 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Motherboards/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
             return View();
         }
 
@@ -55,16 +56,16 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CompanyID,Socket,Chipset,Model,DdrType,Size,Watt,Thumbnail,Price")] Motherboard motherboard)
+        public ActionResult Create(Motherboard motherboard)
         {
             if (ModelState.IsValid)
             {
-                db.Motherboards.Add(motherboard);
-                db.SaveChanges();
+                _unitOfWork.Motherboards.Create(motherboard);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", motherboard.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", motherboard.CompanyID);
             return View(motherboard);
         }
 
@@ -75,12 +76,12 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Motherboard motherboard = db.Motherboards.Find(id);
+            Motherboard motherboard = _unitOfWork.Motherboards.GetById(id);
             if (motherboard == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", motherboard.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", motherboard.CompanyID);
             return View(motherboard);
         }
 
@@ -89,15 +90,15 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CompanyID,Socket,Chipset,Model,DdrType,Size,Watt,Thumbnail,Price")] Motherboard motherboard)
+        public ActionResult Edit(Motherboard motherboard)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(motherboard).State = EntityState.Modified;
-                db.SaveChanges();
+                _unitOfWork.Motherboards.Update(motherboard);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", motherboard.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", motherboard.CompanyID);
             return View(motherboard);
         }
 
@@ -108,7 +109,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Motherboard motherboard = db.Motherboards.Find(id);
+            Motherboard motherboard = _unitOfWork.Motherboards.GetById(id);
             if (motherboard == null)
             {
                 return HttpNotFound();
@@ -121,9 +122,9 @@ namespace GroupProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Motherboard motherboard = db.Motherboards.Find(id);
-            db.Motherboards.Remove(motherboard);
-            db.SaveChanges();
+            Motherboard motherboard = _unitOfWork.Motherboards.GetById(id);
+            _unitOfWork.Motherboards.Delete(id);
+            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
@@ -131,7 +132,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
