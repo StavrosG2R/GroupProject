@@ -16,10 +16,13 @@ namespace GroupProject.Areas.Admin.Controllers
     public class MotherboardsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public MotherboardsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+
+
 
 
         // GET: Admin/Motherboards

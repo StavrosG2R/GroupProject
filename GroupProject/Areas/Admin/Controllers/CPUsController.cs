@@ -12,7 +12,11 @@ namespace GroupProject.Areas.Admin.Controllers
     public class CpusController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CpusController(IUnitOfWork unitOfWork)
+
+
+        public CPUsController(IUnitOfWork unitOfWork)
+
+
         {
             _unitOfWork = unitOfWork;
         }
@@ -20,8 +24,13 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Cpus
         public ActionResult Index()
         {
+
+            var cpus = _unitOfWork.Cpus.GetAll();
+            return View(cpus.ToList());
+
             var Cpus = _unitOfWork.Cpus.GetAll();
             return View(Cpus.ToList());
+
         }
 
         // GET: Admin/Cpus/Details/5
@@ -31,12 +40,14 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CPU cPU = _unitOfWork.Cpus.GetById(id);
-            if (cPU == null)
+
+            CPU cpu = _unitOfWork.Cpus.GetById(id);
+            if (cpu == null)
+
             {
                 return HttpNotFound();
             }
-            return View(cPU);
+            return View(cpu);
         }
 
         // GET: Admin/Cpus/Create
@@ -51,17 +62,21 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CPU cPU)
+
+        public ActionResult Create(CPU cpu)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Cpus.Create(cPU);
+                _unitOfWork.Cpus.Create(cpu);
+
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cPU.CompanyID);
-            return View(cPU);
+
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cpu.CompanyID);
+            return View(cpu);
+
         }
 
         // GET: Admin/Cpus/Edit/5
@@ -71,13 +86,15 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CPU cPU = _unitOfWork.Cpus.GetById(id);
-            if (cPU == null)
+
+            CPU cpu = _unitOfWork.Cpus.GetById(id);
+            if (cpu == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cPU.CompanyID);
-            return View(cPU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cpu.CompanyID);
+            return View(cpu);
+
         }
 
         // POST: Admin/Cpus/Edit/5
@@ -85,16 +102,19 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CPU cPU)
+
+        public ActionResult Edit(CPU cpu)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Cpus.Update(cPU);
+                _unitOfWork.Cpus.Update(cpu);
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cPU.CompanyID);
-            return View(cPU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cpu.CompanyID);
+            return View(cpu);
+
+
         }
 
         // GET: Admin/Cpus/Delete/5
@@ -104,12 +124,15 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CPU cPU = _unitOfWork.Cpus.GetById(id);
-            if (cPU == null)
+
+            CPU cpu = _unitOfWork.Cpus.GetById(id);
+            if (cpu == null)
+
+
             {
                 return HttpNotFound();
             }
-            return View(cPU);
+            return View(cpu);
         }
 
         // POST: Admin/Cpus/Delete/5
@@ -117,7 +140,9 @@ namespace GroupProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CPU cPU = _unitOfWork.Cpus.GetById(id);
+
+            CPU cpu = _unitOfWork.Cpus.GetById(id);
+
             _unitOfWork.Cpus.Delete(id);
             _unitOfWork.Complete();
             return RedirectToAction("Index");

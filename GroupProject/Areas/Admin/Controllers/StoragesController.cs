@@ -1,4 +1,5 @@
 ﻿using DataAccess.Core.Entities;
+using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 using System.Data.Entity;
 using System.Linq;
@@ -10,12 +11,17 @@ namespace GroupProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class StoragesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IUnitOfWork _unitOfWork;
+
+        public StoragesController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: Admin/Storages
         public ActionResult Index()
         {
-            var storages = db.Storages.Include(s => s.Company);
+            var storages = _unitOfWork.Storages.GetAll();
             return View(storages.ToList());
         }
 
@@ -26,7 +32,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Storage storage = db.Storages.Find(id);
+            Storage storage = _unitOfWork.Storages.GetById(id);
             if (storage == null)
             {
                 return HttpNotFound();
@@ -37,7 +43,7 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Storages/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
             return View();
         }
 
@@ -46,16 +52,16 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CompanyID,Model,Capacity,StorageType,ReadSpeed,WriteSpeed,Thumbnail,Price")] Storage storage)
+        public ActionResult Create(Storage storage)
         {
             if (ModelState.IsValid)
             {
-                db.Storages.Add(storage);
-                db.SaveChanges();
+                _unitOfWork.Storages.Create(storage);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", storage.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", storage.CompanyID);
             return View(storage);
         }
 
@@ -66,12 +72,12 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Storage storage = db.Storages.Find(id);
+            Storage storage = _unitOfWork.Storages.GetById(id);
             if (storage == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", storage.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", storage.CompanyID);
             return View(storage);
         }
 
@@ -80,15 +86,15 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CompanyID,Model,Capacity,StorageType,ReadSpeed,WriteSpeed,Thumbnail,Price")] Storage storage)
+        public ActionResult Edit(Storage storage)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(storage).State = EntityState.Modified;
-                db.SaveChanges();
+                _unitOfWork.Storages.Update(storage);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", storage.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", storage.CompanyID);
             return View(storage);
         }
 
@@ -99,7 +105,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Storage storage = db.Storages.Find(id);
+            Storage storage = _unitOfWork.Storages.GetById(id);
             if (storage == null)
             {
                 return HttpNotFound();
@@ -112,9 +118,9 @@ namespace GroupProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Storage storage = db.Storages.Find(id);
-            db.Storages.Remove(storage);
-            db.SaveChanges();
+            Storage storage = _unitOfWork.Storages.GetById(id);
+            _unitOfWork.Storages.Delete(id);
+            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
@@ -122,7 +128,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
