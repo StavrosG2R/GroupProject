@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
+using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
@@ -14,12 +15,17 @@ namespace GroupProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class PSUsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IUnitOfWork _unitOfWork;
+
+        public PSUsController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: Admin/PSUs
         public ActionResult Index()
         {
-            var pSUs = db.PSUs.Include(p => p.Company);
+            var pSUs = _unitOfWork.Psus.GetAll();
             return View(pSUs.ToList());
         }
 
@@ -30,18 +36,18 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PSU pSU = db.PSUs.Find(id);
-            if (pSU == null)
+            PSU psu = _unitOfWork.Psus.GetById(id);
+            if (psu == null)
             {
                 return HttpNotFound();
             }
-            return View(pSU);
+            return View(psu);
         }
 
         // GET: Admin/PSUs/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
             return View();
         }
 
@@ -50,17 +56,17 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CompanyID,Watt,Efficiency,Modularity,Thumbnail,Price")] PSU pSU)
+        public ActionResult Create(PSU psu)
         {
             if (ModelState.IsValid)
             {
-                db.PSUs.Add(pSU);
-                db.SaveChanges();
+                _unitOfWork.Psus.Create(psu);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", pSU.CompanyID);
-            return View(pSU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", psu.CompanyID);
+            return View(psu);
         }
 
         // GET: Admin/PSUs/Edit/5
@@ -70,13 +76,13 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PSU pSU = db.PSUs.Find(id);
-            if (pSU == null)
+            PSU psu = _unitOfWork.Psus.GetById(id);
+            if (psu == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", pSU.CompanyID);
-            return View(pSU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", psu.CompanyID);
+            return View(psu);
         }
 
         // POST: Admin/PSUs/Edit/5
@@ -84,16 +90,16 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CompanyID,Watt,Efficiency,Modularity,Thumbnail,Price")] PSU pSU)
+        public ActionResult Edit(PSU psu)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pSU).State = EntityState.Modified;
-                db.SaveChanges();
+                _unitOfWork.Psus.Update(psu);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", pSU.CompanyID);
-            return View(pSU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", psu.CompanyID);
+            return View(psu);
         }
 
         // GET: Admin/PSUs/Delete/5
@@ -103,12 +109,12 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PSU pSU = db.PSUs.Find(id);
-            if (pSU == null)
+            PSU psu = _unitOfWork.Psus.GetById(id);
+            if (psu == null)
             {
                 return HttpNotFound();
             }
-            return View(pSU);
+            return View(psu);
         }
 
         // POST: Admin/PSUs/Delete/5
@@ -116,9 +122,9 @@ namespace GroupProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PSU pSU = db.PSUs.Find(id);
-            db.PSUs.Remove(pSU);
-            db.SaveChanges();
+            PSU psu = _unitOfWork.Psus.GetById(id);
+            _unitOfWork.Psus.Delete(id);
+            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
@@ -126,7 +132,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
+using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
@@ -14,13 +15,18 @@ namespace GroupProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class RAMsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IUnitOfWork _unitOfWork;
+
+        public RAMsController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: Admin/RAMs
         public ActionResult Index()
         {
-            var rAMs = db.RAMs.Include(r => r.Company);
-            return View(rAMs.ToList());
+            var rams = _unitOfWork.Rams.GetAll();
+            return View(rams.ToList());
         }
 
         // GET: Admin/RAMs/Details/5
@@ -30,18 +36,18 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RAM rAM = db.RAMs.Find(id);
-            if (rAM == null)
+            RAM ram = _unitOfWork.Rams.GetById(id);
+            if (ram == null)
             {
                 return HttpNotFound();
             }
-            return View(rAM);
+            return View(ram);
         }
 
         // GET: Admin/RAMs/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
             return View();
         }
 
@@ -50,17 +56,17 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CompanyID,Model,Frequency,DdrType,Storage,Thumbnail,Price")] RAM rAM)
+        public ActionResult Create(RAM ram)
         {
             if (ModelState.IsValid)
             {
-                db.RAMs.Add(rAM);
-                db.SaveChanges();
+                _unitOfWork.Rams.Create(ram);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", rAM.CompanyID);
-            return View(rAM);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", ram.CompanyID);
+            return View(ram);
         }
 
         // GET: Admin/RAMs/Edit/5
@@ -70,13 +76,13 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RAM rAM = db.RAMs.Find(id);
-            if (rAM == null)
+            RAM ram = _unitOfWork.Rams.GetById(id);
+            if (ram == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", rAM.CompanyID);
-            return View(rAM);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", ram.CompanyID);
+            return View(ram);
         }
 
         // POST: Admin/RAMs/Edit/5
@@ -84,16 +90,16 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CompanyID,Model,Frequency,DdrType,Storage,Thumbnail,Price")] RAM rAM)
+        public ActionResult Edit(RAM ram)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rAM).State = EntityState.Modified;
-                db.SaveChanges();
+                _unitOfWork.Rams.Update(ram);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", rAM.CompanyID);
-            return View(rAM);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", ram.CompanyID);
+            return View(ram);
         }
 
         // GET: Admin/RAMs/Delete/5
@@ -103,12 +109,12 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RAM rAM = db.RAMs.Find(id);
-            if (rAM == null)
+            RAM ram = _unitOfWork.Rams.GetById(id);
+            if (ram == null)
             {
                 return HttpNotFound();
             }
-            return View(rAM);
+            return View(ram);
         }
 
         // POST: Admin/RAMs/Delete/5
@@ -116,9 +122,9 @@ namespace GroupProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RAM rAM = db.RAMs.Find(id);
-            db.RAMs.Remove(rAM);
-            db.SaveChanges();
+            RAM ram = _unitOfWork.Rams.GetById(id);
+            _unitOfWork.Rams.Delete(id);
+            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
@@ -126,7 +132,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

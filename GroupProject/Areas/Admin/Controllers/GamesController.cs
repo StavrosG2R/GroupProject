@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
+using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
@@ -14,12 +15,17 @@ namespace GroupProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class GamesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IUnitOfWork _unitOfWork;
+
+        public GamesController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: Admin/Games
         public ActionResult Index()
         {
-            var games = db.Games.Include(g => g.Company);
+            var games = _unitOfWork.Games.GetAll();
             return View(games.ToList());
         }
 
@@ -30,7 +36,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Game game = db.Games.Find(id);
+            Game game = _unitOfWork.Games.GetById(id);
             if (game == null)
             {
                 return HttpNotFound();
@@ -41,7 +47,7 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Games/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
             return View();
         }
 
@@ -50,16 +56,16 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CompanyID,Name,Thumbnail")] Game game)
+        public ActionResult Create(Game game)
         {
             if (ModelState.IsValid)
             {
-                db.Games.Add(game);
-                db.SaveChanges();
+                _unitOfWork.Games.Create(game);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", game.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", game.CompanyID);
             return View(game);
         }
 
@@ -70,12 +76,12 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Game game = db.Games.Find(id);
+            Game game = _unitOfWork.Games.GetById(id);
             if (game == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", game.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", game.CompanyID);
             return View(game);
         }
 
@@ -84,15 +90,15 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CompanyID,Name,Thumbnail")] Game game)
+        public ActionResult Edit(Game game)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(game).State = EntityState.Modified;
-                db.SaveChanges();
+                _unitOfWork.Games.Update(game);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", game.CompanyID);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", game.CompanyID);
             return View(game);
         }
 
@@ -103,7 +109,7 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Game game = db.Games.Find(id);
+            Game game = _unitOfWork.Games.GetById(id);
             if (game == null)
             {
                 return HttpNotFound();
@@ -116,9 +122,9 @@ namespace GroupProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Game game = db.Games.Find(id);
-            db.Games.Remove(game);
-            db.SaveChanges();
+            Game game = _unitOfWork.Games.GetById(id);
+            _unitOfWork.Games.Delete(id);
+            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
@@ -126,7 +132,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

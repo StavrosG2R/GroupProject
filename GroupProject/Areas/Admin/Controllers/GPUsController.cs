@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess.Core.Entities;
+using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
@@ -14,13 +15,18 @@ namespace GroupProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class GPUsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IUnitOfWork _unitOfWork;
+
+        public GPUsController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: Admin/GPUs
         public ActionResult Index()
         {
-            var gPUs = db.GPUs.Include(g => g.Company);
-            return View(gPUs.ToList());
+            var gpus = _unitOfWork.Gpus.GetAll();
+            return View(gpus.ToList());
         }
 
         // GET: Admin/GPUs/Details/5
@@ -30,18 +36,18 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GPU gPU = db.GPUs.Find(id);
-            if (gPU == null)
+            GPU gpu = _unitOfWork.Gpus.GetById(id);
+            if (gpu == null)
             {
                 return HttpNotFound();
             }
-            return View(gPU);
+            return View(gpu);
         }
 
         // GET: Admin/GPUs/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
             return View();
         }
 
@@ -50,17 +56,17 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CompanyID,Chipset,Model,Watt,Vram,Thumbnail,Price")] GPU gPU)
+        public ActionResult Create(GPU gpu)
         {
             if (ModelState.IsValid)
             {
-                db.GPUs.Add(gPU);
-                db.SaveChanges();
+                _unitOfWork.Gpus.Create(gpu);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", gPU.CompanyID);
-            return View(gPU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", gpu.CompanyID);
+            return View(gpu);
         }
 
         // GET: Admin/GPUs/Edit/5
@@ -70,13 +76,13 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GPU gPU = db.GPUs.Find(id);
-            if (gPU == null)
+            GPU gpu = _unitOfWork.Gpus.GetById(id);
+            if (gpu == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", gPU.CompanyID);
-            return View(gPU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", gpu.CompanyID);
+            return View(gpu);
         }
 
         // POST: Admin/GPUs/Edit/5
@@ -84,16 +90,16 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CompanyID,Chipset,Model,Watt,Vram,Thumbnail,Price")] GPU gPU)
+        public ActionResult Edit(GPU gpu)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(gPU).State = EntityState.Modified;
-                db.SaveChanges();
+                _unitOfWork.Gpus.Update(gpu);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", gPU.CompanyID);
-            return View(gPU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", gpu.CompanyID);
+            return View(gpu);
         }
 
         // GET: Admin/GPUs/Delete/5
@@ -103,12 +109,12 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GPU gPU = db.GPUs.Find(id);
-            if (gPU == null)
+            GPU gpu = _unitOfWork.Gpus.GetById(id);
+            if (gpu == null)
             {
                 return HttpNotFound();
             }
-            return View(gPU);
+            return View(gpu);
         }
 
         // POST: Admin/GPUs/Delete/5
@@ -116,9 +122,9 @@ namespace GroupProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            GPU gPU = db.GPUs.Find(id);
-            db.GPUs.Remove(gPU);
-            db.SaveChanges();
+            GPU gpu = _unitOfWork.Gpus.GetById(id);
+            _unitOfWork.Gpus.Delete(id);
+            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
@@ -126,7 +132,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

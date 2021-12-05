@@ -1,4 +1,5 @@
 ﻿using DataAccess.Core.Entities;
+using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 using System.Data.Entity;
 using System.Linq;
@@ -10,13 +11,18 @@ namespace GroupProject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class CPUsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CPUsController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: Admin/CPUs
         public ActionResult Index()
         {
-            var cPUs = db.CPUs.Include(c => c.Company);
-            return View(cPUs.ToList());
+            var cpus = _unitOfWork.Cpus.GetAll();
+            return View(cpus.ToList());
         }
 
         // GET: Admin/CPUs/Details/5
@@ -26,18 +32,18 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CPU cPU = db.CPUs.Find(id);
-            if (cPU == null)
+            CPU cpu = _unitOfWork.Cpus.GetById(id);
+            if (cpu == null)
             {
                 return HttpNotFound();
             }
-            return View(cPU);
+            return View(cpu);
         }
 
         // GET: Admin/CPUs/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
             return View();
         }
 
@@ -46,17 +52,17 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CompanyID,Socket,Model,Cores,Threads,Frequency,Watt,Thumbnail,Price")] CPU cPU)
+        public ActionResult Create(CPU cpu)
         {
             if (ModelState.IsValid)
             {
-                db.CPUs.Add(cPU);
-                db.SaveChanges();
+                _unitOfWork.Cpus.Create(cpu);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", cPU.CompanyID);
-            return View(cPU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cpu.CompanyID);
+            return View(cpu);
         }
 
         // GET: Admin/CPUs/Edit/5
@@ -66,13 +72,13 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CPU cPU = db.CPUs.Find(id);
-            if (cPU == null)
+            CPU cpu = _unitOfWork.Cpus.GetById(id);
+            if (cpu == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", cPU.CompanyID);
-            return View(cPU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cpu.CompanyID);
+            return View(cpu);
         }
 
         // POST: Admin/CPUs/Edit/5
@@ -80,16 +86,16 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CompanyID,Socket,Model,Cores,Threads,Frequency,Watt,Thumbnail,Price")] CPU cPU)
+        public ActionResult Edit(CPU cpu)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cPU).State = EntityState.Modified;
-                db.SaveChanges();
+                _unitOfWork.Cpus.Update(cpu);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", cPU.CompanyID);
-            return View(cPU);
+            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cpu.CompanyID);
+            return View(cpu);
         }
 
         // GET: Admin/CPUs/Delete/5
@@ -99,12 +105,12 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CPU cPU = db.CPUs.Find(id);
-            if (cPU == null)
+            CPU cpu = _unitOfWork.Cpus.GetById(id);
+            if (cpu == null)
             {
                 return HttpNotFound();
             }
-            return View(cPU);
+            return View(cpu);
         }
 
         // POST: Admin/CPUs/Delete/5
@@ -112,9 +118,9 @@ namespace GroupProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CPU cPU = db.CPUs.Find(id);
-            db.CPUs.Remove(cPU);
-            db.SaveChanges();
+            CPU cpu = _unitOfWork.Cpus.GetById(id);
+            _unitOfWork.Cpus.Delete(id);
+            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
@@ -122,7 +128,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
