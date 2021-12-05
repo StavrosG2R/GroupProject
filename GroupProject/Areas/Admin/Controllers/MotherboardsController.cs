@@ -22,6 +22,9 @@ namespace GroupProject.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
         }
 
+
+
+
         // GET: Admin/Motherboards
         public ActionResult Index()
         {
