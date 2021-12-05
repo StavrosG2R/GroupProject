@@ -15,7 +15,16 @@ namespace DataAccess.Persistence.Repositories
         }
         public IQueryable<Build> GetAll()
         {
-            return _context.Builds;
+            return _context.Builds
+                .Include(b => b.Builder)
+                .Include(b => b.Case)
+                .Include(b => b.Category)
+                .Include(b => b.CPU)
+                .Include(b => b.GPU)
+                .Include(b => b.Motherboard)
+                .Include(b => b.PSU)
+                .Include(b => b.RAM)
+                .Include(b => b.Storage);
         }
         public Build GetById(int? ID)
         {
