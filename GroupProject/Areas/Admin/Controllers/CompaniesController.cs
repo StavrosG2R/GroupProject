@@ -12,6 +12,7 @@ using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CompaniesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

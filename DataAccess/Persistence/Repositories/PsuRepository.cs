@@ -17,7 +17,7 @@ namespace DataAccess.Persistence.Repositories
 
         public IQueryable<PSU> GetAll()
         {
-            return _context.PSUs;
+            return _context.PSUs.Include(p => p.Company);
         }
 
         public PSU GetById(int? ID)

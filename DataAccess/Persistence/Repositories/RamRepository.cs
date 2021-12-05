@@ -17,7 +17,7 @@ namespace DataAccess.Persistence.Repositories
 
         public IQueryable<RAM> GetAll()
         {
-            return _context.RAMs;
+            return _context.RAMs.Include(r => r.Company);
         }
 
         public RAM GetById(int? ID)

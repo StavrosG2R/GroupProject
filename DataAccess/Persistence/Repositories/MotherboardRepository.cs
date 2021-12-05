@@ -17,7 +17,7 @@ namespace DataAccess.Persistence.Repositories
 
         public IQueryable<Motherboard> GetAll()
         {
-            return _context.Motherboards;
+            return _context.Motherboards.Include(m => m.Company);
         }
 
         public Motherboard GetById(int? ID)

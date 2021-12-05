@@ -1,125 +1,124 @@
-﻿using DataAccess.Core.Entities;
-using DataAccess.Core.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using DataAccess.Core.Entities;
+using DataAccess.Persistence;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CasesController : Controller
+    public class PSUsController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        private readonly IUnitOfWork _unitOfWork;
-        public CasesController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
-        // GET: Admin/Cases
+        // GET: Admin/PSUs
         public ActionResult Index()
         {
-            var cases = _unitOfWork.Cases.GetAll(); 
-            return View(cases.ToList());
+            var pSUs = db.PSUs.Include(p => p.Company);
+            return View(pSUs.ToList());
         }
 
-        // GET: Admin/Cases/Details/5
+        // GET: Admin/PSUs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Case @case = _unitOfWork.Cases.GetById(id);
-            if (@case == null)
+            PSU pSU = db.PSUs.Find(id);
+            if (pSU == null)
             {
                 return HttpNotFound();
             }
-            return View(@case);
+            return View(pSU);
         }
 
-        // GET: Admin/Cases/Create
+        // GET: Admin/PSUs/Create
         public ActionResult Create()
         {
-
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name");
             return View();
         }
 
-        // POST: Admin/Cases/Create
+        // POST: Admin/PSUs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Case @case)
+        public ActionResult Create([Bind(Include = "ID,CompanyID,Watt,Efficiency,Modularity,Thumbnail,Price")] PSU pSU)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Cases.Create(@case);
-                _unitOfWork.Complete();
+                db.PSUs.Add(pSU);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", @case.CompanyID);
-            return View(@case);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", pSU.CompanyID);
+            return View(pSU);
         }
 
-        // GET: Admin/Cases/Edit/5
+        // GET: Admin/PSUs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Case @case = _unitOfWork.Cases.GetById(id);
-            if (@case == null)
+            PSU pSU = db.PSUs.Find(id);
+            if (pSU == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", @case.CompanyID);
-            return View(@case);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", pSU.CompanyID);
+            return View(pSU);
         }
 
-        // POST: Admin/Cases/Edit/5
+        // POST: Admin/PSUs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Case @case)
+        public ActionResult Edit([Bind(Include = "ID,CompanyID,Watt,Efficiency,Modularity,Thumbnail,Price")] PSU pSU)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Cases.Update(@case);
-                _unitOfWork.Complete();
+                db.Entry(pSU).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", @case.CompanyID);
-            return View(@case);
+            ViewBag.CompanyID = new SelectList(db.Companies, "ID", "Name", pSU.CompanyID);
+            return View(pSU);
         }
 
-        // GET: Admin/Cases/Delete/5
+        // GET: Admin/PSUs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Case @case = _unitOfWork.Cases.GetById(id);
-            if (@case == null)
+            PSU pSU = db.PSUs.Find(id);
+            if (pSU == null)
             {
                 return HttpNotFound();
             }
-            return View(@case);
+            return View(pSU);
         }
 
-        // POST: Admin/Cases/Delete/5
+        // POST: Admin/PSUs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Case @case = _unitOfWork.Cases.GetById(id);
-            _unitOfWork.Cases.Delete(id);
-            _unitOfWork.Complete();
+            PSU pSU = db.PSUs.Find(id);
+            db.PSUs.Remove(pSU);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -127,7 +126,7 @@ namespace GroupProject.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                _unitOfWork.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

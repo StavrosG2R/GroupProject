@@ -17,7 +17,7 @@ namespace DataAccess.Persistence.Repositories
 
         public IQueryable<Storage> GetAll()
         {
-            return _context.Storages;
+            return _context.Storages.Include(s => s.Company);
         }
 
         public Storage GetById(int? ID)

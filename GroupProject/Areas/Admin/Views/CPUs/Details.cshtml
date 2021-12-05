@@ -1,13 +1,13 @@
-﻿@model DataAccess.Core.Entities.Case
+﻿@model DataAccess.Core.Entities.CPU
+
 @{
-    ViewBag.Title = "View";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details";
 }
 
-<h2>View</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Case</h4>
+    <h4>CPU</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,6 +19,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Socket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Socket)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Model)
         </dt>
 
@@ -27,19 +35,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Size)
+            @Html.DisplayNameFor(model => model.Cores)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Size)
+            @Html.DisplayFor(model => model.Cores)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NumberOfFans)
+            @Html.DisplayNameFor(model => model.Threads)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NumberOfFans)
+            @Html.DisplayFor(model => model.Threads)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Frequency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Frequency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Watt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Watt)
         </dd>
 
         <dt>
@@ -64,4 +88,3 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-
