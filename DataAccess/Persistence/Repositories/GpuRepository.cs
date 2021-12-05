@@ -17,7 +17,7 @@ namespace DataAccess.Persistence.Repositories
 
         public IQueryable<GPU> GetAll()
         {
-            return _context.GPUs;
+            return _context.GPUs.Include(g => g.Company);
         }
 
         public GPU GetById(int? ID)

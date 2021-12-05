@@ -17,7 +17,7 @@ namespace DataAccess.Persistence.Repositories
 
         public IQueryable<Game> GetAll()
         {
-            return _context.Games;
+            return _context.Games.Include(g => g.Company);
         }
 
         public Game GetById(int? ID)

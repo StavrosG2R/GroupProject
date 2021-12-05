@@ -17,7 +17,7 @@ namespace DataAccess.Persistence.Repositories
 
         public IQueryable<CPU> GetAll()
         {
-            return _context.CPUs;
+            return _context.CPUs.Include(c => c.Company);
         }
 
         public CPU GetById(int? ID)
