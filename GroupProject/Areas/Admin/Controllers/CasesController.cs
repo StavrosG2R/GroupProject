@@ -1,5 +1,6 @@
 ﻿using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
+using GroupProject.ViewModels;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -41,9 +42,13 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Cases/Create
         public ActionResult Create()
         {
+            var viewmodel = new PcPartsViewModel()
+            {
+                Case = new Case(),
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
-            return View();
+            return View(viewmodel);
         }
 
         // POST: Admin/Cases/Create
@@ -60,8 +65,13 @@ namespace GroupProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", @case.CompanyID);
-            return View(@case);
+            var viewmodel = new PcPartsViewModel()
+            {
+                Case = new Case(),
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            return View(viewmodel);
         }
 
         // GET: Admin/Cases/Edit/5
@@ -76,8 +86,14 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", @case.CompanyID);
-            return View(@case);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                Case = @case,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/Cases/Edit/5
@@ -93,8 +109,14 @@ namespace GroupProject.Areas.Admin.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", @case.CompanyID);
-            return View(@case);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                Case = @case,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+           
+            return View(viewmodel);
         }
 
         // GET: Admin/Cases/Delete/5
@@ -104,7 +126,9 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Case @case = _unitOfWork.Cases.GetById(id);
+
             if (@case == null)
             {
                 return HttpNotFound();
@@ -115,11 +139,19 @@ namespace GroupProject.Areas.Admin.Controllers
         // POST: Admin/Cases/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             Case @case = _unitOfWork.Cases.GetById(id);
+
+            if (@case == null)
+                return HttpNotFound();
+
             _unitOfWork.Cases.Delete(id);
             _unitOfWork.Complete();
+
             return RedirectToAction("Index");
         }
 
