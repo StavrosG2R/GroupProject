@@ -1,6 +1,7 @@
 ﻿using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -15,7 +16,22 @@ namespace DataAccess.Persistence.Repositories
             _context = context;
         }
 
-        public IQueryable<Motherboard> GetAll()
+        public IQueryable<Motherboard> GetMotherboardsThatMatchTheSocket(string socketType)
+        {
+            if (socketType == null)
+                throw new ArgumentNullException(nameof(socketType));
+
+            IQueryable<Motherboard> filteredMotherboards = _context.Motherboards.Include(m => m.Company).Where(m => m.Socket == socketType);
+
+            return filteredMotherboards;
+        }
+
+        public IEnumerable<Motherboard> GetAll()
+        {
+            return _context.Motherboards.ToList();
+        }
+
+        public IQueryable<Motherboard> GetAllWithCompanies()
         {
             return _context.Motherboards.Include(m => m.Company);
         }

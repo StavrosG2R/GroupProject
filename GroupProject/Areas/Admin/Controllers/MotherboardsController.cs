@@ -26,7 +26,7 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Motherboards
         public ActionResult Index()
         {
-            var motherboards = _unitOfWork.Motherboards.GetAll();
+            var motherboards = _unitOfWork.Motherboards.GetAllWithCompanies();
             return View(motherboards.ToList());
         }
 
