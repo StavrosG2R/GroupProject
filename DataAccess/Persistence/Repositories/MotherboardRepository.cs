@@ -15,7 +15,24 @@ namespace DataAccess.Persistence.Repositories
             _context = context;
         }
 
+        public IQueryable<Motherboard> GetMotherboardsThatMatchTheSocket(string socketType)
+        {
+            if (socketType == null)
+                throw new ArgumentNullException(nameof(socketType));
+
+            IQueryable<Motherboard> filteredMotherboards = _context.Motherboards
+                .Include(m => m.Company)
+                .Where(m => m.Socket == socketType);
+
+            return filteredMotherboards;
+        }
+
         public IQueryable<Motherboard> GetAll()
+        {
+            return _context.Motherboards.Include(m => m.Company);
+        }
+
+        public IQueryable<Motherboard> GetAllWithCompanies()
         {
             return _context.Motherboards.Include(m => m.Company);
         }

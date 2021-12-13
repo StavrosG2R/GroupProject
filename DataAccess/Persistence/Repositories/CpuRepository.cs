@@ -15,6 +15,22 @@ namespace DataAccess.Persistence.Repositories
             _context = context;
         }
 
+        public IQueryable<CPU> GetCPUsThatMatchTheSocket(string socketType)
+        {
+            if (socketType == null)
+                throw new ArgumentNullException(nameof(socketType));
+
+            IQueryable<CPU> filteredCpus = _context.CPUs
+                .Include(m => m.Company)
+                .Where(m => m.Socket == socketType);
+
+            return filteredCpus;
+        }
+        public IQueryable<CPU> GetAllWithCompanies()
+        {
+            return _context.CPUs.Include(c => c.Company);
+        }
+
         public IQueryable<CPU> GetAll()
         {
             return _context.CPUs.Include(c => c.Company);

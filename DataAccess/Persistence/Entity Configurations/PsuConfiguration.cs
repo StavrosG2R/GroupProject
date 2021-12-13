@@ -13,6 +13,9 @@ namespace DataAccess.Persistence.Entity_Configurations
             Property(p => p.Efficiency)
                 .IsRequired();
 
+            Property(p => p.Model)
+                .IsRequired();
+
             Property(c => c.CompanyID)
                 .IsRequired();
         }

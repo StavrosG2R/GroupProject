@@ -104,6 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Dtos\FollowingDto.cs" />
     <Compile Include="Core\Entities\ApplicationUser.cs" />
     <Compile Include="Core\Entities\Build.cs" />
     <Compile Include="Core\Entities\Case.cs" />

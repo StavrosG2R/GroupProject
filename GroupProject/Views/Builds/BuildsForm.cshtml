@@ -1,0 +1,123 @@
+﻿@model GroupProject.ViewModels.BuildsFormViewModel
+@{
+    ViewBag.Title = Model.Header;
+}
+
+<h2>@Model.Header</h2>
+
+
+@using (Html.BeginForm(Model.Action, "Builds"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-horizontal">
+        <h4>Build</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, "Build Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Case, "Case Model", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Case, new SelectList(Model.Cases, "ID", "Model"), "Select Case", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Case, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CPU, "CPU Model", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.CPU, new SelectList(Model.CPUs, "ID", "Model"), "Select CPU", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CPU, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Motherboard, "Motherboard Model", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Motherboard, new SelectList(Model.Motherboards, "ID", "Model"), "Select Motherboard", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Motherboard, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.RAM, "RAM Model", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.RAM, new SelectList(Model.RAMs, "ID", "Model"), "Select RAM", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.RAM, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.GPU, "GPU Model", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.GPU, new SelectList(Model.GPUs, "ID", "Model"), "Select GPU", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.GPU, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PSU, "PSU Model", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.PSU, new SelectList(Model.PSUs, "ID", "Model"), "Select PSU", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PSU, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Storage, "Storage Model", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Storage, new SelectList(Model.Storages, "ID", "Model"), "Select Storage", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Storage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Category, new SelectList(Model.Categories, "ID", "Name"), "Select Category", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.IsAdminBuild, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(m => m.IsAdminBuild)
+                    @Html.ValidationMessageFor(m => m.IsAdminBuild, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
