@@ -25,7 +25,9 @@ namespace DataAccess.Persistence.Repositories
             if (ID == null)
                 throw new ArgumentNullException(nameof(ID));
 
-            return _context.Storages.Find(ID);
+            return _context.Storages
+                .Include(c => c.Company)
+                .FirstOrDefault(c => c.ID == ID);
         }
 
         public void Create(Storage storage)

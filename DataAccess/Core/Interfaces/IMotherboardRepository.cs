@@ -8,7 +8,7 @@ namespace DataAccess.Core.Interfaces
     public interface IMotherboardRepository : IDisposable
     {
         IQueryable<Motherboard> GetAllWithCompanies();
-        IEnumerable<Motherboard> GetAll();
+        IQueryable<Motherboard> GetAll();
         Motherboard GetById(int? ID);
         void Create(Motherboard motherboard);
         void Update(Motherboard motherboard);

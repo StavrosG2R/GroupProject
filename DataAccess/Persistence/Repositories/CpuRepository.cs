@@ -52,7 +52,9 @@ namespace DataAccess.Persistence.Repositories
             if (ID == null)
                 throw new ArgumentNullException(nameof(ID));
 
-            return _context.CPUs.Find(ID);
+            return _context.CPUs
+                .Include(c => c.Company)
+                .FirstOrDefault(c => c.ID == ID);
         }
 
         public void Create(CPU cpu)

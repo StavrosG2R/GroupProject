@@ -31,7 +31,17 @@ namespace DataAccess.Persistence.Repositories
             if (ID == null)
                 throw new ArgumentNullException(nameof(ID));
 
-            return _context.Builds.Find(ID);
+            return _context.Builds
+                .Include(b => b.Builder)
+                .Include(b => b.Case)
+                .Include(b => b.Category)
+                .Include(b => b.CPU)
+                .Include(b => b.GPU)
+                .Include(b => b.Motherboard)
+                .Include(b => b.PSU)
+                .Include(b => b.RAM)
+                .Include(b => b.Storage)
+                .FirstOrDefault(b => b.ID == ID);
         }
         public void Add(Build build)
         {

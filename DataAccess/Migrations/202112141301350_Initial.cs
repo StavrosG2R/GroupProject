@@ -232,6 +232,7 @@
                         ID = c.Int(nullable: false, identity: true),
                         CompanyID = c.Int(nullable: false),
                         Watt = c.Int(nullable: false),
+                        Model = c.String(nullable: false),
                         Efficiency = c.String(nullable: false),
                         Modularity = c.Boolean(nullable: false),
                         Thumbnail = c.String(),

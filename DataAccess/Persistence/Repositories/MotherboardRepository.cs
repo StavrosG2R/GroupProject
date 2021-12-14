@@ -26,9 +26,9 @@ namespace DataAccess.Persistence.Repositories
             return filteredMotherboards;
         }
 
-        public IEnumerable<Motherboard> GetAll()
+        public IQueryable<Motherboard> GetAll()
         {
-            return _context.Motherboards.ToList();
+            return _context.Motherboards;
         }
 
         public IQueryable<Motherboard> GetAllWithCompanies()
@@ -41,7 +41,9 @@ namespace DataAccess.Persistence.Repositories
             if (ID == null)
                 throw new ArgumentNullException(nameof(ID));
 
-            return _context.Motherboards.Find(ID);
+            return _context.Motherboards
+                .Include(c => c.Company)
+                .FirstOrDefault(c => c.ID == ID);
         }
 
         public void Create(Motherboard motherboard)

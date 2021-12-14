@@ -21,13 +21,13 @@ namespace DataAccess.Core.Entities
         public string Name { get; set; }
 
         //! new added
-        public ICollection<Case> Cases { get; set; }
-        public ICollection<CPU> CPUs { get; set; }
-        public ICollection<Game> Games { get; set; }
-        public ICollection<GPU> GPUs { get; set; }
-        public ICollection<Motherboard> Motherboards { get; set; }
-        public ICollection<PSU> PSUs { get; set; }
-        public ICollection<RAM> RAMs { get; set; }
-        public ICollection<Storage> Storages { get; set; }
+        public ICollection<Case> Cases { get; private set; }
+        public ICollection<CPU> CPUs { get; private set; }
+        public ICollection<Game> Games { get; private set; }
+        public ICollection<GPU> GPUs { get; private set; }
+        public ICollection<Motherboard> Motherboards { get; private set; }
+        public ICollection<PSU> PSUs { get; private set; }
+        public ICollection<RAM> RAMs { get; private set; }
+        public ICollection<Storage> Storages { get; private set; }
     }
 }

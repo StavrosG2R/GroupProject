@@ -7,7 +7,7 @@ namespace DataAccess.Core.Interfaces
 {
     public interface ICaseRepository : IDisposable
     {
-        IEnumerable<Case> GetAll();
+        IQueryable<Case> GetAll();
         Case GetById(int? ID);
         void Create(Case cases); // to case baraei
         void Update(Case cases); // to case baraei

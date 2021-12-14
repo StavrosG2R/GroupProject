@@ -1,0 +1,14 @@
+﻿@model IEnumerable<DataAccess.Core.Entities.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Who I Follow</h2>
+
+<ul>
+    @foreach(var builder in Model)
+            {
+                <li>@builder.Name</li>
+            }
+</ul>
+
