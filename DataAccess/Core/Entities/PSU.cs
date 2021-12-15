@@ -19,6 +19,7 @@ namespace DataAccess.Core.Entities
         public Company Company { get; set; }
         public int CompanyID { get; set; }
         public ICollection<Build> Builds { get; set; }
+        public string Model { get; set; }
         public int Watt { get; set; }
         public string Model { get; set; }
         public string Efficiency { get; set; }

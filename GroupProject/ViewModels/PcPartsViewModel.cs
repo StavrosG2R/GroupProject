@@ -1,4 +1,5 @@
-﻿using DataAccess.Core.Entities;
+using DataAccess.Core.Entities;
+using System.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;

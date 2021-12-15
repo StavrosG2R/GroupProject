@@ -48,7 +48,8 @@ namespace GroupProject.App_Start
                 .InstancePerLifetimeScope();
 
             //Register DbContext
-            builder.RegisterType<ApplicationDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<ApplicationDbContext>()
+                .InstancePerLifetimeScope();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

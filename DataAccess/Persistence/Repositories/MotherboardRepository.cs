@@ -21,7 +21,9 @@ namespace DataAccess.Persistence.Repositories
             if (socketType == null)
                 throw new ArgumentNullException(nameof(socketType));
 
-            IQueryable<Motherboard> filteredMotherboards = _context.Motherboards.Include(m => m.Company).Where(m => m.Socket == socketType);
+            IQueryable<Motherboard> filteredMotherboards = _context.Motherboards
+                .Include(m => m.Company)
+                .Where(m => m.Socket == socketType);
 
             return filteredMotherboards;
         }

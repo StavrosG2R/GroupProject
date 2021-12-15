@@ -6,6 +6,8 @@ namespace DataAccess.Core.Interfaces
 {
     public interface ICpuRepository : IDisposable
     {
+        IQueryable<CPU> GetAllWithCompanies();
+        IQueryable<CPU> GetCPUsThatMatchTheSocket(string socketType);
         IQueryable<CPU> GetAll();
         IQueryable<CPU> GetCPU();
         CPU GetById(int? ID);
