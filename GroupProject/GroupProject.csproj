@@ -223,10 +223,17 @@
     <Compile Include="Controllers\Api\FollowingsController.cs" />
     <Compile Include="Controllers\Api\MotherboardsController.cs" />
     <Compile Include="Controllers\BuildsController.cs" />
+    <Compile Include="Controllers\CasesController.cs" />
+    <Compile Include="Controllers\CPUsController.cs" />
     <Compile Include="Controllers\DonatesController.cs" />
     <Compile Include="Controllers\FolloweesController.cs" />
+    <Compile Include="Controllers\GPUsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MotherboardsController.cs" />
+    <Compile Include="Controllers\PSUsController.cs" />
+    <Compile Include="Controllers\RAMsController.cs" />
+    <Compile Include="Controllers\StoragesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -362,6 +369,20 @@
     <Content Include="Views\Builds\BuildsForm.cshtml" />
     <Content Include="Views\Donates\Index.cshtml" />
     <Content Include="Views\Followees\Index.cshtml" />
+    <Content Include="Views\Storages\Details.cshtml" />
+    <Content Include="Views\Storages\Index.cshtml" />
+    <Content Include="Views\RAMs\Details.cshtml" />
+    <Content Include="Views\RAMs\Index.cshtml" />
+    <Content Include="Views\PSUs\Details.cshtml" />
+    <Content Include="Views\PSUs\Index.cshtml" />
+    <Content Include="Views\Motherboards\Details.cshtml" />
+    <Content Include="Views\Motherboards\Index.cshtml" />
+    <Content Include="Views\GPUs\Details.cshtml" />
+    <Content Include="Views\GPUs\Index.cshtml" />
+    <Content Include="Views\CPUs\Details.cshtml" />
+    <Content Include="Views\CPUs\Index.cshtml" />
+    <Content Include="Views\Cases\Details.cshtml" />
+    <Content Include="Views\Cases\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,69 @@
+﻿@model DataAccess.Core.Entities.PSU
+
+<h2>Details</h2>
+
+<div>
+    <h4>PSU</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Watt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Watt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Efficiency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Efficiency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modularity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modularity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thumbnail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
