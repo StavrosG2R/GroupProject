@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DataAccess.Core.Entities.PSU>
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Company.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Watt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Efficiency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modularity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Watt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Efficiency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modularity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thumbnail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

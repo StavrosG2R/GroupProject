@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DataAccess.Core.Entities.Motherboard>
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Company.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Socket)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Chipset)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DdrType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Watt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Socket)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chipset)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DdrType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Watt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thumbnail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
