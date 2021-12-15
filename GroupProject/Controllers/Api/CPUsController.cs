@@ -15,10 +15,11 @@ namespace GroupProject.Controllers.Api
         {
             _unitOfWork = unitOfWork;
         }
-
+        
+        
         public IHttpActionResult GetCpus()
         {
-            var cpus = _unitOfWork.Cpus.GetAllWithCompanies();
+            var cpus = _unitOfWork.Cpus.GetAll();
             return Ok(cpus);
         }
 

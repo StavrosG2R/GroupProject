@@ -18,7 +18,7 @@ namespace GroupProject.Controllers.Api
         }
         public IHttpActionResult GetMotherboards()
         {
-            var motherboards = _unitOfWork.Motherboards.GetAllWithCompanies();
+            var motherboards = _unitOfWork.Motherboards.GetAll();
             return Ok(motherboards);
         }
 

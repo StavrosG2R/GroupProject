@@ -15,14 +15,6 @@ namespace DataAccess.Persistence.Repositories
             _context = context;
         }
 
-        public CPU GetSocket(int ID)
-        {
-            var cpu = _context.CPUs.Find(ID);
-            
-            return _context.CPUs
-                .SingleOrDefault(c => c.Socket == cpu.Socket);
-        }
-
         public IQueryable<CPU> GetCPUsThatMatchTheSocket(string socketType)
         {
             if (socketType == null)
@@ -35,22 +27,7 @@ namespace DataAccess.Persistence.Repositories
 
             return filteredCpus;
         }
-        public IQueryable<CPU> GetAllWithCompanies()
-        {
-            return _context.CPUs.Include(c => c.Company);
-        }
-
-        public IQueryable<CPU> GetCPU()
-        {
-            return _context.CPUs;
-        }
-
         public IQueryable<CPU> GetAll()
-        {
-            return _context.CPUs;
-        }
-
-        public IQueryable<CPU> GetAllWithCompanies()
         {
             return _context.CPUs.Include(c => c.Company);
         }

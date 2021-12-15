@@ -3,6 +3,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 
@@ -27,6 +28,8 @@ namespace GroupProject.App_Start
 
             // Ignore reference looping
             settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+
         }
     }
 }

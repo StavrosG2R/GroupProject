@@ -30,11 +30,6 @@ namespace DataAccess.Persistence.Repositories
 
         public IQueryable<Motherboard> GetAll()
         {
-            return _context.Motherboards;
-        }
-
-        public IQueryable<Motherboard> GetAllWithCompanies()
-        {
             return _context.Motherboards.Include(m => m.Company);
         }
 

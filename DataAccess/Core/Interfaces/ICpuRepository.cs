@@ -6,16 +6,12 @@ namespace DataAccess.Core.Interfaces
 {
     public interface ICpuRepository : IDisposable
     {
-        IQueryable<CPU> GetAllWithCompanies();
-        IQueryable<CPU> GetCPUsThatMatchTheSocket(string socketType);
         IQueryable<CPU> GetAll();
-        IQueryable<CPU> GetCPU();
+        IQueryable<CPU> GetCPUsThatMatchTheSocket(string socketType);
         CPU GetById(int? ID);
         void Create(CPU cpu);
         void Update(CPU cpu);
         void Delete(int? ID);
-        CPU GetSocket(int ID);
-        IQueryable<CPU> GetAllWithCompanies();
-        IQueryable<CPU> GetCPUsThatMatchTheSocket(string socketType);
+    
     }
 }
