@@ -1,6 +1,7 @@
 ﻿using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -22,7 +23,9 @@ namespace DataAccess.Persistence.Repositories
             if (ID == null)
                 throw new ArgumentNullException(nameof(ID));
 
-            return _context.Cases.Find(ID);
+            return _context.Cases
+                .Include(c => c.Company)
+                .FirstOrDefault(c => c.ID == ID);
         }
         public void Create(Case cases)
         {

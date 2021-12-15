@@ -1,6 +1,7 @@
 ﻿using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
+using GroupProject.ViewModels;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -32,7 +33,9 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Storage storage = _unitOfWork.Storages.GetById(id);
+
             if (storage == null)
             {
                 return HttpNotFound();
@@ -43,8 +46,12 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Storages/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
-            return View();
+            var viewmodel = new PcPartsViewModel()
+            {
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/Storages/Create
@@ -61,8 +68,14 @@ namespace GroupProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", storage.CompanyID);
-            return View(storage);
+            var viewmodel = new PcPartsViewModel()
+            {
+                Storage = new Storage(),
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            
+            return View(viewmodel);
         }
 
         // GET: Admin/Storages/Edit/5
@@ -72,13 +85,21 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Storage storage = _unitOfWork.Storages.GetById(id);
+
             if (storage == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", storage.CompanyID);
-            return View(storage);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                Storage = storage,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/Storages/Edit/5
@@ -94,8 +115,14 @@ namespace GroupProject.Areas.Admin.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", storage.CompanyID);
-            return View(storage);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                Storage = storage,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            return View(viewmodel);
         }
 
         // GET: Admin/Storages/Delete/5
@@ -105,7 +132,9 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Storage storage = _unitOfWork.Storages.GetById(id);
+
             if (storage == null)
             {
                 return HttpNotFound();
@@ -116,11 +145,19 @@ namespace GroupProject.Areas.Admin.Controllers
         // POST: Admin/Storages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             Storage storage = _unitOfWork.Storages.GetById(id);
+
+            if (storage == null)
+                return HttpNotFound();
+
             _unitOfWork.Storages.Delete(id);
             _unitOfWork.Complete();
+
             return RedirectToAction("Index");
         }
 

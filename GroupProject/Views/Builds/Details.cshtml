@@ -1,8 +1,5 @@
 ﻿@model DataAccess.Core.Entities.Build
 
-@{
-    ViewBag.Title = "Details";
-}
 
 <h2>Details</h2>
 
@@ -11,7 +8,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Builder.Name)
+            @Html.LabelFor(model => model.Builder.Name, "Builder Name")
         </dt>
 
         <dd>
@@ -19,15 +16,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Case.Model)
+            @Html.LabelFor(model => model.Name, "Build Name")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Case.Model)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.LabelFor(model => model.Category.Name, "Category")
         </dt>
 
         <dd>
@@ -35,39 +32,47 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CPU.Socket)
+            @Html.LabelFor(model => model.Case.Model, "Case Model")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CPU.Socket)
+            @Html.DisplayFor(model => model.Case.Model)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GPU.Chipset)
+            @Html.LabelFor(model => model.CPU.Model, "CPU Model")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GPU.Chipset)
+            @Html.DisplayFor(model => model.CPU.Model)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Motherboard.Socket)
+            @Html.LabelFor(model => model.GPU.Model, "GPU Model")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Motherboard.Socket)
+            @Html.DisplayFor(model => model.GPU.Model)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PSU.Efficiency)
+            @Html.LabelFor(model => model.Motherboard.Model, "Motherboard Model")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PSU.Efficiency)
+            @Html.DisplayFor(model => model.Motherboard.Model)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RAM.Model)
+            @Html.LabelFor(model => model.PSU.Model, "PSU Model")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PSU.Model)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.RAM.Model, "RAM Model")
         </dt>
 
         <dd>
@@ -75,19 +80,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Storage.Model)
+            @Html.LabelFor(model => model.Storage.Model, "Storage Model")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Storage.Model)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>

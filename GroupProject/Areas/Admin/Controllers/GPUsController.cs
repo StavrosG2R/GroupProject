@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
+using GroupProject.ViewModels;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
@@ -47,8 +48,12 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/GPUs/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
-            return View();
+            var viewmodel = new PcPartsViewModel()
+            {
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/GPUs/Create
@@ -64,9 +69,14 @@ namespace GroupProject.Areas.Admin.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
+            var viewmodel = new PcPartsViewModel()
+            {
+                GPU = new GPU(),
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", gpu.CompanyID);
-            return View(gpu);
+            
+            return View(viewmodel);
         }
 
         // GET: Admin/GPUs/Edit/5
@@ -76,13 +86,21 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             GPU gpu = _unitOfWork.Gpus.GetById(id);
+
             if (gpu == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", gpu.CompanyID);
-            return View(gpu);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                GPU = gpu,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/GPUs/Edit/5
@@ -98,8 +116,14 @@ namespace GroupProject.Areas.Admin.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", gpu.CompanyID);
-            return View(gpu);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                GPU = gpu,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // GET: Admin/GPUs/Delete/5
@@ -109,22 +133,33 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             GPU gpu = _unitOfWork.Gpus.GetById(id);
+
             if (gpu == null)
             {
                 return HttpNotFound();
             }
+
             return View(gpu);
         }
 
         // POST: Admin/GPUs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             GPU gpu = _unitOfWork.Gpus.GetById(id);
+
+            if (gpu == null)
+                return HttpNotFound();
+
             _unitOfWork.Gpus.Delete(id);
             _unitOfWork.Complete();
+
             return RedirectToAction("Index");
         }
 

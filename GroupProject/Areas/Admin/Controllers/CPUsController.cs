@@ -1,6 +1,7 @@
 ﻿using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
+using GroupProject.ViewModels;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -13,25 +14,27 @@ namespace GroupProject.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
+
         public CPUsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: Admin/CPUs
+        // GET: Admin/Cpus
         public ActionResult Index()
         {
             var cpus = _unitOfWork.Cpus.GetAll();
             return View(cpus.ToList());
         }
 
-        // GET: Admin/CPUs/Details/5
+        // GET: Admin/Cpus/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             CPU cpu = _unitOfWork.Cpus.GetById(id);
             if (cpu == null)
             {
@@ -40,18 +43,23 @@ namespace GroupProject.Areas.Admin.Controllers
             return View(cpu);
         }
 
-        // GET: Admin/CPUs/Create
+        // GET: Admin/Cpus/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
-            return View();
+            var viewmodel = new PcPartsViewModel()
+            {
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
-        // POST: Admin/CPUs/Create
+        // POST: Admin/Cpus/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Create(CPU cpu)
         {
             if (ModelState.IsValid)
@@ -61,27 +69,41 @@ namespace GroupProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cpu.CompanyID);
-            return View(cpu);
+            var viewmodel = new PcPartsViewModel()
+            {
+                CPU = new CPU(),
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
+
         }
 
-        // GET: Admin/CPUs/Edit/5
+        // GET: Admin/Cpus/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             CPU cpu = _unitOfWork.Cpus.GetById(id);
             if (cpu == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cpu.CompanyID);
-            return View(cpu);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                CPU = cpu,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
+
         }
 
-        // POST: Admin/CPUs/Edit/5
+        // POST: Admin/Cpus/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -94,17 +116,26 @@ namespace GroupProject.Areas.Admin.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", cpu.CompanyID);
-            return View(cpu);
+            var viewmodel = new PcPartsViewModel()
+            {
+                CPU = cpu,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            
+            return View(viewmodel);
+
+
         }
 
-        // GET: Admin/CPUs/Delete/5
+        // GET: Admin/Cpus/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             CPU cpu = _unitOfWork.Cpus.GetById(id);
             if (cpu == null)
             {
@@ -113,14 +144,22 @@ namespace GroupProject.Areas.Admin.Controllers
             return View(cpu);
         }
 
-        // POST: Admin/CPUs/Delete/5
+        // POST: Admin/Cpus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             CPU cpu = _unitOfWork.Cpus.GetById(id);
+
+            if (cpu == null)
+                return HttpNotFound();
+
             _unitOfWork.Cpus.Delete(id);
             _unitOfWork.Complete();
+
             return RedirectToAction("Index");
         }
 

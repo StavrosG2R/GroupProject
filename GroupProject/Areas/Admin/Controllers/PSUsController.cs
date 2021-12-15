@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
+using GroupProject.ViewModels;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
@@ -36,7 +37,9 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             PSU psu = _unitOfWork.Psus.GetById(id);
+
             if (psu == null)
             {
                 return HttpNotFound();
@@ -47,8 +50,12 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/PSUs/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
-            return View();
+            var viewmodel = new PcPartsViewModel()
+            {
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/PSUs/Create
@@ -65,8 +72,13 @@ namespace GroupProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", psu.CompanyID);
-            return View(psu);
+            var viewmodel = new PcPartsViewModel()
+            {
+                PSU = new PSU(),
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            return View(viewmodel);
         }
 
         // GET: Admin/PSUs/Edit/5
@@ -76,13 +88,21 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             PSU psu = _unitOfWork.Psus.GetById(id);
+
             if (psu == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", psu.CompanyID);
-            return View(psu);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                PSU = psu,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/PSUs/Edit/5
@@ -98,8 +118,14 @@ namespace GroupProject.Areas.Admin.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", psu.CompanyID);
-            return View(psu);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                PSU = psu,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            return View(viewmodel);
         }
 
         // GET: Admin/PSUs/Delete/5
@@ -109,7 +135,9 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             PSU psu = _unitOfWork.Psus.GetById(id);
+
             if (psu == null)
             {
                 return HttpNotFound();
@@ -120,11 +148,19 @@ namespace GroupProject.Areas.Admin.Controllers
         // POST: Admin/PSUs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             PSU psu = _unitOfWork.Psus.GetById(id);
+
+            if (psu == null)
+                return HttpNotFound();
+
             _unitOfWork.Psus.Delete(id);
             _unitOfWork.Complete();
+
             return RedirectToAction("Index");
         }
 

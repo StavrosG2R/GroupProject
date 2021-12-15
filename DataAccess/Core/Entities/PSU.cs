@@ -21,6 +21,7 @@ namespace DataAccess.Core.Entities
         public ICollection<Build> Builds { get; set; }
         public string Model { get; set; }
         public int Watt { get; set; }
+        public string Model { get; set; }
         public string Efficiency { get; set; }
         public bool Modularity { get; set; }
         public string Thumbnail { get; set; }

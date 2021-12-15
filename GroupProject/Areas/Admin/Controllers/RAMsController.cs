@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
+using GroupProject.ViewModels;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
@@ -36,7 +37,9 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RAM ram = _unitOfWork.Rams.GetById(id);
+
             if (ram == null)
             {
                 return HttpNotFound();
@@ -47,8 +50,12 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/RAMs/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
-            return View();
+            var viewmodel = new PcPartsViewModel()
+            {
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/RAMs/Create
@@ -65,8 +72,13 @@ namespace GroupProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", ram.CompanyID);
-            return View(ram);
+            var viewmodel = new PcPartsViewModel()
+            {
+                RAM= new RAM(),
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            return View(viewmodel);
         }
 
         // GET: Admin/RAMs/Edit/5
@@ -76,13 +88,21 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RAM ram = _unitOfWork.Rams.GetById(id);
+
             if (ram == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", ram.CompanyID);
-            return View(ram);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                RAM = ram,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            return View(viewmodel);
         }
 
         // POST: Admin/RAMs/Edit/5
@@ -98,8 +118,14 @@ namespace GroupProject.Areas.Admin.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", ram.CompanyID);
-            return View(ram);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                RAM = ram,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // GET: Admin/RAMs/Delete/5
@@ -109,7 +135,9 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RAM ram = _unitOfWork.Rams.GetById(id);
+
             if (ram == null)
             {
                 return HttpNotFound();
@@ -120,11 +148,19 @@ namespace GroupProject.Areas.Admin.Controllers
         // POST: Admin/RAMs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             RAM ram = _unitOfWork.Rams.GetById(id);
+
+            if (ram == null)
+                return HttpNotFound();
+
             _unitOfWork.Rams.Delete(id);
             _unitOfWork.Complete();
+
             return RedirectToAction("Index");
         }
 

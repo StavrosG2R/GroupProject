@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
+using GroupProject.ViewModels;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
@@ -25,7 +26,7 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Motherboards
         public ActionResult Index()
         {
-            var motherboards = _unitOfWork.Motherboards.GetAll();
+            var motherboards = _unitOfWork.Motherboards.GetAllWithCompanies();
             return View(motherboards.ToList());
         }
 
@@ -36,7 +37,9 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Motherboard motherboard = _unitOfWork.Motherboards.GetById(id);
+
             if (motherboard == null)
             {
                 return HttpNotFound();
@@ -47,8 +50,12 @@ namespace GroupProject.Areas.Admin.Controllers
         // GET: Admin/Motherboards/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name");
-            return View();
+            var viewmodel = new PcPartsViewModel()
+            {
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/Motherboards/Create
@@ -65,8 +72,14 @@ namespace GroupProject.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", motherboard.CompanyID);
-            return View(motherboard);
+            var viewmodel = new PcPartsViewModel()
+            {
+                Motherboard = new Motherboard(),
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            
+            return View(viewmodel);
         }
 
         // GET: Admin/Motherboards/Edit/5
@@ -76,13 +89,21 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Motherboard motherboard = _unitOfWork.Motherboards.GetById(id);
+
             if (motherboard == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", motherboard.CompanyID);
-            return View(motherboard);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                Motherboard = motherboard,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+            
+            return View(viewmodel);
         }
 
         // POST: Admin/Motherboards/Edit/5
@@ -98,8 +119,14 @@ namespace GroupProject.Areas.Admin.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompanyID = new SelectList(_unitOfWork.Companies.GetAll(), "ID", "Name", motherboard.CompanyID);
-            return View(motherboard);
+
+            var viewmodel = new PcPartsViewModel()
+            {
+                Motherboard = motherboard,
+                Companies = _unitOfWork.Companies.GetAll().ToList()
+            };
+
+            return View(viewmodel);
         }
 
         // GET: Admin/Motherboards/Delete/5
@@ -109,7 +136,9 @@ namespace GroupProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Motherboard motherboard = _unitOfWork.Motherboards.GetById(id);
+
             if (motherboard == null)
             {
                 return HttpNotFound();
@@ -120,11 +149,19 @@ namespace GroupProject.Areas.Admin.Controllers
         // POST: Admin/Motherboards/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             Motherboard motherboard = _unitOfWork.Motherboards.GetById(id);
+
+            if (motherboard == null)
+                return HttpNotFound();
+
             _unitOfWork.Motherboards.Delete(id);
             _unitOfWork.Complete();
+
             return RedirectToAction("Index");
         }
 

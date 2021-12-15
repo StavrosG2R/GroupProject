@@ -1,6 +1,7 @@
 ﻿using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -29,7 +30,7 @@ namespace DataAccess.Persistence.Repositories
 
         public IQueryable<Motherboard> GetAll()
         {
-            return _context.Motherboards.Include(m => m.Company);
+            return _context.Motherboards;
         }
 
         public IQueryable<Motherboard> GetAllWithCompanies()
@@ -42,7 +43,9 @@ namespace DataAccess.Persistence.Repositories
             if (ID == null)
                 throw new ArgumentNullException(nameof(ID));
 
-            return _context.Motherboards.Find(ID);
+            return _context.Motherboards
+                .Include(c => c.Company)
+                .FirstOrDefault(c => c.ID == ID);
         }
 
         public void Create(Motherboard motherboard)
