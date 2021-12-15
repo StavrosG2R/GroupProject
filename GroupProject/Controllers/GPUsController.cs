@@ -36,5 +36,14 @@ namespace GroupProject.Controllers
             }
             return View(gpu);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

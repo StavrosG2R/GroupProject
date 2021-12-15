@@ -35,5 +35,14 @@ namespace GroupProject.Controllers
             }
             return View(@case);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
