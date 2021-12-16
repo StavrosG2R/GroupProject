@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Core.Entities
 {
@@ -10,6 +12,8 @@ namespace DataAccess.Core.Entities
             Comments= new Collection<Comment>();
         }
         public int ID { get; set; }
+
+        [Display(Name = "Build Name")]
         public string Name { get; set; }
         public ApplicationUser Builder { get; set; }
         public string BuilderID { get; set; }
@@ -32,5 +36,9 @@ namespace DataAccess.Core.Entities
         public int CategoryID { get; set; }
         public bool IsAdminBuild { get; set;}
         public ICollection<Comment> Comments { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Builder Name")]
+        public string BuilderName { get; set; }
     }
 }

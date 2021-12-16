@@ -1,8 +1,6 @@
 ﻿using DataAccess.Persistence;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -36,6 +34,7 @@ namespace GroupProject.Areas.Admin.Controllers
 
         // POST_CREATE: Admin/Roles
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(IdentityRole role)
         {
             _roleManager.Create(role);
@@ -51,6 +50,7 @@ namespace GroupProject.Areas.Admin.Controllers
 
         // POST_DELETE: Admin/Roles
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(IdentityRole role)
         {
             var role1 = _roleManager.FindByName(role.Name);
