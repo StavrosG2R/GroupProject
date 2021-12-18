@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
@@ -16,6 +17,8 @@ namespace DataAccess.Core.Entities
         public int CompanyID { get; set; }
         public ICollection<Build> Builds { get; set; }
         public string Chipset { get; set; }
+
+        [Display(Name = "GPU Model")]
         public string Model { get; set; }
         public int Watt { get; set; }
         public int Vram { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
@@ -16,12 +17,15 @@ namespace DataAccess.Core.Entities
         public int CompanyID { get; set; }
         public ICollection<Build> Builds { get; set; }
         public string Socket { get; set; }
+
+        [Display(Name = "CPU Model")]
         public string Model { get; set; }
         public int Cores { get; set; }
         public int Threads { get; set; }
         public double Frequency { get; set; }
         public int Watt { get; set; }
         public string Thumbnail { get; set; }
+
         [NotMapped]
         public HttpPostedFileBase ImageFile { get; set; } // NotMapped
         public decimal Price { get; set; }
