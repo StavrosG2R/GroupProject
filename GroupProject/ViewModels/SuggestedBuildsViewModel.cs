@@ -3,10 +3,11 @@ using System.Linq;
 
 namespace GroupProject.ViewModels
 {
-    public class BuildsFormViewModel
+    public class SuggestedBuildsViewModel
     {
+        public IQueryable<SuggestedBuild> SuggestedBuilds { get; set; }
         public int Id { get; set; }
-        public string Name { get; set;}
+        public string Name { get; set; }
         public int Case { get; set; }
         public IQueryable<Case> Cases { get; set; }
         public int Category { get; set; }
@@ -23,14 +24,6 @@ namespace GroupProject.ViewModels
         public IQueryable<RAM> RAMs { get; set; }
         public int Storage { get; set; }
         public IQueryable<Storage> Storages { get; set; }
-        public decimal Price { get; set;}
-        public string Header { get; set; }
-        public string Action 
-        {
-            get
-            {
-                return (Id != 0) ? "Edit" : "Create";
-            }
-        }
+        public decimal Price { get; set; }
     }
 }

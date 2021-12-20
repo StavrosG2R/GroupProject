@@ -18,6 +18,7 @@ namespace DataAccess.Core.Interfaces
         IPsuRepository Psus { get; }
         IRamRepository Rams { get; }
         IStorageRepository Storages { get; }
+        ISuggestedBuildRepository SuggestedBuilds { get;}
         void Complete();
     }
 }

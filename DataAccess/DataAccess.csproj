@@ -120,6 +120,7 @@
     <Compile Include="Core\Entities\RAM.cs" />
     <Compile Include="Core\Entities\RoleName.cs" />
     <Compile Include="Core\Entities\Storage.cs" />
+    <Compile Include="Core\Entities\SuggestedBuild.cs" />
     <Compile Include="Core\Interfaces\IApplicationUserRepository.cs" />
     <Compile Include="Core\Interfaces\IBuildRepository.cs" />
     <Compile Include="Core\Interfaces\ICaseRepository.cs" />
@@ -135,10 +136,15 @@
     <Compile Include="Core\Interfaces\IRamRepository.cs" />
     <Compile Include="Core\Interfaces\IRoleNameRepository.cs" />
     <Compile Include="Core\Interfaces\IStorageRepository.cs" />
+    <Compile Include="Core\Interfaces\ISuggestedBuildRepository.cs" />
     <Compile Include="Core\Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\202112141301350_Initial.cs" />
-    <Compile Include="Migrations\202112141301350_Initial.designer.cs">
-      <DependentUpon>202112141301350_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202112191832080_InitialCreate.cs" />
+    <Compile Include="Migrations\202112191832080_InitialCreate.designer.cs">
+      <DependentUpon>202112191832080_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112191837578_Initial.cs" />
+    <Compile Include="Migrations\202112191837578_Initial.designer.cs">
+      <DependentUpon>202112191837578_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
@@ -155,6 +161,7 @@
     <Compile Include="Persistence\Entity Configurations\PsuConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\RamConfiguration.cs" />
     <Compile Include="Persistence\Entity Configurations\StorageConfiguration.cs" />
+    <Compile Include="Persistence\Entity Configurations\SuggestedBuildConfiguration.cs" />
     <Compile Include="Persistence\Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Persistence\Repositories\BuildRepository.cs" />
     <Compile Include="Persistence\Repositories\CaseRepository.cs" />
@@ -169,6 +176,7 @@
     <Compile Include="Persistence\Repositories\PsuRepository.cs" />
     <Compile Include="Persistence\Repositories\RamRepository.cs" />
     <Compile Include="Persistence\Repositories\StorageRepository.cs" />
+    <Compile Include="Persistence\Repositories\SuggestedBuildRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -177,8 +185,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112141301350_Initial.resx">
-      <DependentUpon>202112141301350_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202112191832080_InitialCreate.resx">
+      <DependentUpon>202112191832080_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112191837578_Initial.resx">
+      <DependentUpon>202112191837578_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

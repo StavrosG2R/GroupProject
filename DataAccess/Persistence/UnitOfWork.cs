@@ -33,6 +33,8 @@ namespace DataAccess.Persistence
         public IRamRepository Rams { get; private set; }
 
         public IStorageRepository Storages { get; private set; }
+
+        public ISuggestedBuildRepository SuggestedBuilds { get; private set; }
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -50,6 +52,7 @@ namespace DataAccess.Persistence
             Psus = new PsuRepository(_context);
             Rams = new RamRepository(_context);
             Storages = new StorageRepository(_context);
+            SuggestedBuilds = new SuggestedBuildRepository(_context);
         }
 
         public void Complete()

@@ -1,8 +1,6 @@
 ﻿using DataAccess.Core.Interfaces;
 using GroupProject.ViewModels;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -19,14 +17,6 @@ namespace GroupProject.Controllers
 
         public ActionResult Index()
         {
-            var userId = User.Identity.GetUserId();
-
-            var viewmodel = new BuildsViewModel()
-            {
-                Followings = _unitOfWork.Followings
-                             .GetFollowings(userId)
-                             .ToLookup(a => a.FolloweeId)
-            };
             return View();
         }
 

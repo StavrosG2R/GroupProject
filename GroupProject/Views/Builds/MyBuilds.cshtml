@@ -1,0 +1,102 @@
+﻿@model IEnumerable<DataAccess.Core.Entities.Build>
+@{
+    ViewBag.Title = "MyBuilds";
+}
+
+<h2>MyBuilds</h2>
+
+<table class="table">
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <tr>
+        <th>
+            @Html.DisplayName("Builder")
+            @Html.DisplayNameFor(m => m.Builder.Name)
+        </th>
+        <th>
+            @Html.DisplayName("Build")
+            @Html.DisplayNameFor(m => m.Name)
+        </th>
+        <th>
+            @Html.DisplayName("Category")
+            @Html.DisplayNameFor(m => m.Category.Name)
+        </th>
+        <th>
+            @Html.DisplayName("Case")
+            @Html.DisplayNameFor(m => m.Case.Model)
+        </th>
+        <th>
+            @Html.DisplayName("CPU")
+            @Html.DisplayNameFor(m => m.CPU.Model)
+        </th>
+        <th>
+            @Html.DisplayName("GPU")
+            @Html.DisplayNameFor(m => m.GPU.Model)
+        </th>
+        <th>
+            @Html.DisplayName("Motherboard")
+            @Html.DisplayNameFor(m => m.Motherboard.Model)
+        </th>
+        <th>
+            @Html.DisplayName("PSU")
+            @Html.DisplayNameFor(m => m.PSU.Model)
+        </th>
+        <th>
+            @Html.DisplayName("RAM")
+            @Html.DisplayNameFor(m => m.RAM.Model)
+        </th>
+        <th>
+            @Html.DisplayName("Storage")
+            @Html.DisplayNameFor(m => m.Storage.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.Price)
+        </th>
+    </tr>
+
+    @foreach (var build in Model)
+    {
+        <tr>
+            <td>
+                @build.Builder.Name
+            </td>
+            <td>
+                @build.Name
+            </td>
+            <td>
+                @build.Category.Name
+            </td>
+            <td>
+                @build.Case.Model
+            </td>
+            <td>
+                @build.CPU.Model
+            </td>
+            <td>
+                @build.GPU.Model
+            </td>
+            <td>
+                @build.Motherboard.Model
+            </td>
+            <td>
+                @build.PSU.Model
+            </td>
+            <td>
+                @build.RAM.Model
+            </td>
+            <td>
+                @build.Storage.Model
+            </td>
+            <td>
+                @build.Price
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = build.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = build.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = build.ID })
+            </td>
+        </tr>
+    }
+</table>

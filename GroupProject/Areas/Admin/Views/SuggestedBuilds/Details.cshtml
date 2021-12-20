@@ -1,19 +1,11 @@
-﻿@model DataAccess.Core.Entities.Build
-
+﻿@model DataAccess.Core.Entities.SuggestedBuild
 
 <h2>Details</h2>
 
 <div>
-    <h4>Build</h4>
+    <h4>SuggestedBuild</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.LabelFor(model => model.Builder.Name, "Builder Name")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Builder.Name)
-        </dd>
 
         <dt>
             @Html.LabelFor(model => model.Name, "Build Name")
@@ -60,7 +52,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Motherboard.Model)
+            @Html.DisplayFor(model => model.Motherboard.Socket)
         </dd>
 
         <dt>
@@ -88,7 +80,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.LabelFor(model => model.Price, "Price")
         </dt>
 
         <dd>
@@ -97,7 +89,18 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@if (ViewContext.HttpContext.User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+else
+{
+    <p>
+        
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+

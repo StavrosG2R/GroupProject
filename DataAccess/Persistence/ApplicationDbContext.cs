@@ -26,7 +26,8 @@ namespace DataAccess.Persistence
         public DbSet<RAM> RAMs { get; set; }
         public DbSet<Storage> Storages { get; set; }
         public DbSet<Comment> Comments { get; set; }
-       
+        public DbSet<SuggestedBuild> SuggestedBuilds { get; set; }
+
         public ApplicationDbContext()
            : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -50,6 +51,7 @@ namespace DataAccess.Persistence
             modelBuilder.Configurations.Add(new RamConfiguration());
             modelBuilder.Configurations.Add(new StorageConfiguration());
             modelBuilder.Configurations.Add(new CompanyConfiguration());
+            modelBuilder.Configurations.Add(new SuggestedBuildConfiguration());
 
             base.OnModelCreating(modelBuilder);
 
