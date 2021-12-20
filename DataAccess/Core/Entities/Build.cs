@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Core.Entities
 {
@@ -35,9 +34,5 @@ namespace DataAccess.Core.Entities
         public Category Category { get; set; }
         public int CategoryID { get; set; }
         public ICollection<Comment> Comments { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Builder Name")]
-        public string BuilderName { get; set; }
     }
 }

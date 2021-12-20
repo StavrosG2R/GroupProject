@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
@@ -19,8 +18,6 @@ namespace DataAccess.Core.Entities
         public ICollection<Build> Builds { get; set; }
         public ICollection<SuggestedBuild> SuggestedBuilds { get; set; }
         public string Socket { get; set; }
-
-        [Display(Name = "CPU Model")]
         public string Model { get; set; }
         public int Cores { get; set; }
         public int Threads { get; set; }

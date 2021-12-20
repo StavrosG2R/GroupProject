@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
@@ -20,8 +19,6 @@ namespace DataAccess.Core.Entities
         public ICollection<SuggestedBuild> SuggestedBuilds { get; set; }
         public string Socket { get; set; }
         public string Chipset { get; set; }
-
-        [Display(Name = "Motherboard Model")]
         public string Model { get; set; }
         public int DdrType { get; set; }
         public string Size { get; set; }
