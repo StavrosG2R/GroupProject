@@ -12,6 +12,8 @@ namespace DataAccess.Core.Entities
             SuggestedBuilds = new Collection<SuggestedBuild>();
         }
         public int ID { get; set; }
+
+        [Display(Name = "Category")]
         public string Name { get; set; }
         public ICollection<Build> Builds { get; set; }
         public ICollection <SuggestedBuild> SuggestedBuilds { get; set; }

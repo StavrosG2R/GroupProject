@@ -12,6 +12,8 @@ namespace DataAccess.Core.Entities
             Comments= new Collection<Comment>();
         }
         public int ID { get; set; }
+
+        [Display(Name = "Build Name")]
         public string Name { get; set; }
         public ApplicationUser Builder { get; set; }
         public string BuilderID { get; set; }
@@ -33,5 +35,9 @@ namespace DataAccess.Core.Entities
         public Category Category { get; set; }
         public int CategoryID { get; set; }
         public ICollection<Comment> Comments { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Builder Name")]
+        public string BuilderName { get; set; }
     }
 }

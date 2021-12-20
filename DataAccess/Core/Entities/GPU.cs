@@ -19,6 +19,8 @@ namespace DataAccess.Core.Entities
         public ICollection<Build> Builds { get; set; }
         public ICollection<SuggestedBuild> SuggestedBuilds { get; set; }
         public string Chipset { get; set; }
+
+        [Display(Name = "GPU Model")]
         public string Model { get; set; }
         public int Watt { get; set; }
         public int Vram { get; set; }

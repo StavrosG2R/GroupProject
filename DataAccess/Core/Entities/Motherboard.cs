@@ -20,6 +20,8 @@ namespace DataAccess.Core.Entities
         public ICollection<SuggestedBuild> SuggestedBuilds { get; set; }
         public string Socket { get; set; }
         public string Chipset { get; set; }
+
+        [Display(Name = "Motherboard Model")]
         public string Model { get; set; }
         public int DdrType { get; set; }
         public string Size { get; set; }
