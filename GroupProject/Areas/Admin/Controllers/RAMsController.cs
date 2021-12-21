@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -63,10 +64,20 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RAM ram)
+        public ActionResult Create(RAM ram, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                if(ImageFile == null)
+                {
+                    ram.Thumbnail = "na_image.jpg";
+                }
+                else
+                {
+                    ram.Thumbnail = Path.GetFileName(ImageFile.FileName);
+                    string filename = Path.Combine(Server.MapPath("~/img/"), ram.Thumbnail);
+                    ImageFile.SaveAs(filename);
+                }
                 _unitOfWork.Rams.Create(ram);
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");

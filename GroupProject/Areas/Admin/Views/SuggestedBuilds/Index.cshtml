@@ -11,6 +11,11 @@
     
 <table class="table">
     <tr>
+        <th></th>
+        <th>
+            @Html.Label("Images")
+        </th>
+        <th></th>
         <th>
             @Html.LabelFor(m => m.Name, "Build Name")
         </th>
@@ -47,6 +52,15 @@
     @foreach (var suggestedbuild in Model.SuggestedBuilds)
     {
         <tr>
+            <td>
+                <img width="40" src="~/img/@Url.Content(suggestedbuild.Case.Thumbnail)" />
+            </td>
+            <td>
+                <img width="40" src="~/img/@Url.Content(suggestedbuild.CPU.Thumbnail)" />
+            </td>
+            <td>
+                <img width="40" src="~/img/@Url.Content(suggestedbuild.GPU.Thumbnail)" />
+            </td>
             <td>
                 @suggestedbuild.Name
             </td>

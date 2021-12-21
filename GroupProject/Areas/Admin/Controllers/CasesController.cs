@@ -1,8 +1,10 @@
 ﻿using DataAccess.Core.Entities;
 using DataAccess.Core.Interfaces;
 using GroupProject.ViewModels;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GroupProject.Areas.Admin.Controllers
@@ -56,15 +58,25 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Case @case)
+        public ActionResult Create(Case @case, HttpPostedFileBase ImageFile)
         {
+
             if (ModelState.IsValid)
             {
+                if (ImageFile == null)
+                {
+                    @case.Thumbnail = "na_image.jpg";
+                }
+                else
+                {
+                    @case.Thumbnail = Path.GetFileName(ImageFile.FileName);
+                    string filename = Path.Combine(Server.MapPath("~/img/"), @case.Thumbnail);
+                    ImageFile.SaveAs(filename);
+                }
                 _unitOfWork.Cases.Create(@case);
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-
             var viewmodel = new PcPartsViewModel()
             {
                 Case = new Case(),
