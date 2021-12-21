@@ -25,6 +25,7 @@ namespace GroupProject.App_Start
             var settings = config.Formatters.JsonFormatter.SerializerSettings;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             settings.Formatting = Formatting.Indented;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             // Ignore reference looping
             settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
