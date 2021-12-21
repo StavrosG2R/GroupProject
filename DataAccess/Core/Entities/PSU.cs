@@ -11,13 +11,13 @@ namespace DataAccess.Core.Entities
         public PSU()
         {
             Builds = new Collection<Build>();
+            SuggestedBuilds = new Collection<SuggestedBuild>();
         }
         public int ID { get; set; }
         public Company Company { get; set; }
         public int CompanyID { get; set; }
         public ICollection<Build> Builds { get; set; }
-
-        [Display(Name = "PSU Model")]
+        public ICollection<SuggestedBuild> SuggestedBuilds { get; set; }
         public string Model { get; set; }
         public int Watt { get; set; }
         public string Efficiency { get; set; }

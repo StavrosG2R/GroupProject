@@ -11,13 +11,13 @@ namespace DataAccess.Core.Entities
         public Case()
         {
             Builds = new Collection<Build>();
+            SuggestedBuilds = new Collection<SuggestedBuild>();
         }
         public int ID { get; set; }
         public Company Company { get; set; }
         public int CompanyID { get; set; }
         public ICollection<Build> Builds { get; set; }
-
-        [Display(Name = "Case Model")]
+        public ICollection<SuggestedBuild> SuggestedBuilds { get; set; }
         public string Model { get; set; }
         public string Size { get; set; }
         public int NumberOfFans { get; set; }

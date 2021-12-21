@@ -17,11 +17,32 @@ namespace GroupProject.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: Builds
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult MyBuilds()
         {
-            var builds = _unitOfWork.Builds.GetAll();
-            return View(builds.ToList());
+            var userId = User.Identity.GetUserId();
+
+            var myBuilds = _unitOfWork.Builds.MyBuilds(userId);
+
+            return View(myBuilds);
+        }
+
+        // GET: Builds
+        public ActionResult Index(string query = null)
+        {
+            var searchBuilds = _unitOfWork.Builds.SearchBuilds(query);
+
+            var userId = User.Identity.GetUserId();
+
+            var viewmodel = new BuildsViewModel()
+            {
+                Builds = searchBuilds,
+                Followings = _unitOfWork.Followings
+                    .GetFollowings(userId)
+                    .ToLookup(a => a.FollowerId)
+            };
+
+            return View("Index", viewmodel);
         }
 
         // GET: Builds/Details/5
@@ -89,7 +110,6 @@ namespace GroupProject.Controllers
                 RAMID = viewmodel.RAM,
                 StorageID = viewmodel.Storage,
                 Price = viewmodel.Price,
-                IsAdminBuild = viewmodel.IsAdminBuild,
                 Name = viewmodel.Name
             };
 
@@ -123,7 +143,6 @@ namespace GroupProject.Controllers
                 RAMs = _unitOfWork.Rams.GetAll(),
                 Storages = _unitOfWork.Storages.GetAll(),
                 Price = build.Price,
-                IsAdminBuild = build.IsAdminBuild,
                 Name = build.Name,
                 Header = "Edit build"
             };
@@ -166,7 +185,6 @@ namespace GroupProject.Controllers
             build.RAMID = viewmodel.RAM;
             build.StorageID = viewmodel.Storage;
             build.Price = viewmodel.Price;
-            build.IsAdminBuild = viewmodel.IsAdminBuild;
             build.Name = viewmodel.Name;
 
             _unitOfWork.Complete();
@@ -224,7 +242,7 @@ namespace GroupProject.Controllers
         [HttpPost]
         public ActionResult Search(BuildsViewModel viewModel)
         {
-            return RedirectToAction("Index", "Home", new { query = viewModel.SearchBar });
+            return RedirectToAction("Index", "Builds", new { query = viewModel.SearchBar });
         }
 
         protected override void Dispose(bool disposing)

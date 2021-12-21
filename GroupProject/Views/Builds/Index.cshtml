@@ -1,95 +1,99 @@
-﻿@model IEnumerable<DataAccess.Core.Entities.Build>
+﻿@model GroupProject.ViewModels.BuildsViewModel
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
+@using (Html.BeginForm("Search", "Builds"))
+{   
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BuilderName)
+            <div class="form-group">
+                <div id="searchBuilds" class="input-group">
+                    @Html.TextBoxFor(m => m.SearchBar, new { @class = "form-control", @placeholder = "Search"})
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </span>
+                </div>
+            </div>
+        </th>
+    </tr>
+}
+
+
+    <tr>
+        <th>
+            @Html.LabelFor(m => m.Builder, "Builder Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.LabelFor(m => m.Build, "Build Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.LabelFor(m => m.Category, "Category")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Case.Model)
+            @Html.LabelFor(m => m.Case, "Case Model")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CPU.Model)
+            @Html.LabelFor(m => m.CPU, "CPU Model")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GPU.Model)
+            @Html.LabelFor(m => m.GPU, "GPU Model")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Motherboard.Model)
+            @Html.LabelFor(m => m.Motherboard, "Motherboard Model")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PSU.Model)
+            @Html.LabelFor(m => m.PSU, "PSU Model")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RAM.Model)
+            @Html.LabelFor(m => m.RAM, "RAM Model")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Storage.Model)
+            @Html.LabelFor(m => m.Storage, "Storage Model")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.LabelFor(m => m.Price, "Price")
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsAdminBuild)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Builder.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Category.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Case.Model)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CPU.Model)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.GPU.Model)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Motherboard.Model)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.PSU.Model)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.RAM.Model)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Storage.Model)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Price)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.IsAdminBuild)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-    </td>
-</tr>
-}
+    @foreach (var build in Model.Builds)
+    {
+        <tr>
+            <td>
+                @build.Builder.Name
+            </td>
+            <td>
+                @build.Name
+            </td>
+            <td>
+                @build.Category.Name
+            </td>
+            <td>
+                @build.Case.Model
+            </td>
+            <td>
+                @build.CPU.Model
+            </td>
+            <td>
+                @build.GPU.Model
+            </td>
+            <td>
+                @build.Motherboard.Model
+            </td>
+            <td>
+                @build.PSU.Model
+            </td>
+            <td>
+                @build.RAM.Model
+            </td>
+            <td>
+                @build.Storage.Model
+            </td>
+            <td>
+                @build.Price
+            </td>
+            
+        </tr>
+    }
 
 </table>
