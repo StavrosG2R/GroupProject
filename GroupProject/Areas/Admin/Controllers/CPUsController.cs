@@ -3,8 +3,10 @@ using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 using GroupProject.ViewModels;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GroupProject.Areas.Admin.Controllers
@@ -60,10 +62,20 @@ namespace GroupProject.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create(CPU cpu)
+        public ActionResult Create(CPU cpu, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                if (ImageFile == null)
+                {
+                    cpu.Thumbnail = "na_image.jpg";
+                }
+                else
+                {
+                    cpu.Thumbnail = Path.GetFileName(ImageFile.FileName);
+                    string filename = Path.Combine(Server.MapPath("~/img/"), cpu.Thumbnail);
+                    ImageFile.SaveAs(filename);
+                }
                 _unitOfWork.Cpus.Create(cpu);
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");

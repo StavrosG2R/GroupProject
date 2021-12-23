@@ -11,10 +11,15 @@
         @Html.ActionLink("Create New", "Create")
     </p>
     <tr>
+        <th></th>
+        <th>
+            @Html.Label("Images")
+        </th>
         <th>
             @Html.DisplayName("Builder")
             @Html.DisplayNameFor(m => m.Builder.Name)
         </th>
+        <th></th>
         <th>
             @Html.DisplayName("Build")
             @Html.DisplayNameFor(m => m.Name)
@@ -59,6 +64,15 @@
     @foreach (var build in Model)
     {
         <tr>
+            <td>
+                <img width="40" src="~/img/@Url.Content(build.Case.Thumbnail)" />
+            </td>
+            <td>
+                <img width="40" src="~/img/@Url.Content(build.CPU.Thumbnail)" />
+            </td>
+            <td>
+                <img width="40" src="~/img/@Url.Content(build.GPU.Thumbnail)" />
+            </td>
             <td>
                 @build.Builder.Name
             </td>

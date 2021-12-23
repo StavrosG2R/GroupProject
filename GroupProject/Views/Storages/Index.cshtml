@@ -6,6 +6,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.Label("Images")
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Company.Name)
         </th>
         <th>
@@ -35,6 +38,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                <img width="40" src="~/img/@Url.Content(item.Thumbnail)" />
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Company.Name)
             </td>

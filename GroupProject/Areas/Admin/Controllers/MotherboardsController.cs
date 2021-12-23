@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -63,10 +64,20 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Motherboard motherboard)
+        public ActionResult Create(Motherboard motherboard, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                if(ImageFile == null)
+                {
+                    motherboard.Thumbnail = "na_image.img";
+                }
+                else
+                {
+                    motherboard.Thumbnail = Path.GetFileName(ImageFile.FileName);
+                    string filename = Path.Combine(Server.MapPath("~/img/"), motherboard.Thumbnail);
+                    ImageFile.SaveAs(filename);
+                }
                 _unitOfWork.Motherboards.Create(motherboard);
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");

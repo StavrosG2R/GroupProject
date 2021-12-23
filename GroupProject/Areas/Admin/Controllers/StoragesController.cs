@@ -3,8 +3,10 @@ using DataAccess.Core.Interfaces;
 using DataAccess.Persistence;
 using GroupProject.ViewModels;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GroupProject.Areas.Admin.Controllers
@@ -59,10 +61,20 @@ namespace GroupProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Storage storage)
+        public ActionResult Create(Storage storage, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                if(ImageFile == null)
+                {
+                    storage.Thumbnail = "na_image.jpg";
+                }
+                else
+                {
+                    storage.Thumbnail = Path.GetFileName(ImageFile.FileName);
+                    string filename = Path.Combine(Server.MapPath("~/img/"), storage.Thumbnail);
+                    ImageFile.SaveAs(filename);
+                }
                 _unitOfWork.Storages.Create(storage);
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
