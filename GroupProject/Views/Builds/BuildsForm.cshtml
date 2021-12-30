@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Motherboard, "Motherboard Model", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Motherboard, new SelectList("", "ID"), "Select Motherboard", htmlAttributes: new { @class = "form-control", @id = "MotherboardId" })
+                @Html.DropDownListFor(m => m.Motherboard, new SelectList(""), "Select Motherboard", htmlAttributes: new { @class = "form-control", @id = "MotherboardId" })
                 @Html.ValidationMessageFor(m => m.Motherboard, "", new { @class = "text-danger" })
             </div>
         </div>
