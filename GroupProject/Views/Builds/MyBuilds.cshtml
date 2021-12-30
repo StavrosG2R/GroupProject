@@ -6,22 +6,21 @@
 <h2>MyBuilds</h2>
 
 <table class="table">
-
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
+    
     <tr>
         <th></th>
         <th>
             @Html.Label("Images")
         </th>
+        <th></th>
         <th>
             @Html.DisplayName("Builder")
             @Html.DisplayNameFor(m => m.Builder.Name)
         </th>
-        <th></th>
         <th>
-            @Html.DisplayName("Build")
             @Html.DisplayNameFor(m => m.Name)
         </th>
         <th>
