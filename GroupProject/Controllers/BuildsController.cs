@@ -116,7 +116,7 @@ namespace GroupProject.Controllers
             _unitOfWork.Builds.Add(build);
             _unitOfWork.Complete();
 
-            return RedirectToAction("Index", "Builds");
+            return RedirectToAction("MyBuilds", "Builds");
         }
 
         // GET: Bulds/Edit
@@ -189,7 +189,7 @@ namespace GroupProject.Controllers
 
             _unitOfWork.Complete();
 
-            return RedirectToAction("Index", "Builds");
+            return RedirectToAction("MyBuilds");
         }
 
         // GET: Builds/Delete/5
@@ -235,7 +235,7 @@ namespace GroupProject.Controllers
 
             _unitOfWork.Builds.Delete(id);
             _unitOfWork.Complete();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyBuilds");
         }
 
         // Search bar
