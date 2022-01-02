@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<DataAccess.Core.Entities.Case>
 
-    <h2>Index</h2>
+    <h2>Cases</h2>
 
     <p>
         @Html.ActionLink("Create New", "Create")
@@ -11,7 +11,7 @@
                 @Html.Label("Images")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Company.Name)
+                @Html.DisplayName("Company")
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Model)
@@ -21,9 +21,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NumberOfFans)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Thumbnail)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
@@ -47,9 +44,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfFans)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Thumbnail)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)

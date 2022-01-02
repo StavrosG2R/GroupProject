@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace GroupProject.Areas.Admin.Controllers
 {
-   [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -67,6 +67,10 @@ namespace GroupProject.Areas.Admin.Controllers
             return View(users);
         }
 
+        public ActionResult ManageUsers()
+        {
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
