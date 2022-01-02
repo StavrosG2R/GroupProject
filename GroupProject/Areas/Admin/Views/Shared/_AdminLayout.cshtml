@@ -116,7 +116,7 @@
 
                         <li class="nav-item">
                             <a href="@Url.Action("Index","SuggestedBuilds")" class="nav-link">
-                                <i class="nav-icon far fa-hdd"></i>
+                                <i class="nav-icon bi bi-exclamation-triangle"></i>
                                 <p>
                                     Suggested Builds
                                 </p>
@@ -142,22 +142,22 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="@Url.Action("Index","Roles")" class="nav-link">
+                            <a href="@Url.Action("ManageUsers","Roles")" class="nav-link">
                                 <i class="nav-icon bi bi-person-bounding-box"></i>
                                 <p>
-                                    User Roles
+                                    Users Managment
                                 </p>
                             </a>
                         </li>
 
-                        @*<li class="nav-header">MISCELLANEOUS</li>
+                        <li class="nav-header">Users</li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-ellipsis-h"></i>
-                                    <p>Tabbed IFrame Plugin</p>
+                                <a href="@Url.Action("Index","Builds", new { area = ""})" class="nav-link">
+                                    <i class="nav-icon bi bi-people"></i>
+                                    <p>Users Builds</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-file"></i>
                                     <p>Documentation</p>
@@ -175,8 +175,8 @@
                                 <a href="#" class="nav-link">
                                     <i class="fas fa-circle nav-icon"></i>
                                     <p>Level 1</p>
-                                </a>
-                            </li>*@
+                                </a>*@
+                        </li>
 
                     </ul>
                 </nav>
@@ -215,7 +215,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2021-2022 Delegays.</strong>
+            <strong>Copyright &copy; 2021 - @DateTime.Now.Year Delegays.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0.0

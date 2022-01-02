@@ -12,34 +12,55 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Admin", "Index", "admins", new { area = "admin" }, new { })</li>
+                    <li>@Html.ActionLink("My Builds", "Index", "Builds/MyBuilds")</li>
+                    <li>@Html.ActionLink("All Builds", "Index", "Builds")</li>
+                    <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Products <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("CPU", "Index", "CPUs")</li>
+                            <li>@Html.ActionLink("Motherboards", "Index", "Motherboards")</li>
+                            <li>@Html.ActionLink("Cases", "Index", "Cases")</li>
+                            <li>@Html.ActionLink("GPU", "Index", "GPUs")</li>
+                            <li>@Html.ActionLink("PSU", "Index", "PSUs")</li>
+                            <li>@Html.ActionLink("Storage", "Index", "Storages")</li>
+                            <li>@Html.ActionLink("RAM", "Index", "RAMs")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Donate", "Index", "Donates")
+                    </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+                    @Html.Partial("_LoginPartial")
+</div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2021 - @DateTime.Now.Year Delegays.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0
+            </div>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @*@Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>
