@@ -1,18 +1,15 @@
 ﻿@model DataAccess.Core.Entities.SuggestedBuild
 
-@{
-    ViewBag.Title = "Delete";
-}
 
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>SuggestedBuild</h4>
+    <h4>Build</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Case.Model)
+            @Html.DisplayName("Case Model")
         </dt>
 
         <dd>
@@ -20,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.DisplayName("Category Name")
         </dt>
 
         <dd>
@@ -28,31 +25,31 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CPU.Socket)
+            @Html.DisplayName("CPU Model")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CPU.Socket)
+            @Html.DisplayFor(model => model.CPU.Model)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GPU.Chipset)
+            @Html.DisplayName("GPU Model")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GPU.Chipset)
+            @Html.DisplayFor(model => model.GPU.Model)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Motherboard.Socket)
+            @Html.DisplayName("Motherboard Model")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Motherboard.Socket)
+            @Html.DisplayFor(model => model.Motherboard.Model)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PSU.Model)
+            @Html.DisplayName("PSU Model")
         </dt>
 
         <dd>
@@ -60,7 +57,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RAM.Model)
+            @Html.DisplayName("RAM Model")
         </dt>
 
         <dd>
@@ -68,7 +65,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Storage.Model)
+            @Html.DisplayName("Storage Model")
         </dt>
 
         <dd>
@@ -76,7 +73,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayName("Build Name")
         </dt>
 
         <dd>

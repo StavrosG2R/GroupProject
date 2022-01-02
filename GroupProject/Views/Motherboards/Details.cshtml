@@ -3,11 +3,11 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Motherboard</h4>
+    <h4>For Motherboard model "@Html.DisplayFor(model => model.Model)"</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Company.Name)
+            @Html.DisplayName("Company")
         </dt>
 
         <dd>
@@ -60,14 +60,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Watt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Thumbnail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Thumbnail)
         </dd>
 
         <dt>

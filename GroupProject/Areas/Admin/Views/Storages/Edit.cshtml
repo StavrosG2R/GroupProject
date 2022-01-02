@@ -13,7 +13,7 @@
         @Html.HiddenFor(model => model.Storage.ID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Storage.CompanyID, "CompanyID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Storage.CompanyID, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Storage.CompanyID, new SelectList(Model.Companies, "ID", "Name"), "Select Company", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Storage.CompanyID, "", new { @class = "text-danger" })
