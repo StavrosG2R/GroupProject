@@ -10,16 +10,17 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-@*<div class="row">
+<div class="row">
     <h2 class="text-center">Suggested Builds</h2>
     <hr />
-    @foreach (var build in Model.SuggestedBuilds)
+    @foreach(var build in Model.SuggestedBuilds)
     {
-        <div class="col-md-3">
-            <img src="~/img/@Url.Content(artist.Thumbnail)" class="music-thumb" />
-            <div class="title">
-                <h4 class="text-center">@build.Name</h4>
-            </div>
-        </div>
+<div class="col-md-3">
+    <img src="~/img/@Url.Content(build.Case.Thumbnail)" class="music-thumb" />
+    <div class="title">
+        <h4 class="text-center">@build.Name</h4>
+    </div>
+    @Html.ActionLink("Details", "Details","SuggestedBuilds", new { id = build.ID }) |
+</div>
     }
-</div>*@
+</div>
