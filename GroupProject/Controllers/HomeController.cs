@@ -17,7 +17,12 @@ namespace GroupProject.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            SuggestedBuildsViewModel viewmodel = new SuggestedBuildsViewModel()
+            {
+                SuggestedBuilds = _unitOfWork.SuggestedBuilds.GetAll().Take(4)
+            };
+
+            return View(viewmodel);
         }
 
         public ActionResult About()

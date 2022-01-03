@@ -1,12 +1,21 @@
-﻿@*@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>*@
-@{
-    ViewBag.Title = "Roles";
-}
+﻿<h2>Roles</h2>
 
-<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 
-@foreach (var role in Model)
-{
-    @role.Name
-    <br />
-}
+<table class = "table">
+    @foreach (var role in Model)
+    {
+     <tr>
+         <td>
+            @role.Name
+            <br />
+         </td>
+    
+         <td>
+             @Html.ActionLink("Delete", "Delete")
+         </td>
+    </tr>
+    }
+</table>

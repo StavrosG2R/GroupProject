@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<DataAccess.Core.Entities.GPU>
 
-<h2>Index</h2>
+<h2>GPUs</h2>
 
 
 <table class="table">
@@ -9,7 +9,7 @@
             @Html.Label("Images")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Company.Name)
+            @Html.DisplayName("Company")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Chipset)
@@ -22,9 +22,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Vram)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Thumbnail)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -52,9 +49,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Vram)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Thumbnail)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)

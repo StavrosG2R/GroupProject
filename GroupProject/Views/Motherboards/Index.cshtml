@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<DataAccess.Core.Entities.Motherboard>
 
-<h2>Index</h2>
+<h2>Motherboards</h2>
 
 
 <table class="table">
@@ -9,7 +9,7 @@
             @Html.Label("Images")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Company.Name)
+            @Html.DisplayName("Company")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Socket)
@@ -28,9 +28,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Watt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Thumbnail)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -64,9 +61,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Watt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Thumbnail)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
