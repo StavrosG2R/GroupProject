@@ -3,109 +3,176 @@
     ViewBag.Title = Model.Header;
 }
 
-<h2>@Model.Header</h2>
 
 
-@using (Html.BeginForm(Model.Action, "Builds"))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.Id)
+<section class=" bg-dark" style="color:white;">
+    <h2 style="text-align:center; padding:20px;">@Model.Header</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Build</h4>
+                        <dl class="dl-horizontal">
+                            @using (Html.BeginForm(Model.Action, "Builds"))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => m.Id)
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name, "Build Name", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Case, "Case Model", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Case, new SelectList(Model.Cases, "ID", "Model"), "Select Case", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Case, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Name, "Build Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.CPU, "CPU Model", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.CPU, new SelectList(Model.CPUs, "ID", "Model"), "Select CPU", htmlAttributes: new { @class = "form-control", @id = "CpuId" })
-                @Html.ValidationMessageFor(m => m.CPU, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Case, "Case Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(m => m.Case, new SelectList(Model.Cases, "ID", "Model"), "Select Case", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Case, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Motherboard, "Motherboard Model", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Motherboard, new SelectList(""), "Select Motherboard", htmlAttributes: new { @class = "form-control", @id = "MotherboardId" })
-                @Html.ValidationMessageFor(m => m.Motherboard, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CPU, "CPU Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(m => m.CPU, new SelectList(Model.CPUs, "ID", "Model"), "Select CPU", htmlAttributes: new { @class = "form-control", @id = "CpuId" })
+                                            @Html.ValidationMessageFor(m => m.CPU, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.RAM, "RAM Model", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.RAM, new SelectList(Model.RAMs, "ID", "Model"), "Select RAM", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.RAM, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Motherboard, "Motherboard Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(m => m.Motherboard, new SelectList("", "ID"), "Select Motherboard", htmlAttributes: new { @class = "form-control", @id = "MotherboardId" })
+                                            @Html.ValidationMessageFor(m => m.Motherboard, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.GPU, "GPU Model", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.GPU, new SelectList(Model.GPUs, "ID", "Model"), "Select GPU", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.GPU, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.RAM, "RAM Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(m => m.RAM, new SelectList(Model.RAMs, "ID", "Model"), "Select RAM", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.RAM, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.PSU, "PSU Model", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.PSU, new SelectList(Model.PSUs, "ID", "Model"), "Select PSU", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.PSU, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.GPU, "GPU Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(m => m.GPU, new SelectList(Model.GPUs, "ID", "Model"), "Select GPU", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.GPU, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Storage, "Storage Model", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Storage, new SelectList(Model.Storages, "ID", "Model"), "Select Storage", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Storage, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PSU, "PSU Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(m => m.PSU, new SelectList(Model.PSUs, "ID", "Model"), "Select PSU", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PSU, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Storage, "Storage Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(m => m.Storage, new SelectList(Model.Storages, "ID", "Model"), "Select Storage", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Storage, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Category, new SelectList(Model.Categories, "ID", "Name"), "Select Category", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(m => m.Category, new SelectList(Model.Categories, "ID", "Name"), "Select Category", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Save" class="btn btn-default" style="color:white;" />
+                                    </div>
+
+                                </div>
+                            }
+
+                    </div>
+                    <div class="col-md-8">
+                        <h6>Description</h6>
+                        <hr />
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                            numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                            optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+                            obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+                            nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+                            tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+                            quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
+                            sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
+                            recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
+                            minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit
+                            quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur
+                            fugiat, temporibus enim commodi iusto libero magni deleniti quod quam
+                            consequuntur! Commodi minima excepturi repudiandae velit hic maxime
+                            doloremque. Quaerat provident commodi consectetur veniam similique ad
+                            earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo
+                            fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore
+                            suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
+                            modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam
+                            totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam
+                            quasi aliquam eligendi, placeat qui corporis!
+                        </p>
+                        <h6>Comments</h6>
+                        <hr />
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                            numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                            optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+                            obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+                            nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+                            tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+                            quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
+                            sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
+                            recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
+                            minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit
+                            quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur
+                            fugiat, temporibus enim commodi iusto libero magni deleniti quod quam
+                            consequuntur! Commodi minima excepturi repudiandae velit hic maxime
+                            doloremque. Quaerat provident commodi consectetur veniam similique ad
+                            earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo
+                            fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore
+                            suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
+                            modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam
+                            totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam
+                            quasi aliquam eligendi, placeat qui corporis!
+                        </p>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
+
+</section>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
@@ -132,4 +199,5 @@
         });
     </script>
 }
+
 

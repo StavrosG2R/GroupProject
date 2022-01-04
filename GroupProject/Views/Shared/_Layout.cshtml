@@ -1,66 +1,174 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
+    <body>
+        <div class="layout-top" style="font-size: 15px;">
+            <div class="upper-menu" style="display:flex; justify-content:space-between; padding-left: 70px; padding-top: 15px; padding-bottom:10px; background-color: #010102;">
+                <div class="top-nav-home-link text-uppercase">
+                    <a href="https://localhost:44321/home/index" style="text-decoration:none; font-weight:bold;"><img src="	https://pcpartpicker.com/static/img/pcpp-icon.svg" /> the Dele<span style="color: #ffd752;">gays</span> Project</a>
+                </div>
 
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("My Builds", "Index", "Builds/MyBuilds")</li>
-                    <li>@Html.ActionLink("All Builds", "Index", "Builds")</li>
-                    <li>@Html.ActionLink("About Us", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Products <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("CPU", "Index", "CPUs")</li>
-                            <li>@Html.ActionLink("Motherboards", "Index", "Motherboards")</li>
-                            <li>@Html.ActionLink("Cases", "Index", "Cases")</li>
-                            <li>@Html.ActionLink("GPU", "Index", "GPUs")</li>
-                            <li>@Html.ActionLink("PSU", "Index", "PSUs")</li>
-                            <li>@Html.ActionLink("Storage", "Index", "Storages")</li>
-                            <li>@Html.ActionLink("RAM", "Index", "RAMs")</li>
-                        </ul>
-                    </li>
-                    <li>
-                        @Html.ActionLink("Donate", "Index", "Donates")
-                    </li>
-                </ul>
+                <div>
                     @Html.Partial("_LoginPartial")
-</div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2021 - @DateTime.Now.Year Delegays.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0.0
+                </div>
             </div>
-        </footer>
-    </div>
+            <nav class="navbar navbar-expand-lg navbar-dark" style="padding:0px 30px; background-color: #09090F; border:1px solid #181827">
+                <div class="container-fluid">
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
-</body>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown" style="padding-left: 30px; padding-top: 5px; padding-bottom:5px;">
+                        <ul class="navbar-nav es">
+                            <li class="nav-item">
+                                <a class="dropdown-item " href="https://localhost:44321/builds/create" style=" font-weight:bold; color:white; border-right: 1px solid #181827; padding:10px 15px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
+                                        <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.356 3.356a1 1 0 0 0 1.414 0l1.586-1.586a1 1 0 0 0 0-1.414l-3.356-3.356a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0zm9.646 10.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708zM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11z" />
+                                    </svg><span>System Builder</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="https://localhost:44321/builds/index" style="font-weight: bold; color:white; border-right: 1px solid #181827; padding: 10px 15px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pc" viewBox="0 0 16 16">
+                                        <path d="M5 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H5Zm.5 14a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Zm2 0a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1ZM5 1.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5ZM5.5 3h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1Z" />
+                                    </svg><span>Build Guides</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <div class="colors-tochange">
+                                    <a class="dropdown-item" href="https://localhost:44321/Admin" style=" font-weight:bold; color:white; border-right: 1px solid #181827; padding:8px 15px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cpu" viewBox="0 0 16 16">
+                                            <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+                                        </svg><span>Completed Builds</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Pc Parts
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="https://localhost:44321/cpus">CPU</a></li>
+                                    <li><a class="dropdown-item" href="https://localhost:44321/Cases">Cases</a></li>
+                                    <li><a class="dropdown-item" href="https://localhost:44321/gpus">GPU</a></li>
+                                    <li><a class="dropdown-item" href="https://localhost:44321/motherboards">Motherboards</a></li>
+                                    <li><a class="dropdown-item" href="https://localhost:44321/psus">PSU</a></li>
+                                    <li><a class="dropdown-item" href="https://localhost:44321/rams">Memory</a></li>
+                                    <li><a class="dropdown-item" href="https://localhost:44321/storages">Storage</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div>
+            @RenderBody()
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-lg-start text-muted " style="font-size: 20px; background-color: #010102;">
+            <!-- Section: Social media -->
+            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            </section>
+            <!-- Section: Social media -->
+            <!-- Section: Links  -->
+            <section class="">
+                <div class="container text-center text-md-start mt-5">
+                    <!-- Grid row -->
+                    <div class="row mt-3">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <!-- Content -->
+                            <h4 class="text-uppercase fw-bold mb-4" style="color:whitesmoke;">
+                                <i class="fas fa-gem me-3"><img src="https://pcpartpicker.com/static/img/pcpp-icon.svg" /></i>Los Dele<span style="color: #ffd752;">gays</span> Project
+                            </h4>
+                            <p style="font-size:20px; font-weight:bolder; color:whitesmoke;">
+                                PICK PARTS.<br />
+                                BUILD YOUR PC.<br />
+                                COMPARE AND SHARE.
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+                        <!-- Grid column -->
+                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4" style="color:white;">
+                                Products
+                            </h6>
+                            <p>
+                                <a href="#!">Angular</a>
+                            </p>
+                            <p>
+                                <a href="#!">React</a>
+                            </p>
+                            <p>
+                                <a href="#!">Vue</a>
+                            </p>
+                            <p>
+                                <a href="#!">Laravel</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4" style="color:white;">
+                                Useful links
+                            </h6>
+                            <p>
+                                <a href="#!">Pricing</a>
+                            </p>
+                            <p>
+                                <a href="#!">Settings</a>
+                            </p>
+                            <p>
+                                <a href="#!">Orders</a>
+                            </p>
+                            <p>
+                                <a href="#!">Help</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+                        <!-- Grid column -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="color:white;">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Contact
+                            </h6>
+                            <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                            <p>
+                                <i class="fas fa-envelope me-3"></i>
+                                info@example.com
+                            </p>
+                            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+                            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
+                </div>
+            </section>
+            <!-- Section: Links  -->
+            <!-- Copyright -->
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                © 2021 Copyright:
+                <a class="text-reset fw-bold" href="https://mdbootstrap.com/">Los Delegays</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

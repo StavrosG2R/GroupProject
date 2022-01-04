@@ -66,51 +66,54 @@
 
     @foreach (var build in Model.Builds)
     {
-        <tr>
-            <td>
-                <img width="40" src="~/img/@Url.Content(build.Case.Thumbnail)" />
-            </td>
-            <td>
-                <img width="40" src="~/img/@Url.Content(build.CPU.Thumbnail)" />
-            </td>
-            <td>
-                <img width="40" src="~/img/@Url.Content(build.GPU.Thumbnail)" />
-            </td>
-            <td>
-                @build.Builder.Name
-            </td>
-            <td>
-                @build.Name
-            </td>
-            <td>
-                @build.Category.Name
-            </td>
-            <td>
-                @build.Case.Model
-            </td>
-            <td>
-                @build.CPU.Model
-            </td>
-            <td>
-                @build.GPU.Model
-            </td>
-            <td>
-                @build.Motherboard.Model
-            </td>
-            <td>
-                @build.PSU.Model
-            </td>
-            <td>
-                @build.RAM.Model
-            </td>
-            <td>
-                @build.Storage.Model
-            </td>
-            <td>
-                @build.Price
-            </td>
-            
-        </tr>
+<tr>
+    <td>
+        <img width="40" src="~/img/@Url.Content(build.Case.Thumbnail)" />
+    </td>
+    <td>
+        <img width="40" src="~/img/@Url.Content(build.CPU.Thumbnail)" />
+    </td>
+    <td>
+        <img width="40" src="~/img/@Url.Content(build.GPU.Thumbnail)" />
+    </td>
+    <td>
+        @build.Builder.Name
+    </td>
+    <td>
+        @build.Name
+    </td>
+    <td>
+        @build.Category.Name
+    </td>
+    <td>
+        @build.Case.Model
+    </td>
+    <td>
+        @build.CPU.Model
+    </td>
+    <td>
+        @build.GPU.Model
+    </td>
+    <td>
+        @build.Motherboard.Model
+    </td>
+    <td>
+        @build.PSU.Model
+    </td>
+    <td>
+        @build.RAM.Model
+    </td>
+    <td>
+        @build.Storage.Model
+    </td>
+    <td>
+        @build.Price
+    </td>
+    <td>
+        @Html.ActionLink("Details", "Details", new { id = build.ID })
+    </td>
+
+</tr>
     }
 
 </table>
