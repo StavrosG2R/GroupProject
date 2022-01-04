@@ -59,9 +59,9 @@
         <th>
             @Html.LabelFor(m => m.Storage, "Storage Model")
         </th>
-        <th>
+        @*<th>
             @Html.LabelFor(m => m.Price, "Price")
-        </th>
+        </th>*@
     </tr>
 
     @foreach (var build in Model.Builds)
@@ -106,9 +106,9 @@
     <td>
         @build.Storage.Model
     </td>
-    <td>
+    @*<td>
         @build.Price
-    </td>
+    </td>*@
     <td>
         @Html.ActionLink("Details", "Details", new { id = build.ID })
     </td>

@@ -43,9 +43,9 @@
         <th>
             @Html.LabelFor(m => m.Storage, "Storage Model")
         </th>
-        <th>
+        @*<th>
             @Html.LabelFor(m => m.Price)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -88,9 +88,9 @@
             <td>
                 @suggestedbuild.Storage.Model
             </td>
-            <td>
+            @*<td>
                 @suggestedbuild.Price
-            </td>
+            </td>*@
             @if (ViewContext.HttpContext.User.IsInRole("Admin"))
             {
                 <td>
