@@ -38,5 +38,10 @@ namespace GroupProject.Controllers
 
             return View();
         }
+
+        public ActionResult PCParts()
+        {
+            return View();
+        }
     }
 }

@@ -269,6 +269,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\StyleSheetBabis.css" />
     <Content Include="Content\webfonts\fa-brands-400.svg" />
     <Content Include="Content\webfonts\fa-regular-400.svg" />
     <Content Include="Content\webfonts\fa-solid-900.svg" />
@@ -294,6 +295,7 @@
     <Content Include="img\aorusprob560.jpeg" />
     <Content Include="img\aorusprox570.jpeg" />
     <Content Include="img\carbidespecdeltargb.jpeg" />
+    <Content Include="img\casepng.png" />
     <Content Include="img\corei511gen.jpeg" />
     <Content Include="img\corei512gen.jpeg" />
     <Content Include="img\corei711gen.jpeg" />
@@ -304,11 +306,13 @@
     <Content Include="img\gamingplusb550.jpeg" />
     <Content Include="img\gamingplusx570.jpeg" />
     <Content Include="img\gamingx570.jpeg" />
+    <Content Include="img\graphics_card_tp.png" />
     <Content Include="img\hx850.jpeg" />
     <Content Include="img\lianlilancooliirgb.jpeg" />
     <Content Include="img\masterboxtd500mesh.jpeg" />
     <Content Include="img\masterwatt550.jpeg" />
     <Content Include="img\masterwatt650.jpeg" />
+    <Content Include="img\mobopng.png" />
     <Content Include="img\mpggamingplusz590.jpeg" />
     <Content Include="img\mpgz690.jpeg" />
     <Content Include="img\mwe650.jpeg" />
@@ -318,10 +322,13 @@
     <Content Include="img\primeb550.jpeg" />
     <Content Include="img\primez590.jpeg" />
     <Content Include="img\primez690.jpeg" />
+    <Content Include="img\psupng.png" />
+    <Content Include="img\rampng.png" />
     <Content Include="img\rm650x.jpeg" />
     <Content Include="img\rm750x.jpeg" />
     <Content Include="img\rogstrixb550.jpeg" />
     <Content Include="img\rogstrixx570.jpeg" />
+    <Content Include="img\ryzen-chip-1.png" />
     <Content Include="img\ryzen33000.jpeg" />
     <Content Include="img\ryzen53000.jpeg" />
     <Content Include="img\ryzen55000.jpeg" />
@@ -333,6 +340,7 @@
     <Content Include="img\sn850.jpeg" />
     <Content Include="img\spectrix.jpeg" />
     <Content Include="img\ssdplus.jpeg" />
+    <Content Include="img\ssdpng.png" />
     <Content Include="img\tomahawkb550.jpeg" />
     <Content Include="img\tomahawkb560.jpeg" />
     <Content Include="img\tomahawkx570.jpeg" />
@@ -514,6 +522,7 @@
     <Content Include="Views\Cases\Details.cshtml" />
     <Content Include="Views\Cases\Index.cshtml" />
     <Content Include="Views\Builds\MyBuilds.cshtml" />
+    <Content Include="Views\Home\PCParts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
