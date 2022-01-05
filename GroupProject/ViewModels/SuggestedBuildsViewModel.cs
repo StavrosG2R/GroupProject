@@ -1,4 +1,5 @@
 ﻿using DataAccess.Core.Entities;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GroupProject.ViewModels
@@ -6,6 +7,7 @@ namespace GroupProject.ViewModels
     public class SuggestedBuildsViewModel
     {
         public IQueryable<SuggestedBuild> SuggestedBuilds { get; set; }
+        public IQueryable<Build> Builds { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public int Case { get; set; }

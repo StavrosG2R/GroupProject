@@ -1,0 +1,295 @@
+﻿
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #131313;
+}
+
+
+
+.containers {
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: grid;
+}
+
+    .containers .card {
+        margin: 10px;
+        position: center;
+        width: 380px;
+        height: 400px;
+        background: #232323;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+        .containers .card:before {
+            
+            content: '';
+            position: absolute;
+            
+            background: #9bdc28;
+            width: 100%;
+            height: 100%;
+            clip-path: circle(150px at 80% 20%);
+            transition: 0.5s ease-in-out;
+        }
+
+        .containers .card1:before {
+           
+            background: red;
+           
+        }
+
+        .containers .card2:before {
+            background: #ff0;
+        }
+
+        .containers .card3:before {
+            background: #03a9f4;
+        }
+
+        .containers .card4:before {
+            background: #ff6a00;
+        }
+
+        .containers .card5:before {
+            background: #000000;
+        }
+
+        
+
+            .containers .card:hover:before {
+            clip-path: circle(350px at 80% -20%);
+        }
+
+    .containers .card1:after {
+        content: 'CPUS';
+        position: absolute;
+        top: 55%;
+        text-align: center;
+        font-size: 8em;
+        font-weight: 800;
+        font-style: italic;
+        color: rgba(255,255,25,0.05)
+    }
+    .containers .card2:after {
+        content: 'MOBOS';
+        position: absolute;
+        top: 55%;
+        text-align: center;
+        font-size: 8em;
+        font-weight: 800;
+        font-style: italic;
+        color: rgba(255,255,25,0.05)
+    }
+
+    .containers .card3:after {
+        content: 'CASES';
+        position: absolute;
+        top: 55%;
+        text-align: center;
+        font-size: 8em;
+        font-weight: 800;
+        font-style: italic;
+        color: rgba(255,255,25,0.05)
+    }
+
+    .containers .card4:after {
+        content: 'RAM';
+        position: absolute;
+        top: 55%;
+        text-align: center;
+        font-size: 8em;
+        font-weight: 800;
+        font-style: italic;
+        color: rgba(255,255,25,0.05)
+    }
+
+    .containers .card5:after {
+        content: 'SSD';
+        position: absolute;
+        top: 55%;
+        text-align: center;
+        font-size: 8em;
+        font-weight: 800;
+        font-style: italic;
+        color: rgba(255,255,25,0.05)
+    }
+
+    .containers .card6:after {
+        content: 'PSU';
+        position: absolute;
+        top: 55%;
+        text-align: center;
+        font-size: 8em;
+        font-weight: 800;
+        font-style: italic;
+        color: rgba(255,255,25,0.05)
+    }
+
+    .containers .card7:after {
+        content: 'GPUS';
+        position: absolute;
+        top: 55%;
+        text-align: center;
+        font-size: 8em;
+        font-weight: 800;
+        font-style: italic;
+        color: rgba(255,255,25,0.05)
+    }
+
+        .containers .card .imgBx {
+            position: absolute;
+            top: 30%;
+            transform: translateY(-50%);
+            z-index: 10000;
+            width: 100%;
+            height: 220px;
+            transition: 0.5s;
+        }
+
+        .containers .card:hover .imgBx {
+            top: -10%;
+            transform: translateY(0%);
+        }
+
+        .containers .card .imgBx img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            width: 270px;
+        }
+
+        .containers .card .contentBx {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            transition: 1s;
+            z-index: 10;
+        }
+
+        .containers .card:hover .contentBx {
+            height: 210px;
+        }
+
+        .containers .card .contentBx h2 {
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #fff;
+            margin: 0;
+        }
+
+        .containers .card .contentBx .size, .containers .card .contentBx .color {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px 20px;
+            transition: 0.5s;
+            opacity: 0;
+            visibility: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .containers .card:hover .contentBx .size {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0.5s;
+        }
+
+        .containers .card:hover .contentBx .color {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0.6s;
+        }
+
+        .containers .card .contentBx .size h3, .containers .card .contentBx .color h3 {
+            color: #fff;
+            font-weight: 300;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-right: 10px;
+        }
+
+        .containers .card .contentBx .size span {
+            width: 26px;
+            height: 26px;
+            text-align: center;
+            line-height: 26px;
+            font-size: 14px;
+            display: inline-block;
+            color: #111;
+            background: #fff;
+            margin: 0 5px;
+            transition: 0.5s;
+            color: #111;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .containers .card .contentBx .size span:hover {
+                background: #9bdc28;
+            }
+
+            .containers .card1 .contentBx .size span:hover {
+                background: red;
+            }
+
+        .containers .card .contentBx .color span {
+            width: 20px;
+            height: 20px;
+            background: #ff0;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+            .containers .card .contentBx .color span:nth-child(2) {
+                background: #9bdc28;
+            }
+
+            .containers .card .contentBx .color span:nth-child(3) {
+                background: #03a9f4;
+            }
+
+            .container .card .contentBx .color span:nth-child(4) {
+                background: #e91e63;
+            }
+
+        .containers .card .contentBx a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #fff;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #111;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 0.5s;
+            margin-top: 0;
+        }
+
+        .containers .card:hover .contentBx a {
+            opacity: 1;
+            transform: translateY(0px);
+            transition-delay: 0.35s;
+        }

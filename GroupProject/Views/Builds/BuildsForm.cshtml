@@ -105,7 +105,7 @@
 
 
                                     <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Save" class="btn btn-default" style="color:white;" />
+                                        <input type="submit" value="Save" class="btn btn-default" style="color:black; background-color:lightgrey; margin-top: 10px" />
                                     </div>
 
                                 </div>
@@ -113,55 +113,13 @@
 
                     </div>
                     <div class="col-md-8">
-                        <h6>Description</h6>
+                        <h6>Product Description</h6>
                         <hr />
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                            numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                            optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-                            obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                            nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                            tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-                            quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                            sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                            recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                            minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit
-                            quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur
-                            fugiat, temporibus enim commodi iusto libero magni deleniti quod quam
-                            consequuntur! Commodi minima excepturi repudiandae velit hic maxime
-                            doloremque. Quaerat provident commodi consectetur veniam similique ad
-                            earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo
-                            fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore
-                            suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
-                            modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam
-                            totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam
-                            quasi aliquam eligendi, placeat qui corporis!
-                        </p>
+                        
                         <h6>Comments</h6>
                         <hr />
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                            numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                            optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-                            obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                            nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                            tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-                            quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-                            sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                            recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-                            minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit
-                            quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur
-                            fugiat, temporibus enim commodi iusto libero magni deleniti quod quam
-                            consequuntur! Commodi minima excepturi repudiandae velit hic maxime
-                            doloremque. Quaerat provident commodi consectetur veniam similique ad
-                            earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo
-                            fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore
-                            suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
-                            modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam
-                            totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam
-                            quasi aliquam eligendi, placeat qui corporis!
+                           
                         </p>
 
                     </div>
@@ -180,10 +138,9 @@
         $(document).ready(function () {
             $("#CpuId").change(function () {
                 var value = parseInt($(this).val());
-                var model = '';
                 //alert(value)
                 $.ajax({
-                    url: "/api/Motherboards/" + value + model,
+                    url: "/api/Motherboards/" + value,
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
@@ -196,6 +153,21 @@
                     }
                 });
             });
+            $("#CpuId").on('change', function () {
+                var value = $(this).val();
+                alert(value)
+                $.ajax({
+                    url: "/CPUs/Details/" + value,
+                    type: "GET",
+                    success: function (data) {
+                        var cpus = data;
+
+                        if (cpus) {
+                            $('#CPUZ').append(value);
+                        }
+                    }
+                })
+            })
         });
     </script>
 }

@@ -26,19 +26,18 @@ textarea {
 
 
 
-.layout-dropdown a {
-    color: aliceblue !important;
+/*.layout-dropdown a {
+    color: aliceblue;
 }
-
+*/
 .es :hover {
-    background-color: gray !important;
-    color: coral;
+    color: coral !important;
 }
 
+/*
 li:hover {
-    background-color: inherit !important;
     color: aqua !important;
-}
+}*/
 
 .top-nav-home-link a {
     color: white;

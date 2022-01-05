@@ -1,0 +1,28 @@
+﻿@model GroupProject.ViewModels.SuggestedBuildsViewModel
+
+<div class="main" style="color:beige; margin:0;">
+
+    <div style="width:100%;padding-top: 50px; padding-left:100px; padding-right:100px; background-color: #09090F; border-color: #37374d; padding-bottom:50px;">
+        <h1 style="text-align:center">Build Guides</h1>
+        <p style="margin: 20px auto; text-align:center">Building your own PC and need ideas on where to get started? Explore our build guides which cover systems for a variety of use-cases and budgets.</p>
+        <div class="row row-cols-1 row-cols-md-3 g-4" style="padding:0px 30px; color:black; ">
+            @foreach (var build in Model.SuggestedBuilds)
+            {
+                <div class="col">
+                    <div class="card bg-black" style="background-color: lightgray; width:65%">
+                        <img src="~/img/@Url.Content(build.Case.Thumbnail)" class="card-img-top" alt="..." >
+                        <div class="card-body">
+                            <h5 class="card-title">@build.Name</h5>
+                            <p class="card-text">
+                                This is a longer card with supporting text below as a natural lead-in to additional content.
+                                This content is a little bit longer.
+                            </p>
+                            <a href="#" class="btn btn-primary" role="button" id="details">Button</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@*<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>*@

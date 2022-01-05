@@ -19,7 +19,8 @@ namespace GroupProject.Controllers
         {
             SuggestedBuildsViewModel viewmodel = new SuggestedBuildsViewModel()
             {
-                SuggestedBuilds = _unitOfWork.SuggestedBuilds.GetAll().Take(4)
+                SuggestedBuilds = _unitOfWork.SuggestedBuilds.GetAll().Take(4),
+                Builds = _unitOfWork.Builds.GetAll().Take(4)
             };
 
             return View(viewmodel);
@@ -36,6 +37,11 @@ namespace GroupProject.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult PCParts()
+        {
             return View();
         }
     }

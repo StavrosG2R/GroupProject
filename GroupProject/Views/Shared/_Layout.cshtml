@@ -7,12 +7,13 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <body>
         <div class="layout-top" style="font-size: 15px;">
             <div class="upper-menu" style="display:flex; justify-content:space-between; padding-left: 70px; padding-top: 15px; padding-bottom:10px; background-color: #010102;">
                 <div class="top-nav-home-link text-uppercase">
-                    <a href="https://localhost:44321/home/index" style="text-decoration:none; font-weight:bold;"><img src="	https://pcpartpicker.com/static/img/pcpp-icon.svg" /> the Dele<span style="color: #ffd752;">gays</span> Project</a>
+                    <a href="@Url.Action("Index", "Home")" style="text-decoration:none; font-weight:bold;"><img src="	https://pcpartpicker.com/static/img/pcpp-icon.svg" /> the Dele<span style="color: #ffd752;">gays</span> Project</a>
                 </div>
 
                 <div>
@@ -28,42 +29,57 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown" style="padding-left: 30px; padding-top: 5px; padding-bottom:5px;">
                         <ul class="navbar-nav es">
                             <li class="nav-item">
-                                <a class="dropdown-item " href="https://localhost:44321/builds/create" style=" font-weight:bold; color:white; border-right: 1px solid #181827; padding:10px 15px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
-                                        <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.356 3.356a1 1 0 0 0 1.414 0l1.586-1.586a1 1 0 0 0 0-1.414l-3.356-3.356a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0zm9.646 10.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708zM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11z" />
-                                    </svg><span>System Builder</span>
+                                <div class="colors-tochange">
+                                    <a class="dropdown-item" href="@Url.Action("MyBuilds","Builds", new { area =""})" style=" font-weight:bold; color:white; border-right: 1px solid #181827; padding:8px 15px;">
+                                        <span><i class="bi bi-pc-display"></i> My Builds</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item " href="@Url.Action("Create", "Builds")" style=" font-weight:bold; color:white; border-right: 1px solid #181827; padding:10px 15px;">
+                                    <span><i class="bi bi-tools"></i> System Builder</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="dropdown-item" href="https://localhost:44321/builds/index" style="font-weight: bold; color:white; border-right: 1px solid #181827; padding: 10px 15px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pc" viewBox="0 0 16 16">
-                                        <path d="M5 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H5Zm.5 14a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Zm2 0a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1ZM5 1.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5ZM5.5 3h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1Z" />
-                                    </svg><span>Build Guides</span>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Builds", new {area="" })" style="font-weight: bold; color:white; border-right: 1px solid #181827; padding: 10px 15px;">
+                                    <span><i class="bi bi-pc-display-horizontal"></i> All Builds</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <div class="colors-tochange">
-                                    <a class="dropdown-item" href="https://localhost:44321/Admin" style=" font-weight:bold; color:white; border-right: 1px solid #181827; padding:8px 15px;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cpu" viewBox="0 0 16 16">
-                                            <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
-                                        </svg><span>Completed Builds</span>
+                                    <a class="dropdown-item" href="@Url.Action("Index","SuggestedBuilds", new { area = "Admin"})" style=" font-weight:bold; color:white; border-right: 1px solid #181827; padding:8px 15px;">
+                                        <span><i class="bi bi-pc"></i> Suggested Builds</span>
                                     </a>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Pc Parts
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="https://localhost:44321/cpus">CPU</a></li>
-                                    <li><a class="dropdown-item" href="https://localhost:44321/Cases">Cases</a></li>
-                                    <li><a class="dropdown-item" href="https://localhost:44321/gpus">GPU</a></li>
-                                    <li><a class="dropdown-item" href="https://localhost:44321/motherboards">Motherboards</a></li>
-                                    <li><a class="dropdown-item" href="https://localhost:44321/psus">PSU</a></li>
-                                    <li><a class="dropdown-item" href="https://localhost:44321/rams">Memory</a></li>
-                                    <li><a class="dropdown-item" href="https://localhost:44321/storages">Storage</a></li>
-                                </ul>
+                            <li class="nav-item">
+                                <div class="colors-tochange">
+                                    <a class="dropdown-item" href="@Url.Action("PCParts", "Home", new {area="" })" style=" font-weight:bold; color:white; border-right: 1px solid #181827; padding:8px 15px;">
+                                        <span><i class="bi bi-cpu"></i> All Parts</span>
+                                    </a>
+                                </div>
                             </li>
+                            <li class="nav-item">
+                                <div class="colors-tochange">
+                                    <a class="dropdown-item" href="@Url.Action("Index", "Donates", new {area="" })" style=" font-weight:bold; color:white; border-right: 1px solid #181827; padding:8px 15px;">
+                                        <span><i class="bi bi-piggy-bank"></i> Donate</span>
+                                    </a>
+                                </div>
+                            </li>
+                            @*<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Pc Parts
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li class="dropdown-item"><a href="@Url.Action("Index", "CPUs")" style="text-decoration: none; color: black;">CPU</a></li>
+                <li class="dropdown-item"><a href="@Url.Action("Index", "Motherboards")" style="text-decoration: none; color: black;">Motherboards</a></li>
+                <li class="dropdown-item"><a href="@Url.Action("Index", "Cases")" style="text-decoration: none; color: black;">Cases</a></li>
+                <li class="dropdown-item"><a href="@Url.Action("Index", "GPUs")" style="text-decoration: none; color: black;">GPU</a></li>
+                <li class="dropdown-item"><a href="@Url.Action("Index", "PSUs")" style="text-decoration: none; color: black;"></a></li>
+                <li class="dropdown-item"><a href="@Url.Action("Index", "Storages")" style="text-decoration: none; color: black;">Storage</a></li>
+                <li class="dropdown-item"><a href="@Url.Action("Index", "RAMs")" style="text-decoration: none; color: black;">RAM</a></li>
+            </ul>
+        </li>*@
                         </ul>
                     </div>
                 </div>
@@ -159,10 +175,13 @@
             </section>
             <!-- Section: Links  -->
             <!-- Copyright -->
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-                © 2021 Copyright:
-                <a class="text-reset fw-bold" href="https://mdbootstrap.com/">Los Delegays</a>
-            </div>
+            <footer class="main-footer" style="text-align: center;">
+                <strong>Copyright &copy; 2021 - @DateTime.Now.Year Delegays.</strong>
+                All rights reserved.
+                <div class="float-right d-none d-sm-inline-block">
+                    <b>Version</b> 1.0.0
+                </div>
+            </footer>
             <!-- Copyright -->
         </footer>
         <!-- Footer -->
