@@ -8,17 +8,17 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Build</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, "Build Name", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>Build</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, "Build Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Case, "Case Model", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -31,16 +31,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CPU, "CPU Model", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CPU, new SelectList(Model.CPUs, "ID", "Model"), "Select CPU", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.CPU, new SelectList(Model.CPUs, "ID", "Model"), "Select CPU", htmlAttributes: new { @class = "form-control", @id = "CpuId" })
                 @Html.ValidationMessageFor(model => model.CPU, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Motherboard, "Motherboard Model", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.Motherboard, "Motherboard Model", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Motherboard, new SelectList(Model.Motherboards, "ID", "Model"), "Select Motherboard", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Motherboard, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(m => m.Motherboard, new SelectList("", "ID"), "Select Motherboard", htmlAttributes: new { @class = "form-control", @id = "MotherboardId" })
+                @Html.ValidationMessageFor(m => m.Motherboard, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -84,13 +84,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -103,3 +103,36 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#CpuId").change(function () {
+                var value = parseInt($(this).val());
+                //alert(value)
+                $.ajax({
+                    url: "/api/Motherboards/" + value,
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $('#MotherboardId').empty();
+                        $.each(data, function (id, cpuSocket) {
+                            //console.log(data);
+                            $('#MotherboardId').append('<option value="' + id + '">' + cpuSocket.model + ' ' + cpuSocket.chipset + ' ' + cpuSocket.price + "€" + '</option>');
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+
+}
+
+
+
+

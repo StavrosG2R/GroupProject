@@ -289,6 +289,7 @@
     <Content Include="img\3080TiVentus3X.jpeg" />
     <Content Include="img\870evo.jpeg" />
     <Content Include="img\970evopplus.jpeg" />
+    <Content Include="img\Amitsis_profile.jpeg" />
     <Content Include="img\aoruseliteb550.jpeg" />
     <Content Include="img\aoruselitez590.jpeg" />
     <Content Include="img\aoruselitez690.jpeg" />
@@ -303,12 +304,16 @@
     <Content Include="img\corei911gen.jpeg" />
     <Content Include="img\corei912gen.jpeg" />
     <Content Include="img\ds3hb550.jpeg" />
+    <Content Include="img\G2R_profile.jpg" />
     <Content Include="img\gamingplusb550.jpeg" />
     <Content Include="img\gamingplusx570.jpeg" />
     <Content Include="img\gamingx570.jpeg" />
+    <Content Include="img\Gatsakos_profile.jpeg" />
     <Content Include="img\graphics_card_tp.png" />
     <Content Include="img\hx850.jpeg" />
+    <Content Include="img\Karatzas_profile.jpg" />
     <Content Include="img\lianlilancooliirgb.jpeg" />
+    <Content Include="img\Marcos_profile.png" />
     <Content Include="img\masterboxtd500mesh.jpeg" />
     <Content Include="img\masterwatt550.jpeg" />
     <Content Include="img\masterwatt650.jpeg" />
@@ -523,6 +528,8 @@
     <Content Include="Views\Cases\Index.cshtml" />
     <Content Include="Views\Builds\MyBuilds.cshtml" />
     <Content Include="Views\Home\PCParts.cshtml" />
+    <Content Include="Views\Shared\_UserBuilds.cshtml" />
+    <Content Include="Views\Shared\_SuggestedBuilds.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

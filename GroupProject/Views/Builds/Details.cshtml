@@ -85,18 +85,23 @@
                                 <a href="@Url.Action("Details", "Storages", new {id = Model.StorageID })" class="buildDets">@Html.DisplayFor(model => model.Storage.Model)</a>
                             </dd>
 
-                            <dt>
+                            @*<dt>
                                 @Html.DisplayNameFor(model => model.Price)
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => model.Price)
+
                             </dd>
+                            
+
+                            </dd>*@
+                      
                             <h6>
                                 @Html.ActionLink("Back to List", "Index")
                             </h6>
                         </dl>
-
+      
                     </div>
                     <div class="col-md-8">
                         <h6>Photos</h6>
