@@ -28,5 +28,11 @@ namespace GroupProject.Controllers.Api
             var motherboardSocket = _unitOfWork.Motherboards.GetById(id).Socket;
             return Ok(_unitOfWork.Cpus.GetCPUsThatMatchTheSocket(motherboardSocket));
         }
+
+        public IHttpActionResult Details(int id)
+        {
+            var details = _unitOfWork.Cpus.GetById(id);
+            return Ok(details);
+        }
     }
 }

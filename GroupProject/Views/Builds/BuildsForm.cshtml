@@ -116,7 +116,7 @@
                         <h6>Product Description</h6>
                         <hr />
                         <p id="CPUZ">
-                            @Html.DisplayTextFor(m => m.CPUS.ID)
+                            
                         </p>
                         <h6>Comments</h6>
                         <hr />
@@ -140,10 +140,9 @@
         $(document).ready(function () {
             $("#CpuId").change(function () {
                 var value = parseInt($(this).val());
-                var model = '';
                 //alert(value)
                 $.ajax({
-                    url: "/api/Motherboards/" + value + model,
+                    url: "/api/Motherboards/" + value,
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
@@ -157,17 +156,19 @@
                 });
             });
             $("#CpuId").on('change', function () {
-                var value = $(this).val();
+                var value = parseInt($(this).val());
                 alert(value)
                 $.ajax({
-                    url: "/CPUs/Details/" + value,
-                    type: "GET",
+                    url: "/api/CPUs/Details/" + value,
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
                     success: function (data) {
-                        var cpus = data;
-
-                        if (cpus) {
-                            $('#CPUZ').append(value);
-                        }
+                        $('#CPUZ').empty();
+                        $.each(data, function (id, details) {
+                            console.log(data);
+                            $('#CPUZ').append('<p value="' + id + '">' + details.model + '</p>')
+                        })
                     }
                 })
             })

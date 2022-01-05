@@ -10,6 +10,8 @@
             @Html.DisplayName("Company")
         </dt>
 
+            <img width="20%" src="~/img/@Url.Content(Model.Thumbnail)" style="margin-left:20%; position:absolute;"/>
+
         <dd>
             @Html.DisplayFor(model => model.Company.Name)
         </dd>
