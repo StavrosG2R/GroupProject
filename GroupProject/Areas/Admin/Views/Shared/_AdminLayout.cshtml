@@ -151,13 +151,13 @@
                         </li>
 
                         <li class="nav-header">Users</li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index","Builds", new { area = ""})" class="nav-link">
-                                    <i class="nav-icon bi bi-people"></i>
-                                    <p>Users Builds</p>
-                                </a>
-                            </li>
-                            @*<li class="nav-item">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Builds", new { area = ""})" class="nav-link">
+                                <i class="nav-icon bi bi-people"></i>
+                                <p>Users Builds</p>
+                            </a>
+                        </li>
+                        @*<li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-file"></i>
                                     <p>Documentation</p>
@@ -237,6 +237,7 @@
     <script>$.widget.bridge('uibutton', $.ui.button)</script>
     <!-- Bootstrap 4 -->
     <script src="~/Scripts/admin-scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>
