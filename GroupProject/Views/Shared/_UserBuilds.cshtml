@@ -14,8 +14,16 @@
                         <div class="card-body">
                             <h5 class="card-title">@build.Name</h5>
                             <p class="card-text">
-                                This is a longer card with supporting text below as a natural lead-in to additional content.
-                                This content is a little bit longer.
+                                @Html.DisplayName(build.CPU.Model)
+                                <br />
+                                @Html.DisplayName(build.Motherboard.Model)
+                                @Html.DisplayName(build.Motherboard.Chipset)
+                                <br />
+                                @Html.DisplayName(build.GPU.Model)
+                                <br />
+
+                                <strong>....</strong>
+
                             </p>
                             <a href="@Url.Action("Details", "Builds", new { id = build.ID})" class="btn btn-primary">Details</a>
                         </div>
