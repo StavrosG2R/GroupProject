@@ -1,17 +1,71 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@*@{
+        ViewBag.Title = "Contact";
+    }
+    <h2>@ViewBag.Title</h2>*@
+
+
+
+<!-- contact section -->
+<section class="contact-section">
+    <form data-netlify="true" method="POST" name="contact-form" id="contact-form" class="contact-form">
+        <input type="hidden" name="form-name" value="contact-form">
+        <div class="input-control">
+            <input type="text" name="name" id="name" autocomplete="off" placeholder="Name">
+            <div class="error"></div>
+        </div>
+        <div class="input-control">
+            <input type="text" name="email" id="email" autocomplete="off" placeholder="Email">
+            <div class="error"></div>
+        </div>
+        <div class="input-control">
+            <textarea name="msg" id="msg" placeholder="Message" autocomplete="off"></textarea>
+            <div class="error"></div>
+        </div>
+        <button id="submit-btn" type="submit" class="form-submit-btn">contact</button>
+    </form>
+
+    <!-- map -->
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12573.66280672845!2d23.6884175!3d38.0140872!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa8435b54cc257e11!2sArch%20Beer%20House!5e0!3m2!1sel!2sgr!4v1641373060490!5m2!1sel!2sgr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</section>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Initialize form validation on the registration form.
+            // It has the name attribute "registration"
+            $("form[name='contact-form']").validate({
+                // Specify validation rules
+                rules: {
+                    // The key name on the left side is the name attribute
+                    // of an input field. Validation rules are defined
+                    // on the right side
+                    name: "required",
+                    msg: "required",
+                    email: {
+                        required: true,
+                        // Specify that email should be validated
+                        // by the built-in "email" rule
+                        email: true
+                    },
+                },
+                // Specify validation error messages
+                messages: {
+                    name: " Please enter your name",
+                    msg: " Please fill the form",
+                    email: " Please enter a valid email address"
+                },
+                // Make sure the form is submitted to the destination defined
+                // in the "action" attribute of the form when valid
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
