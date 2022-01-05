@@ -31,6 +31,10 @@ textarea {
     width: 40%;
 }
 
+.buildDets {
+    color: darkorange;
+}
+
 /*.layout-dropdown a {
     color: aliceblue;
 }

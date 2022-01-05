@@ -34,7 +34,7 @@
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => model.Case.Model)
+                                <a href="@Url.Action("Details", "Cases", new {id = Model.CaseID })" class="buildDets">@Html.DisplayFor(model => model.Case.Model)</a>
                             </dd>
 
                             <dt>
@@ -42,7 +42,7 @@
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => model.CPU.Model)
+                                <a href="@Url.Action("Details", "CPUs", new {id = Model.CPUID })" class="buildDets">@Html.DisplayFor(model => model.CPU.Model)</a>
                             </dd>
 
                             <dt>
@@ -50,7 +50,7 @@
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => model.GPU.Model)
+                                <a href="@Url.Action("Details", "GPUs", new {id = Model.GPUID })" class="buildDets">@Html.DisplayFor(model => model.GPU.Model)</a>
                             </dd>
 
                             <dt>
@@ -58,7 +58,7 @@
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => model.Motherboard.Model)
+                                <a href="@Url.Action("Details", "Motherboards", new {id = Model.MotherboardID })" class="buildDets">@Html.DisplayFor(model => model.Motherboard.Model)</a>
                             </dd>
 
                             <dt>
@@ -66,7 +66,7 @@
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => model.PSU.Model)
+                                <a href="@Url.Action("Details", "PSUs", new {id = Model.PSUID })" class="buildDets">@Html.DisplayFor(model => model.PSU.Model)</a>
                             </dd>
 
                             <dt>
@@ -74,7 +74,7 @@
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => model.RAM.Model)
+                                <a href="@Url.Action("Details", "RAMs", new {id = Model.RAMID })" class="buildDets">@Html.DisplayFor(model => model.RAM.Model)</a>
                             </dd>
 
                             <dt>
@@ -82,7 +82,7 @@
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => model.Storage.Model)
+                                <a href="@Url.Action("Details", "Storages", new {id = Model.StorageID })" class="buildDets">@Html.DisplayFor(model => model.Storage.Model)</a>
                             </dd>
 
                             <dt>
