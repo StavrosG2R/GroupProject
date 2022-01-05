@@ -523,6 +523,8 @@
     <Content Include="Views\Cases\Index.cshtml" />
     <Content Include="Views\Builds\MyBuilds.cshtml" />
     <Content Include="Views\Home\PCParts.cshtml" />
+    <Content Include="Views\Shared\_UserBuilds.cshtml" />
+    <Content Include="Views\Shared\_SuggestedBuilds.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,131 +1,23 @@
-﻿@model GroupProject.ViewModels.SuggestedBuildsViewModel
+﻿
 
-<div class="main" style="color:beige; margin:0;">
 
-    <div style="width:100%;padding-top: 50px; padding-left:100px; padding-right:100px; background-color: #09090F; border-color: #37374d; padding-bottom:50px;">
-        <h1 style="text-align:center">Build Guides</h1>
-        <p style="margin: 20px auto; text-align:center">Building your own PC and need ideas on where to get started? Explore our build guides which cover systems for a variety of use-cases and budgets.</p>
-        <div class="row row-cols-1 row-cols-md-3 g-4" style="padding:0px 30px; color:black;">
-            @foreach (var build in Model.SuggestedBuilds)
-            {
-                <div class="col">
-                    <div class="card bg-black">
-                        <img src="~/img/@Url.Content(build.Case.Thumbnail)" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@build.Name</h5>
-                            <p class="card-text">
-                                This is a longer card with supporting text below as a natural lead-in to additional content.
-                                This content is a little bit longer.
-                            </p>
-                            <a href="#" class="btn btn-primary" role="button" id="details">Button</a>
-                        </div>
-                    </div>
-                </div>
-            }
-            <div class="col">
-                <div class="card bg-black">
-                    <img src="~/imgs/380411.6e11da06a34b27317e21537487cd5f34.1600.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black">
-                    <img src="~/imgs/380407.b8e5d810d7e1e62db6d5c73b2108c085.1600.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black">
-                    <img src="~/imgs/380430.6a01df39a08fa537c20942f0bb24fdc9.1600.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black">
-                    <img src="~/imgs/380431.99ce08323fbbfe59e265b64c25120225.1600.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">First Personal Build</h5>
-                        <p class="card-text">
-                            AMD Ryzen 7 5700G<br />
 
-                            GeForce RTX 3070
-                        </p>
+        @Html.Partial("_SuggestedBuilds")
+        @Html.Partial("_UserBuilds")
 
-                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div style="width:100%;padding-top: 50px; padding-left:100px; padding-right:100px; background-color: #282838; border-color: #37374d; padding-bottom:50px;">
-        <h2 style="text-align:center">Completed Builds</h2>
-        <p style="margin: 20px auto; height:150%; text-align:center">Building your own PC and need ideas on where to get started? Explore our build guides which cover systems for a variety of use-cases and budgets.</p>
-        <div class="row row-cols-1 row-cols-md-3 g-4" style="padding:0px 30px;">
-            <div class="col">
-                <div class="card bg-black">
-                    <img src="~/imgs/380411.6e11da06a34b27317e21537487cd5f34.1600.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black">
-                    <img src="~/imgs/380407.b8e5d810d7e1e62db6d5c73b2108c085.1600.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black">
-                    <img src="~/imgs/380430.6a01df39a08fa537c20942f0bb24fdc9.1600.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black">
-                    <img src="~/imgs/380431.99ce08323fbbfe59e265b64c25120225.1600.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">First Personal Build</h5>
-                        <p class="card-text">
-                            AMD Ryzen 7 5700G<br />
 
-                            GeForce RTX 3070
-                        </p>
 
-                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-</div>
 
-@*@section 
-{
-    <script>
-        $(document).ready(function () {
-            $(".details").on("click", function () {
-                $(".details").append('<a href="@Url.Action("Details","Details")">my link</a>');
+@*@section
+    {
+        <script>
+            $(document).ready(function () {
+                $(".details").on("click", function () {
+                    $(".details").append('<a href="@Url.Action("Details","Details")">my link</a>');
+                })
             })
-        })
-    </script>
-    
-}*@
+        </script>
+
+    }*@

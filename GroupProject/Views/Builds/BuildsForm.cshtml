@@ -115,9 +115,7 @@
                     <div class="col-md-8">
                         <h6>Product Description</h6>
                         <hr />
-                        <p id="CPUZ">
-                            @Html.DisplayTextFor(m => m.CPUS.ID)
-                        </p>
+                        
                         <h6>Comments</h6>
                         <hr />
                         <p>
@@ -140,10 +138,9 @@
         $(document).ready(function () {
             $("#CpuId").change(function () {
                 var value = parseInt($(this).val());
-                var model = '';
                 //alert(value)
                 $.ajax({
-                    url: "/api/Motherboards/" + value + model,
+                    url: "/api/Motherboards/" + value,
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
