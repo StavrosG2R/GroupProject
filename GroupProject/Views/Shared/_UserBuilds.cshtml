@@ -14,14 +14,15 @@
                         <div class="card-body">
                             <h5 class="card-title">@build.Name</h5>
                             <p class="card-text">
-                                @Html.DisplayName(build.CPU.Model)
+                                <strong>CPU:</strong> @Html.DisplayName(build.CPU.Model)
                                 <br />
-                                @Html.DisplayName(build.Motherboard.Model)
+                                <strong>Motherboard:</strong> @Html.DisplayName(build.Motherboard.Model)
                                 @Html.DisplayName(build.Motherboard.Chipset)
                                 <br />
-                                @Html.DisplayName(build.GPU.Model)
+                                <strong>GPU:</strong> @Html.DisplayName(build.GPU.Model)
                                 <br />
-
+                                <strong>RAM:</strong> @Html.DisplayName(build.RAM.Model)
+                                <br />
                                 <strong>....</strong>
 
                             </p>
