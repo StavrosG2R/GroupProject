@@ -1,106 +1,106 @@
 ﻿@model IEnumerable<DataAccess.Core.Entities.Build>
-@{
-    ViewBag.Title = "MyBuilds";
-}
 
-<h2>MyBuilds</h2>
+<div class="mybuilds">
 
-<table class="table">
-    <th>
-        @Html.ActionLink("Create New", "Create")
-    </th>
-    
-    <tr>
-        <th></th>
-        <th>
-            @Html.Label("Images")
-        </th>
-        <th></th>
-        <th>
-            @Html.DisplayName("Builder Name")
-        </th>
-        <th>
-            @Html.DisplayNameFor(m => m.Name)
-        </th>
-        <th>
-            @Html.DisplayName("Category")
-        </th>
-        <th>
-            @Html.DisplayName("Case Model")
-        </th>
-        <th>
-            @Html.DisplayName("CPU Model")
-        </th>
-        <th>
-            @Html.DisplayName("GPU Model")
-        </th>
-        <th>
-            @Html.DisplayName("Motherboard Model")
-        </th>
-        <th>
-            @Html.DisplayName("PSU Model")
-        </th>
-        <th>
-            @Html.DisplayName("RAM Model")
-        </th>
-        <th>
-            @Html.DisplayName("Storage Model")
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(m => m.Price)
-        </th>*@
-    </tr>
+    <h2>MyBuilds</h2>
 
-    @foreach (var build in Model)
-    {
+    <table class="table">
+        <th>
+            @Html.ActionLink("Create New", "Create")
+        </th>
+
         <tr>
-            <td>
-                <img width="40" src="~/img/@Url.Content(build.Case.Thumbnail)" />
-            </td>
-            <td>
-                <img width="40" src="~/img/@Url.Content(build.CPU.Thumbnail)" />
-            </td>
-            <td>
-                <img width="40" src="~/img/@Url.Content(build.GPU.Thumbnail)" />
-            </td>
-            <td>
-                @build.Builder.Name
-            </td>
-            <td>
-                @build.Name
-            </td>
-            <td>
-                @build.Category.Name
-            </td>
-            <td>
-                @build.Case.Model
-            </td>
-            <td>
-                @build.CPU.Model
-            </td>
-            <td>
-                @build.GPU.Model
-            </td>
-            <td>
-                @build.Motherboard.Model
-            </td>
-            <td>
-                @build.PSU.Model
-            </td>
-            <td>
-                @build.RAM.Model
-            </td>
-            <td>
-                @build.Storage.Model
-            </td>
-            @*<td>
-                @build.Price
-            </td>*@
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = build.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = build.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = build.ID })
-            </td>
+            <th></th>
+            <th>
+                @Html.Label("Images")
+            </th>
+            <th></th>
+            <th>
+                @Html.DisplayName("Builder Name")
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Name)
+            </th>
+            <th>
+                @Html.DisplayName("Category")
+            </th>
+            <th>
+                @Html.DisplayName("Case Model")
+            </th>
+            <th>
+                @Html.DisplayName("CPU Model")
+            </th>
+            <th>
+                @Html.DisplayName("GPU Model")
+            </th>
+            <th>
+                @Html.DisplayName("Motherboard Model")
+            </th>
+            <th>
+                @Html.DisplayName("PSU Model")
+            </th>
+            <th>
+                @Html.DisplayName("RAM Model")
+            </th>
+            <th>
+                @Html.DisplayName("Storage Model")
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(m => m.Price)
+                </th>*@
         </tr>
-    }
-</table>
+
+        @foreach (var build in Model)
+        {
+            <tr>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(build.Case.Thumbnail)" />
+                </td>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(build.CPU.Thumbnail)" />
+                </td>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(build.GPU.Thumbnail)" />
+                </td>
+                <td>
+                    @build.Builder.Name
+                </td>
+                <td>
+                    @build.Name
+                </td>
+                <td>
+                    @build.Category.Name
+                </td>
+                <td>
+                    @build.Case.Model
+                </td>
+                <td>
+                    @build.CPU.Model
+                </td>
+                <td>
+                    @build.GPU.Model
+                </td>
+                <td>
+                    @build.Motherboard.Model
+                </td>
+                <td>
+                    @build.PSU.Model
+                </td>
+                <td>
+                    @build.RAM.Model
+                </td>
+                <td>
+                    @build.Storage.Model
+                </td>
+                @*<td>
+                        @build.Price
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = build.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = build.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = build.ID })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

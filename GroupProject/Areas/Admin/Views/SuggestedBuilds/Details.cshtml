@@ -1,8 +1,9 @@
 ﻿@model DataAccess.Core.Entities.SuggestedBuild
 
-<h2>Details</h2>
 
-<div>
+<div class="suggbuildsdet">
+    <h2>Details</h2>
+
     <h4>For "@Html.DisplayFor(model => model.Name)" Build</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -88,19 +89,18 @@
         </dd>*@
 
     </dl>
-</div>
-@if (ViewContext.HttpContext.User.IsInRole("Admin"))
-{
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-}
-else
-{
-    <p>
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+    else
+    {
+        <p>
         
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-}
-
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+</div>

@@ -1,8 +1,7 @@
 ﻿@model DataAccess.Core.Entities.RAM
 
-<h2>Details</h2>
-
-<div>
+<div class="ramsdet">
+    <h2>Details</h2>
     <h4>For RAM model "@Html.DisplayFor(model => model.Model)"</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -10,7 +9,9 @@
             @Html.DisplayName("Company")
         </dt>
 
-        <img width="20%" src="~/img/@Url.Content(Model.Thumbnail)" style="margin-left:20%; position:absolute;" />
+        <div id="zoom">
+            <img id="img" width="20%" src="~/img/@Url.Content(Model.Thumbnail)" style="margin-left:20%; position:absolute;" />
+        </div>
 
         <dd>
             @Html.DisplayFor(model => model.Company.Name)
@@ -57,7 +58,12 @@
         </dd>
 
     </dl>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@section Scripts
+{
+    <script src="~/Scripts/Zoom.js"></script>
+}
