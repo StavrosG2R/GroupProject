@@ -31,6 +31,15 @@ textarea {
     width: 40%;
 }
 
+.links a {
+    color: orange;
+    text-decoration: none;
+}
+
+    .links a:hover {
+        color: orangered;
+    }
+
 .buildDets {
     color: darkorange;
 }

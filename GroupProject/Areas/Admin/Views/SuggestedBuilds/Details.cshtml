@@ -1,106 +1,259 @@
 ﻿@model DataAccess.Core.Entities.SuggestedBuild
-
-<h2>Details</h2>
-
-<div>
-    <h4>For "@Html.DisplayFor(model => model.Name)" Build</h4>
-    <hr />
-    <dl class="dl-horizontal">
-
-        <dt>
-            @Html.LabelFor(model => model.Name, "Build Name")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.LabelFor(model => model.Category.Name, "Category")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
-
-        <dt>
-            @Html.LabelFor(model => model.Case.Model, "Case Model")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Case.Model)
-        </dd>
-
-        <dt>
-            @Html.LabelFor(model => model.CPU.Model, "CPU Model")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CPU.Model)
-        </dd>
-
-        <dt>
-            @Html.LabelFor(model => model.GPU.Model, "GPU Model")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GPU.Model)
-        </dd>
-
-        <dt>
-            @Html.LabelFor(model => model.Motherboard.Model, "Motherboard Model")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Motherboard.Socket)
-        </dd>
-
-        <dt>
-            @Html.LabelFor(model => model.PSU.Model, "PSU Model")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PSU.Model)
-        </dd>
-
-        <dt>
-            @Html.LabelFor(model => model.RAM.Model, "RAM Model")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RAM.Model)
-        </dd>
-
-        <dt>
-            @Html.LabelFor(model => model.Storage.Model, "Storage Model")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Storage.Model)
-        </dd>
-
-        @*<dt>
-            @Html.LabelFor(model => model.Price, "Price")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>*@
-
-    </dl>
-</div>
-@if (ViewContext.HttpContext.User.IsInRole("Admin"))
+@if (ViewContext.HttpContext.User.IsInRole("User"))
 {
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    <div style="background-color: #282838">
+        <div class="page_Title" style=" color: #c97d54; background-color: #5C2A0F; margin: 0 auto; text-align: center; padding: 30px 0px;">
+            <h6><strong>BUILD</strong></h6>
+            <h1 style="color:white;">
+                @Model.Name
+            </h1>
+            <div>
+                by <img style="max-width: 46px;" src="https://pcpartpicker.com/static/img/default-avatar.png" /><span style=" color: #ffd752; font-weight:bolder;">Suggested Build</span>
+            </div>
+        </div>
+
+
+        <section class="container" style="color:white;">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 links">
+                            <h6>Part List</h6>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.LabelFor(model => model.Category.Name, "Category", new { @style = "text-align:left;" })
+                                </dt>
+
+                                <dd class="buildDets">
+                                    @Html.DisplayFor(model => model.Category.Name)
+                                </dd>
+
+                                <dt>
+                                    @Html.LabelFor(model => model.Case.Model, "Case Model")
+                                </dt>
+
+                                <dd>
+                                    <a href="@Url.Action("Details", "Cases", new { id = Model.CaseID })" class="buildDets">@Html.DisplayFor(model => model.Case.Model)</a>
+                                </dd>
+
+                                <dt>
+                                    @Html.LabelFor(model => model.CPU.Model, "CPU Model")
+                                </dt>
+
+                                <dd>
+                                    <a href="@Url.Action("Details", "CPUs", new { id = Model.CPUID })" class="buildDets">@Html.DisplayFor(model => model.CPU.Model)</a>
+                                </dd>
+
+                                <dt>
+                                    @Html.LabelFor(model => model.GPU.Model, "GPU Model")
+                                </dt>
+
+                                <dd>
+                                    <a href="@Url.Action("Details", "GPUs", new { id = Model.GPUID })" class="buildDets">@Html.DisplayFor(model => model.GPU.Model)</a>
+                                </dd>
+
+                                <dt>
+                                    @Html.LabelFor(model => model.Motherboard.Model, "Motherboard Model")
+                                </dt>
+
+                                <dd>
+                                    <a href="@Url.Action("Details", "Motherboards", new { id = Model.MotherboardID })" class="buildDets">@Html.DisplayFor(model => model.Motherboard.Model)</a>
+                                </dd>
+
+                                <dt>
+                                    @Html.LabelFor(model => model.PSU.Model, "PSU Model")
+                                </dt>
+
+                                <dd>
+                                    <a href="@Url.Action("Details", "PSUs", new { id = Model.PSUID })" class="buildDets">@Html.DisplayFor(model => model.PSU.Model)</a>
+                                </dd>
+
+                                <dt>
+                                    @Html.LabelFor(model => model.RAM.Model, "RAM Model")
+                                </dt>
+
+                                <dd>
+                                    <a href="@Url.Action("Details", "RAMs", new { id = Model.RAMID })" class="buildDets">@Html.DisplayFor(model => model.RAM.Model)</a>
+                                </dd>
+
+                                <dt>
+                                    @Html.LabelFor(model => model.Storage.Model, "Storage Model")
+                                </dt>
+
+                                <dd>
+                                    <a href="@Url.Action("Details", "Storages", new { id = Model.StorageID })" class="buildDets">@Html.DisplayFor(model => model.Storage.Model)</a>
+                                </dd>
+
+                                @*<dt>
+                                        @Html.DisplayNameFor(model => model.Price)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Price)
+
+                                    </dd>
+
+
+                                    </dd>*@
+
+                                    <h6>
+
+                                        @Html.ActionLink("Back to List", "Index")
+                                    </h6>
+                            </dl>
+
+                        </div>
+                        <div class="col-md-8">
+                            <h6>Photos</h6>
+                            <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false" style="background-color: white;">
+                                <div class="carousel-inner justify-content-center position-static">
+
+                                    <div class="carousel-item active">
+                                        <img class="buildimg" src="~/img/@Url.Content(Model.Case.Thumbnail)">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="buildimg" src="~/img/@Url.Content(Model.CPU.Thumbnail)">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="buildimg" src="~/img/@Url.Content(Model.GPU.Thumbnail)">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="buildimg" src="~/img/@Url.Content(Model.Motherboard.Thumbnail)">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="buildimg" src="~/img/@Url.Content(Model.RAM.Thumbnail)">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="buildimg" src="~/img/@Url.Content(Model.Storage.Thumbnail)">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="buildimg" src="~/img/@Url.Content(Model.PSU.Thumbnail)">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev" style="background-color: black;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next" style="background-color: black;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+
+                            <h6>Comments</h6>
+                            <hr />
+                            <p>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 }
 else
-{
-    <p>
-        
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+{ <h2> Details </h2>
+
+    <div>
+        <h4> For "@Html.DisplayFor(model => model.Name)" Build </h4>
+
+
+        <hr />
+
+
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.LabelFor(model => model.Name, "Build Name")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.Category.Name, "Category")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.Name)
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.Case.Model, "Case Model")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Case.Model)
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.CPU.Model, "CPU Model")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CPU.Model)
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.GPU.Model, "GPU Model")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GPU.Model)
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.Motherboard.Model, "Motherboard Model")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Motherboard.Socket)
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.PSU.Model, "PSU Model")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PSU.Model)
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.RAM.Model, "RAM Model")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RAM.Model)
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.Storage.Model, "Storage Model")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Storage.Model)
+            </dd>
+            <h6>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                @Html.ActionLink("Back to List", "Index")
+            </h6>
+</div>
 }
 
+
+
+            @*<dt>
+                            @Html.LabelFor(model => model.Price, "Price")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Price)
+                        </dd>
+
+                    </dl>
+                </div>
+            *@

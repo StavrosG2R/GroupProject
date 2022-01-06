@@ -17,22 +17,19 @@ namespace GroupProject.Controllers.Api
         }
         
         
-        public IHttpActionResult GetCpus()
+        public IHttpActionResult GetCpu(int id)
         {
-            var cpus = _unitOfWork.Cpus.GetAll();
-            return Ok(cpus);
+            var cpu = _unitOfWork.Cpus.GetById(id);
+            return Ok(cpu);
         }
 
-        public IHttpActionResult GetCpus(int id)
-        {
-            var motherboardSocket = _unitOfWork.Motherboards.GetById(id).Socket;
-            return Ok(_unitOfWork.Cpus.GetCPUsThatMatchTheSocket(motherboardSocket));
-        }
+        //public IHttpActionResult GetCpus(int id)
+        //{
+        //    var motherboardSocket = _unitOfWork.Motherboards.GetById(id).Socket;
+        //    return Ok(_unitOfWork.Cpus.GetCPUsThatMatchTheSocket(motherboardSocket));
+        //}
+        
 
-        public IHttpActionResult Details(int id)
-        {
-            var details = _unitOfWork.Cpus.GetById(id);
-            return Ok(details);
-        }
+
     }
 }

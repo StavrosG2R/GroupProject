@@ -68,14 +68,20 @@ body {
             background: #000000;
         }
 
-        
+        .containers .card6:before {
+            background: brown;
+        }
+
+        .containers .card7:before {
+            background: darkgreen;
+        }
 
             .containers .card:hover:before {
             clip-path: circle(350px at 80% -20%);
         }
 
     .containers .card1:after {
-        content: 'CPUS';
+        content: 'CPU';
         position: absolute;
         top: 55%;
         text-align: center;
@@ -140,7 +146,7 @@ body {
     }
 
     .containers .card7:after {
-        content: 'GPUS';
+        content: 'GPU';
         position: absolute;
         top: 55%;
         text-align: center;

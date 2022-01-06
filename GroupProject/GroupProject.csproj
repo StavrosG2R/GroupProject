@@ -220,9 +220,15 @@
     <Compile Include="Areas\Admin\Controllers\StoragesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SuggestedBuildsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\CasesController.cs" />
     <Compile Include="Controllers\Api\CPUsController.cs" />
     <Compile Include="Controllers\Api\FollowingsController.cs" />
+    <Compile Include="Controllers\Api\GPUsController.cs" />
     <Compile Include="Controllers\Api\MotherboardsController.cs" />
+    <Compile Include="Controllers\Api\MotherboardsDetailsController.cs" />
+    <Compile Include="Controllers\Api\PSUsController.cs" />
+    <Compile Include="Controllers\Api\RAMsController.cs" />
+    <Compile Include="Controllers\Api\StoragesController.cs" />
     <Compile Include="Controllers\BuildsController.cs" />
     <Compile Include="Controllers\CasesController.cs" />
     <Compile Include="Controllers\CPUsController.cs" />
@@ -462,6 +468,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\DetailsPartsQuery.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
