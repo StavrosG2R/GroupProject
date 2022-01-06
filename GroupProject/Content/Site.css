@@ -111,7 +111,8 @@ loginPartial-sexy a :hover {
 .psusdet,
 .gpusindex,
 .gpusindex tr,
-.gpusdet {
+.gpusdet,
+.help{
     background: #282838;
     color: floralwhite;
 }
