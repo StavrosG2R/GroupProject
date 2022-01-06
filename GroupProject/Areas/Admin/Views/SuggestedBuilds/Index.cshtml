@@ -1,111 +1,113 @@
 ﻿@model GroupProject.ViewModels.SuggestedBuildsViewModel
 
-<h2>Suggested Builds</h2>
+<div class="suggbuildsindex">
+    <h2>Suggested Builds</h2>
 
-@if (ViewContext.HttpContext.User.IsInRole("Admin"))
- {
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
- }
-    
-<table class="table">
-    <tr>
-        <th></th>
-        <th>
-            @Html.Label("Images")
-        </th>
-        <th></th>
-        <th>
-            @Html.LabelFor(m => m.Name, "Build Name")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.Category, "Category")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.Case, "Case Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.CPU, "CPU Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.GPU, "GPU Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.Motherboard, "Motherboard Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.PSU, "PSU Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.RAM, "RAM Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.Storage, "Storage Model")
-        </th>
-        @*<th>
-            @Html.LabelFor(m => m.Price)
-        </th>*@
-        <th></th>
-    </tr>
-
-    @foreach (var suggestedbuild in Model.SuggestedBuilds)
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
     {
-        <tr>
-            <td>
-                <img width="40" src="~/img/@Url.Content(suggestedbuild.Case.Thumbnail)" />
-            </td>
-            <td>
-                <img width="40" src="~/img/@Url.Content(suggestedbuild.CPU.Thumbnail)" />
-            </td>
-            <td>
-                <img width="40" src="~/img/@Url.Content(suggestedbuild.GPU.Thumbnail)" />
-            </td>
-            <td>
-                @suggestedbuild.Name
-            </td>
-            <td>
-                @suggestedbuild.Category.Name
-            </td>
-            <td>
-                @suggestedbuild.Case.Model
-            </td>
-            <td>
-                @suggestedbuild.CPU.Model
-            </td>
-            <td>
-                @suggestedbuild.GPU.Model
-            </td>
-            <td>
-                @suggestedbuild.Motherboard.Model
-            </td>
-            <td>
-                @suggestedbuild.PSU.Model
-            </td>
-            <td>
-                @suggestedbuild.RAM.Model
-            </td>
-            <td>
-                @suggestedbuild.Storage.Model
-            </td>
-            @*<td>
-                @suggestedbuild.Price
-            </td>*@
-            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = suggestedbuild.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = suggestedbuild.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = suggestedbuild.ID })
-                </td>
-            }
-            else
-            {
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = suggestedbuild.ID })
-                </td>
-            }
-        </tr>
-     }
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
 
-</table>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>
+                @Html.Label("Images")
+            </th>
+            <th></th>
+            <th>
+                @Html.LabelFor(m => m.Name, "Build Name")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.Category, "Category")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.Case, "Case Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.CPU, "CPU Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.GPU, "GPU Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.Motherboard, "Motherboard Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.PSU, "PSU Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.RAM, "RAM Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.Storage, "Storage Model")
+            </th>
+            @*<th>
+                    @Html.LabelFor(m => m.Price)
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var suggestedbuild in Model.SuggestedBuilds)
+        {
+            <tr>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(suggestedbuild.Case.Thumbnail)" />
+                </td>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(suggestedbuild.CPU.Thumbnail)" />
+                </td>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(suggestedbuild.GPU.Thumbnail)" />
+                </td>
+                <td>
+                    @suggestedbuild.Name
+                </td>
+                <td>
+                    @suggestedbuild.Category.Name
+                </td>
+                <td>
+                    @suggestedbuild.Case.Model
+                </td>
+                <td>
+                    @suggestedbuild.CPU.Model
+                </td>
+                <td>
+                    @suggestedbuild.GPU.Model
+                </td>
+                <td>
+                    @suggestedbuild.Motherboard.Model
+                </td>
+                <td>
+                    @suggestedbuild.PSU.Model
+                </td>
+                <td>
+                    @suggestedbuild.RAM.Model
+                </td>
+                <td>
+                    @suggestedbuild.Storage.Model
+                </td>
+                @*<td>
+                        @suggestedbuild.Price
+                    </td>*@
+                @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = suggestedbuild.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = suggestedbuild.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = suggestedbuild.ID })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = suggestedbuild.ID })
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>

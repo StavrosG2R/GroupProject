@@ -75,6 +75,13 @@ li:hover {
     padding-right: 20px;
 }
 
+.register,
+.login,
+.manage,
+.changepass{
+    background: #282838;
+    color: floralwhite;
+}
 
 #loginLink {
     color: floralwhite;
@@ -84,6 +91,41 @@ li:hover {
 loginPartial-sexy a :hover {
     color: #5C2A0F;
 }
+
+.mybuilds,
+.mybuilds tr,
+.deletebuild,
+.buildsindex,
+.buildsindex tr,
+.suggbuildsindex,
+.suggbuildsindex tr,
+.suggbuildsdet,
+.cpusindex,
+.cpusindex tr,
+.cpusdet,
+.moboindex,
+.moboindex tr,
+.mobodet,
+.casesindex,
+.casesindex tr,
+.casesdet,
+.ramsindex,
+.ramsindex tr,
+.ramsdet,
+.storagesindex,
+.storagesindex tr,
+.storagesdet,
+.psusindex,
+.psusindex tr,
+.psusdet,
+.gpusindex,
+.gpusindex tr,
+.gpusdet,
+.help{
+    background: #282838;
+    color: floralwhite;
+}
+
 
 /*Contact*/
 .contact-section {

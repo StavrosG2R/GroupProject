@@ -1,119 +1,121 @@
 ﻿@model GroupProject.ViewModels.BuildsViewModel
 
-<h2>Builds</h2>
+<div class="buildsindex">
+    <h2>Builds</h2>
 
-<table class="table">
-@using (Html.BeginForm("Search", "Builds"))
-{   
-    <tr>
-        <th>
-            <div class="form-group">
-                <div id="searchBuilds" class="input-group">
-                    @Html.TextBoxFor(m => m.SearchBar, new { @class = "form-control", @placeholder = "Search"})
-                    <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </span>
-                </div>
-            </div>
-        </th>
-        <th>
-            @Html.ActionLink("Create New", "Create")
-        </th>
-    </tr>
-}
+    <table class="table">
+        @using (Html.BeginForm("Search", "Builds"))
+        {
+            <tr>
+                <th>
+                    <div class="form-group">
+                        <div id="searchBuilds" class="input-group">
+                            @Html.TextBoxFor(m => m.SearchBar, new { @class = "form-control", @placeholder = "Search" })
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    @Html.ActionLink("Create New", "Create")
+                </th>
+            </tr>
+        }
 
 
-    <tr>
-        <th></th>
-        <th>
-            @Html.Label("Images")
-        </th>
-        <th></th>
-        <th>
-            @Html.LabelFor(m => m.Builder, "Builder Name")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.Build, "Build Name")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.Category, "Category")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.Case, "Case Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.CPU, "CPU Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.GPU, "GPU Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.Motherboard, "Motherboard Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.PSU, "PSU Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.RAM, "RAM Model")
-        </th>
-        <th>
-            @Html.LabelFor(m => m.Storage, "Storage Model")
-        </th>
-        @*<th>
-            @Html.LabelFor(m => m.Price, "Price")
-        </th>*@
-    </tr>
+        <tr>
+            <th></th>
+            <th>
+                @Html.Label("Images")
+            </th>
+            <th></th>
+            <th>
+                @Html.LabelFor(m => m.Builder, "Builder Name")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.Build, "Build Name")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.Category, "Category")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.Case, "Case Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.CPU, "CPU Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.GPU, "GPU Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.Motherboard, "Motherboard Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.PSU, "PSU Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.RAM, "RAM Model")
+            </th>
+            <th>
+                @Html.LabelFor(m => m.Storage, "Storage Model")
+            </th>
+            @*<th>
+                    @Html.LabelFor(m => m.Price, "Price")
+                </th>*@
+        </tr>
 
-    @foreach (var build in Model.Builds)
-    {
-<tr>
-    <td>
-        <img width="40" src="~/img/@Url.Content(build.Case.Thumbnail)" />
-    </td>
-    <td>
-        <img width="40" src="~/img/@Url.Content(build.CPU.Thumbnail)" />
-    </td>
-    <td>
-        <img width="40" src="~/img/@Url.Content(build.GPU.Thumbnail)" />
-    </td>
-    <td>
-        @build.Builder.Name
-    </td>
-    <td>
-        @build.Name
-    </td>
-    <td>
-        @build.Category.Name
-    </td>
-    <td>
-        @build.Case.Model
-    </td>
-    <td>
-        @build.CPU.Model
-    </td>
-    <td>
-        @build.GPU.Model
-    </td>
-    <td>
-        @build.Motherboard.Model
-    </td>
-    <td>
-        @build.PSU.Model
-    </td>
-    <td>
-        @build.RAM.Model
-    </td>
-    <td>
-        @build.Storage.Model
-    </td>
-    @*<td>
-        @build.Price
-    </td>*@
-    <td>
-        @Html.ActionLink("Details", "Details", new { id = build.ID })
-    </td>
+        @foreach (var build in Model.Builds)
+        {
+            <tr>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(build.Case.Thumbnail)" />
+                </td>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(build.CPU.Thumbnail)" />
+                </td>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(build.GPU.Thumbnail)" />
+                </td>
+                <td>
+                    @build.Builder.Name
+                </td>
+                <td>
+                    @build.Name
+                </td>
+                <td>
+                    @build.Category.Name
+                </td>
+                <td>
+                    @build.Case.Model
+                </td>
+                <td>
+                    @build.CPU.Model
+                </td>
+                <td>
+                    @build.GPU.Model
+                </td>
+                <td>
+                    @build.Motherboard.Model
+                </td>
+                <td>
+                    @build.PSU.Model
+                </td>
+                <td>
+                    @build.RAM.Model
+                </td>
+                <td>
+                    @build.Storage.Model
+                </td>
+                @*<td>
+                        @build.Price
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = build.ID })
+                </td>
 
-</tr>
-    }
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

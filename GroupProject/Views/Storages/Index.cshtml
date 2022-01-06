@@ -1,68 +1,69 @@
 ﻿@model IEnumerable<DataAccess.Core.Entities.Storage>
 
-<h2>Storages</h2>
+<div class="storagesindex">
+    <h2>Storages</h2>
 
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.Label("Images")
-        </th>
-        <th>
-            @Html.DisplayName("Company")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Model)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Capacity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StorageType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReadSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WriteSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                <img width="40" src="~/img/@Url.Content(item.Thumbnail)" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StorageType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReadSpeed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WriteSpeed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.ID })
-            </td>
+            <th>
+                @Html.Label("Images")
+            </th>
+            <th>
+                @Html.DisplayName("Company")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StorageType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReadSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WriteSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img width="40" src="~/img/@Url.Content(item.Thumbnail)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StorageType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReadSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WriteSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
