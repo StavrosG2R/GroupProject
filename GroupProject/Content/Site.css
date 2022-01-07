@@ -309,3 +309,23 @@ a > .project-btn.live {
 .project-card:hover .project-content {
     opacity: 1;
 }
+
+#buildFormButton{
+    text-decoration:none;
+}
+
+#LogOffLink {
+    color: floralwhite;
+    text-decoration: none;
+
+
+}#LogOffLink :hover{
+    color: red;
+    text-decoration: none;
+}
+
+#helloLink {
+    color: floralwhite;
+    text-decoration: none;
+}
+
