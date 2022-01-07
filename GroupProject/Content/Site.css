@@ -31,6 +31,10 @@ textarea {
     width: 40%;
 }
 
+.links {
+    color: orange;
+}
+
 .links a {
     color: orange;
     text-decoration: none;

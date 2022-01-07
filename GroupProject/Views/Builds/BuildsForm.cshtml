@@ -6,13 +6,13 @@
 
 
 <section class=" bg-dark" style="color:white;">
-    <h2 style="text-align:center; padding:20px;">@Model.Header</h2>
+    <h2 class="links" style="text-align:center; padding:20px;">@Model.Header</h2>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-4">
-                        <h4>Build</h4>
+                        <h4 class="links">Build</h4>
                         <dl class="dl-horizontal">
                             @using (Html.BeginForm(Model.Action, "Builds"))
                             {
@@ -21,68 +21,68 @@
 
                                 <div class="form-horizontal">
 
-                                    <hr />
+                                    <hr class="links"/>
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Name, "Build Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(m => m.Name, "Build Name", htmlAttributes: new { @class = "control-label col-md-3 links" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", @style = "background-color:lightgrey" } })
                                             @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Case, "Case Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(m => m.Case, "Case Model", htmlAttributes: new { @class = "control-label col-md-3 links" })
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(m => m.Case, new SelectList(Model.Cases, "ID", "Model"), "Select Case", htmlAttributes: new { @class = "form-control", @id = "CaseId" })
+                                            @Html.DropDownListFor(m => m.Case, new SelectList(Model.Cases, "ID", "Model"), "Select Case", htmlAttributes: new { @class = "form-control", @style = "background-color:lightgrey", @id = "CaseId" })
                                             @Html.ValidationMessageFor(m => m.Case, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.CPU, "CPU Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(m => m.CPU, "CPU Model", htmlAttributes: new { @class = "control-label col-md-3 links" })
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(m => m.CPU, new SelectList(Model.CPUs, "ID", "Model"), "Select CPU", htmlAttributes: new { @class = "form-control", @id = "CpuId" })
+                                            @Html.DropDownListFor(m => m.CPU, new SelectList(Model.CPUs, "ID", "Model"), "Select CPU", htmlAttributes: new { @class = "form-control", @style = "background-color:lightgrey", @id = "CpuId" })
                                             @Html.ValidationMessageFor(m => m.CPU, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Motherboard, "Motherboard Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(m => m.Motherboard, "Motherboard Model", htmlAttributes: new { @class = "control-label col-md-5 links" })
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(m => m.Motherboard, new SelectList("", "ID"), "Select Motherboard", htmlAttributes: new { @class = "form-control", @id = "MotherboardId" })
+                                            @Html.DropDownListFor(m => m.Motherboard, new SelectList("", "ID","Model"), "Select Motherboard", htmlAttributes: new { @class = "form-control", @style = "background-color:lightgrey", @id = "MotherboardId" })
                                             @Html.ValidationMessageFor(m => m.Motherboard, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.RAM, "RAM Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(m => m.RAM, "RAM Model", htmlAttributes: new { @class = "control-label col-md-3 links" })
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(m => m.RAM, new SelectList(Model.RAMs, "ID", "Model"), "Select RAM", htmlAttributes: new { @class = "form-control", @id = "RamId" })
+                                            @Html.DropDownListFor(m => m.RAM, new SelectList(Model.RAMs, "ID", "Model"), "Select RAM", htmlAttributes: new { @class = "form-control", @style = "background-color:lightgrey", @id = "RamId" })
                                             @Html.ValidationMessageFor(m => m.RAM, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.GPU, "GPU Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(m => m.GPU, "GPU Model", htmlAttributes: new { @class = "control-label col-md-3 links" })
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(m => m.GPU, new SelectList(Model.GPUs, "ID", "Model"), "Select GPU", htmlAttributes: new { @class = "form-control", @id = "GpuId" })
+                                            @Html.DropDownListFor(m => m.GPU, new SelectList(Model.GPUs, "ID", "Model"), "Select GPU", htmlAttributes: new { @class = "form-control", @style = "background-color:lightgrey", @id = "GpuId" })
                                             @Html.ValidationMessageFor(m => m.GPU, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.PSU, "PSU Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(m => m.PSU, "PSU Model", htmlAttributes: new { @class = "control-label col-md-3 links" })
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(m => m.PSU, new SelectList(Model.PSUs, "ID", "Model"), "Select PSU", htmlAttributes: new { @class = "form-control", @id = "PsuId" })
+                                            @Html.DropDownListFor(m => m.PSU, new SelectList(Model.PSUs, "ID", "Model"), "Select PSU", htmlAttributes: new { @class = "form-control", @style = "background-color:lightgrey", @id = "PsuId" })
                                             @Html.ValidationMessageFor(m => m.PSU, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Storage, "Storage Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(m => m.Storage, "Storage Model", htmlAttributes: new { @class = "control-label col-md-4 links" })
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(m => m.Storage, new SelectList(Model.Storages, "ID", "Model"), "Select Storage", htmlAttributes: new { @class = "form-control", @id = "StorageId" })
+                                            @Html.DropDownListFor(m => m.Storage, new SelectList(Model.Storages, "ID", "Model"), "Select Storage", htmlAttributes: new { @class = "form-control", @style = "background-color:lightgrey", @id = "StorageId" })
                                             @Html.ValidationMessageFor(m => m.Storage, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -96,9 +96,9 @@
                                         </div>*@
 
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(m => m.Category, "Category", htmlAttributes: new { @class = "control-label col-md-3 links" })
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(m => m.Category, new SelectList(Model.Categories, "ID", "Name"), "Select Category", htmlAttributes: new { @class = "form-control" })
+                                            @Html.DropDownListFor(m => m.Category, new SelectList(Model.Categories, "ID", "Name"), "Select Category", htmlAttributes: new { @class = "form-control", @style = "background-color:lightgrey" })
                                             @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -113,36 +113,36 @@
 
                     </div>
                     <div class="col-md-8">
-                        <h6>Product Details</h6>
-                        <hr />
+                        <h6 class="links">Product Details</h6>
+                        <hr class="links"/>
                         <p id="CasesLabel">
                             Case Details
                         </p>
-                        <hr />
+                        <hr class="links"/>
                         <p id="CPULabel">
                             CPU Details
                         </p>
-                        <hr />
+                        <hr class="links"/>
                         <p id="MotherboardLabel">
                             Motherboard Details
                         </p>
-                        <hr />
+                        <hr class="links"/>
                         <p id="RamLabel">
                             RAM Details
                         </p>
-                        <hr />
+                        <hr class="links"/>
                         <p id="GpuLabel">
                             GPU Details
                         </p>
-                        <hr />
+                        <hr class="links"/>
                         <p id="PsuLabel">
                             PSU Details
                         </p>
-                        <hr />
+                        <hr class="links"/>
                         <p id="StorageLabel">
                             Storage Details
                         </p>
-                        <hr />
+                        <hr class="links"/>
                     </div>
                 </div>
             </div>
@@ -169,9 +169,21 @@
                     success: function (data) {
                         $('#MotherboardId').empty();
                         $.each(data, function (id, cpuSocket) {
-                            //console.log(data);
-                            $('#MotherboardId').append('<option value="' + id + '">' + cpuSocket.model + ' ' + cpuSocket.chipset + ' ' + cpuSocket.price + "€" + '</option>');
+                            console.log(id);
+                            console.log(data.name);
+                            if (id == 0) {
+                                $('#MotherboardId').append('<option selected="selected" value="' + cpuSocket.id + '">' + cpuSocket.model + ' ' + cpuSocket.chipset + ' '
+                                    + cpuSocket.price + "€" + '</option>');
+                                $('#MotherboardLabel').empty();
+                                $('#MotherboardLabel').append('<p>' + '<strong>Motherboard Model: </strong>' + cpuSocket.company.name + ' ' + cpuSocket.model + '<br/>' + '<strong>Chipset: </strong>' + cpuSocket.chipset + '<br />' +
+                                    '<strong>Size: </strong>' + cpuSocket.size + '<br />' + '<strong>Motherboard Price: </strong>' + cpuSocket.price + " €" + '</p>')
+                            } else {
+                                $('#MotherboardId').append('<option value="' + cpuSocket.id + '">' + cpuSocket.model + ' ' + cpuSocket.chipset + ' '
+                                    + cpuSocket.price + "€" + '</option>');
+                            }
+                            
                         });
+                        
                     }
                 });
             });
