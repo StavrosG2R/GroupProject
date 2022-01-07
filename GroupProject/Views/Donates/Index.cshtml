@@ -1,5 +1,5 @@
 @*@model IEnumerable<DataAccess.Core.Entities.Donate>*@
-  
+<link href="~/Content/StyleSheetDonate.css" rel="stylesheet" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,15 +11,23 @@
     <title> PayPal Checkout Integration | Server Demo </title>
 </head>
 
-<body>
-    <!-- Set up a container element for the button -->
-    <div id="paypal-button-container"></div>
+<body1>
 
-    <!-- Include the PayPal JavaScript SDK -->
+    <div class="img1">
+
+        <img src="~/img/Donate/depositphotos_452046736-stock-illustration-man-fixing-repairing-setup-assembling.jpg" alt="Alternate Text" />
+        <img src="~/img/Donate/images.png" alt="Alternate Text" />
+    </div>
+
+    <div class="box">
+        <img src="~/img/Donate/coins.png" />
+        <h2>Donate</h2>
+        <p>Support your favorite developers. <br />Small things change Donate below.</p>
+        <a class=" " id="paypal-button-container"></a>
+    </div>
 
     @section scripts
 {
-
         <script src="https://www.paypalobjects.com/api/checkout.js"></script>
         <script>
             paypal.Button.render({
@@ -32,8 +40,8 @@
                 // Customize button (optional)
                 locale: 'en_US',
                 style: {
-                    size: 'small',
-                    color: 'gold',
+                    size: 'large',
+                    color: 'blue',
                     shape: 'pill',
                 },
 
@@ -59,11 +67,8 @@
                     });
                 }
             }, '#paypal-button-container');
-
         </script>
-
     }
-
-</body>
+</body1>
 
 </html>

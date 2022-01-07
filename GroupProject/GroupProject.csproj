@@ -543,6 +543,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="img\Donate\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
