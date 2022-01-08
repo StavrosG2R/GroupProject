@@ -310,7 +310,8 @@
     <Content Include="img\corei712gen.jpeg" />
     <Content Include="img\corei911gen.jpeg" />
     <Content Include="img\corei912gen.jpeg" />
-    <Content Include="img\Donate\donate 1.png" />
+    <Content Include="img\Donate\donate-1.png" />
+    <Content Include="img\Donate\donate-2.jpg" />
     <Content Include="img\Donate\drop-down-arrow.png" />
     <Content Include="img\Donate\fast-forward.png" />
     <Content Include="img\Donate\give-love.png" />
