@@ -105,7 +105,7 @@
 
 
                                     <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Save" class="btn btn-default" style="color:black; background-color:lightgrey; margin-top: 10px" />
+                                        <input type="submit" value="Save" id="save" class="btn btn-default" style="color:black; background-color:lightgrey; margin-top: 10px" />
                                     </div>
 
                                 </div>
@@ -156,6 +156,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/DetailsPartsQuery.js"></script>
+    <script src="~/Scripts/bootbox.js"></script>
     <script>
         $(document).ready(function () {
             $("#CpuId").change(function () {
@@ -186,6 +187,12 @@
                         
                     }
                 });
+            });
+
+            bootbox.alert({
+                size: "large",
+                title: "Welcome noob!",
+                message: "Build your pc...if you can"
             });
         });
     </script>
