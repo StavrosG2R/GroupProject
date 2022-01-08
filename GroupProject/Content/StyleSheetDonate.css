@@ -20,15 +20,22 @@ body1 {
     border-radius: 20px;
     padding: 40px 60px;
     position: relative;
+    margin-right: 70px;
 }
 
-.img1 {
-    display:block;
-    background-color: red;
-    width: 150px;
-    height: 150px;
-    margin-bottom: 50px;
+.test1 {
+    display: flex;    
+    margin-left: 100px; 
+    align-content:center;
+    background-color: #fff;
+    width: 250px ;
+    height:200px;
+    right: 400px;
+    
+    
 }
+
+
 
     .box:before {
         content: '';
