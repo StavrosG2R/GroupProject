@@ -72,9 +72,10 @@ li:hover {
 .register,
 .login,
 .manage,
-.changepass{
+.changepass {
     background: #282838;
     color: floralwhite;
+    padding-left: 10px;
 }
 
 .g2rbuttons {
@@ -127,6 +128,10 @@ li:hover {
     background: #282838;
     color: floralwhite;
     padding-left: 10px;
+}
+
+.donate {
+    text-align: center;
 }
 
 /*Contact*/

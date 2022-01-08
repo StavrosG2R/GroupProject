@@ -276,6 +276,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\StyleSheetBabis.css" />
+    <Content Include="Content\StyleSheetDonate.css" />
     <Content Include="Content\webfonts\fa-brands-400.svg" />
     <Content Include="Content\webfonts\fa-regular-400.svg" />
     <Content Include="Content\webfonts\fa-solid-900.svg" />
@@ -309,6 +310,11 @@
     <Content Include="img\corei712gen.jpeg" />
     <Content Include="img\corei911gen.jpeg" />
     <Content Include="img\corei912gen.jpeg" />
+    <Content Include="img\Donate\coins.png" />
+    <Content Include="img\Donate\donate 1.png" />
+    <Content Include="img\Donate\drop-down-arrow.png" />
+    <Content Include="img\Donate\fast-forward.png" />
+    <Content Include="img\Donate\give-love.png" />
     <Content Include="img\ds3hb550.jpeg" />
     <Content Include="img\G2R_profile.jpg" />
     <Content Include="img\gamingplusb550.jpeg" />
