@@ -1,5 +1,5 @@
 @model DataAccess.Core.Entities.SuggestedBuild
-@if (ViewContext.HttpContext.User.IsInRole("User"))
+@if (ViewContext.HttpContext.User.IsInRole("User") || !User.Identity.IsAuthenticated)
 {
     <div style="background-color: #282838">
         <div class="page_Title" style=" color: #c97d54; background-color: #5C2A0F; margin: 0 auto; text-align: center; padding: 30px 0px;">
@@ -35,7 +35,7 @@
                                 </dt>
 
                                 <dd>
-                                    <a href="@Url.Action("Details", "Cases", new { id = Model.CaseID })" class="buildDets">@Html.DisplayFor(model => model.Case.Model)</a>
+                                    <a href="@Url.Action("Details", "Cases", new { id = Model.CaseID, area="" })" class="buildDets">@Html.DisplayFor(model => model.Case.Model)</a>
                                 </dd>
 
                                 <dt>
@@ -43,7 +43,7 @@
                                 </dt>
 
                                 <dd>
-                                    <a href="@Url.Action("Details", "CPUs", new { id = Model.CPUID })" class="buildDets">@Html.DisplayFor(model => model.CPU.Model)</a>
+                                    <a href="@Url.Action("Details", "CPUs", new { id = Model.CPUID, area=""  })" class="buildDets">@Html.DisplayFor(model => model.CPU.Model)</a>
                                 </dd>
 
                                 <dt>
@@ -51,7 +51,7 @@
                                 </dt>
 
                                 <dd>
-                                    <a href="@Url.Action("Details", "GPUs", new { id = Model.GPUID })" class="buildDets">@Html.DisplayFor(model => model.GPU.Model)</a>
+                                    <a href="@Url.Action("Details", "GPUs", new { id = Model.GPUID, area=""  })" class="buildDets">@Html.DisplayFor(model => model.GPU.Model)</a>
                                 </dd>
 
                                 <dt>
@@ -59,7 +59,7 @@
                                 </dt>
 
                                 <dd>
-                                    <a href="@Url.Action("Details", "Motherboards", new { id = Model.MotherboardID })" class="buildDets">@Html.DisplayFor(model => model.Motherboard.Model)</a>
+                                    <a href="@Url.Action("Details", "Motherboards", new { id = Model.MotherboardID, area=""  })" class="buildDets">@Html.DisplayFor(model => model.Motherboard.Model)</a>
                                 </dd>
 
                                 <dt>
@@ -67,7 +67,7 @@
                                 </dt>
 
                                 <dd>
-                                    <a href="@Url.Action("Details", "PSUs", new { id = Model.PSUID })" class="buildDets">@Html.DisplayFor(model => model.PSU.Model)</a>
+                                    <a href="@Url.Action("Details", "PSUs", new { id = Model.PSUID, area=""  })" class="buildDets">@Html.DisplayFor(model => model.PSU.Model)</a>
                                 </dd>
 
                                 <dt>
@@ -75,7 +75,7 @@
                                 </dt>
 
                                 <dd>
-                                    <a href="@Url.Action("Details", "RAMs", new { id = Model.RAMID })" class="buildDets">@Html.DisplayFor(model => model.RAM.Model)</a>
+                                    <a href="@Url.Action("Details", "RAMs", new { id = Model.RAMID, area=""  })" class="buildDets">@Html.DisplayFor(model => model.RAM.Model)</a>
                                 </dd>
 
                                 <dt>
@@ -83,7 +83,7 @@
                                 </dt>
 
                                 <dd>
-                                    <a href="@Url.Action("Details", "Storages", new { id = Model.StorageID })" class="buildDets">@Html.DisplayFor(model => model.Storage.Model)</a>
+                                    <a href="@Url.Action("Details", "Storages", new { id = Model.StorageID, area=""  })" class="buildDets">@Html.DisplayFor(model => model.Storage.Model)</a>
                                 </dd>
 
                                 @*<dt>

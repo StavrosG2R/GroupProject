@@ -24,6 +24,17 @@ textarea {
     max-width: 280px;
 }
 
+.btn {
+    background-color: darkorange;
+    color: white;
+    border-color: black;
+}
+
+.btn:hover {
+    background-color: orangered;
+    border-color: black;
+}
+
 .buildimg {
     margin-left: auto;
     margin-right: auto; 
@@ -73,27 +84,30 @@ li:hover {
     max-width: 36px !important;
 }
 
-#registerLink {
-    color: floralwhite;
-    text-decoration: none;
-    padding-right: 20px;
-}
-
 .register,
 .login,
 .manage,
-.changepass{
+.changepass {
     background: #282838;
     color: floralwhite;
+    padding-left: 10px;
 }
 
-#loginLink {
-    color: floralwhite;
+.g2rbuttons {
+    color:black;
+    background-color:lightgrey;
+    margin-top: 10px
+}
+
+.g2rlogbuttons {
     text-decoration: none;
+    color: white;
+    margin-right: 50px;
+    padding-top: 5px;
 }
 
-loginPartial-sexy a :hover {
-    color: #5C2A0F;
+.g2rlogbuttons :hover{
+    color: orange;
 }
 
 .mybuilds,
@@ -125,11 +139,15 @@ loginPartial-sexy a :hover {
 .gpusindex,
 .gpusindex tr,
 .gpusdet,
-.help{
+.help {
     background: #282838;
     color: floralwhite;
+    padding-left: 10px;
 }
 
+.donate {
+    text-align: center;
+}
 
 /*Contact*/
 .contact-section {
@@ -256,7 +274,7 @@ loginPartial-sexy a :hover {
 .project-content {
     position: relative;
     padding: 40px;
-    color: orangered;
+    color: darkred;
     transition: 0.5s;
     opacity: 0;
     top: 70px;

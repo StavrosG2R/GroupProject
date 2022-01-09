@@ -87,14 +87,6 @@
                                         </div>
                                     </div>
 
-                                    @*<div class="form-group">
-                                            @Html.LabelFor(m => m.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>*@
-
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.Category, "Category", htmlAttributes: new { @class = "control-label col-md-3 links" })
                                         <div class="col-md-10">
@@ -105,7 +97,7 @@
 
 
                                     <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Save" class="btn btn-default" style="color:black; background-color:lightgrey; margin-top: 10px" />
+                                        <input type="submit" value="Save" id="save" class="btn btn-default" style="color:black; background-color:lightgrey; margin-top: 10px" />
                                     </div>
 
                                 </div>
@@ -156,11 +148,11 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/DetailsPartsQuery.js"></script>
+    <script src="~/Scripts/bootbox.js"></script>
     <script>
         $(document).ready(function () {
             $("#CpuId").change(function () {
                 var value = parseInt($(this).val());
-                //alert(value)
                 $.ajax({
                     url: "/api/Motherboards/" + value,
                     method: "GET",
@@ -180,12 +172,18 @@
                             } else {
                                 $('#MotherboardId').append('<option value="' + cpuSocket.id + '">' + cpuSocket.model + ' ' + cpuSocket.chipset + ' '
                                     + cpuSocket.price + "€" + '</option>');
-                            }
+                                    }
                             
                         });
                         
                     }
                 });
+            });
+
+            bootbox.alert({
+                size: "large",
+                title: "Welcome noob!",
+                message: "Build your pc...if you can"
             });
         });
     </script>

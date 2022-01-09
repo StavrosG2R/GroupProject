@@ -1,5 +1,4 @@
-@*@model IEnumerable<DataAccess.Core.Entities.Donate>*@
-  
+<link href="~/Content/StyleSheetDonate.css" rel="stylesheet" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,16 +10,25 @@
     <title> PayPal Checkout Integration | Server Demo </title>
 </head>
 
-<body>
-    <!-- Set up a container element for the button -->
-    <div id="paypal-button-container"></div>
+<body1>
 
-    <!-- Include the PayPal JavaScript SDK -->
+    <div class="row" style="max-height: 600px; max-width:1100px; min-width:1100px;">
+        <img src="~/img/Donate/donate 1.png" alt="Alternate Text" />
+    </div>
+
+    <div class="box">
+        <img src="~/img/Donate/coins.png" />
+        <h2>Donate to the Dr.Builder Project <img src="~/img/Donate/give-love.png" style="margin-left:465px; margin-top:-50px;" /> </h2>
+        <p>If you appreciate our job help us maintain and improve our project. <br />Donate below.</p>
+        <a style="left:300px;" id="paypal-button-container"></a>
+    </div>
 
     @section scripts
 {
-
         <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <script src="~/Scripts/bootbox.js"></script>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="~/Content/admin-css/all.min.css">
         <script>
             paypal.Button.render({
                 // Configure environment
@@ -32,8 +40,8 @@
                 // Customize button (optional)
                 locale: 'en_US',
                 style: {
-                    size: 'small',
-                    color: 'gold',
+                    size: 'large',
+                    color: 'blue',
                     shape: 'pill',
                 },
 
@@ -55,15 +63,22 @@
                 onAuthorize: function (data, actions) {
                     return actions.payment.execute().then(function () {
                         // Show a confirmation message to the buyer
-                        window.alert('Thank you for your purchase!');
+                        bootbox.dialog({
+                            size: "large",
+                            title: "Donated successfully",
+                            message: 'With your money we will go get drunk! <i class="fas fa-beer"></i>',
+                            className: "donate",
+                            buttons: {
+                                fee: {
+                                    label: "Cheers!"
+                                }
+                            }
+                        })
                     });
                 }
             }, '#paypal-button-container');
-
         </script>
-
     }
-
-</body>
+</body1>
 
 </html>

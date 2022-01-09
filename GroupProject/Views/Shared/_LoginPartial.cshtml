@@ -1,9 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
+
 
         @*<ul class="nav navbar-nav navbar-right">
                 <li>
@@ -19,8 +21,8 @@
 }
 else
 {
-    <div class="loginPartial-sexy" style="margin-right:50px; padding-top:5px;">
-        <span style=" margin-right:20px; border-right: 1px solid #181827;">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</span>
-        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    <div class="g2rlogbuttons">
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "g2rlogbuttons"})
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "g2rlogbuttons"})
     </div>
 }
