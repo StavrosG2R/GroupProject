@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<DataAccess.Core.Entities.Build>
 
-<div class="mybuilds">
+<div class="mybuilds container" style="padding: 10px 25px;">
 
-    <h2>MyBuilds</h2>
+    <h2 style="text-align:center;">MyBuilds</h2>
 
     <table class="table">
-        <th>
-            @Html.ActionLink("Create New", "Create")
-        </th>
 
         <tr>
             <th></th>
@@ -103,4 +100,8 @@
             </tr>
         }
     </table>
-</div>
+
+
+    <button class=" btn btn-dark text-black" style="background-color: white;">@Html.ActionLink("Create New", "Create", new { id = "buildFormButton" })</button>
+
+</div> 

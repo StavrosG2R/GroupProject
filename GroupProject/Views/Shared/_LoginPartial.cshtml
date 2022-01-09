@@ -6,9 +6,16 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="g2rlogbuttons">
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "g2rlogbuttons", title = "Manage" })
-            <a href="javascript:document.getElementById('logoutForm').submit()" class="g2rlogbuttons">Log off</a>
+
+        @*<ul class="nav navbar-nav navbar-right">
+                <li>
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>*@
+        <div class="loginPartial-sexy" style="margin-right:50px; padding-top:5px;">
+            <span style=" margin-right:20px; border-right: 1px solid #181827;">@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { id ="helloLink",  title = "Manage" })</span>
+            <a id="LogOffLink" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
         </div>
     }
 }
