@@ -1,5 +1,5 @@
 @model DataAccess.Core.Entities.SuggestedBuild
-@if (ViewContext.HttpContext.User.IsInRole("User"))
+@if (ViewContext.HttpContext.User.IsInRole("User") || !User.Identity.IsAuthenticated)
 {
     <div style="background-color: #282838">
         <div class="page_Title" style=" color: #c97d54; background-color: #5C2A0F; margin: 0 auto; text-align: center; padding: 30px 0px;">
