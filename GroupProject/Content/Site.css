@@ -24,6 +24,17 @@ textarea {
     max-width: 280px;
 }
 
+.btn {
+    background-color: darkorange;
+    color: white;
+    border-color: black;
+}
+
+.btn:hover {
+    background-color: orangered;
+    border-color: black;
+}
+
 .buildimg {
     margin-left: auto;
     margin-right: auto; 
